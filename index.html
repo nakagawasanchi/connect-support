@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>機器接続サポート</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🎹 機器接続サポート</h1>
+    <p class="subtitle">お使いの鍵盤とスマホの接続方法をご案内します</p>
+  </header>
+
+  <main id="app">
+
+    <!-- STEP 1: 端末選択 -->
+    <section id="step-device" class="step">
+      <h2><span class="step-num">1</span> お使いのスマホ・タブレットは？</h2>
+      <div class="choices" id="device-choices">
+        <button class="choice" data-device="iphone-lightning">iPhone<small>Lightning端子（iPhone 14以前）</small></button>
+        <button class="choice" data-device="iphone-usbc">iPhone<small>USB-C端子（iPhone 15以降）</small></button>
+        <button class="choice" data-device="ipad-usbc">iPad<small>USB-C端子</small></button>
+        <button class="choice" data-device="ipad-lightning">iPad<small>Lightning端子</small></button>
+        <button class="choice" data-device="android">Android<small>スマホ・タブレット</small></button>
+      </div>
+      <p class="hint">💡 充電口の形で見分けられます。小判型で裏表があるのがLightning、楕円で裏表がないのがUSB-Cです。</p>
+    </section>
+
+    <!-- STEP 2: 鍵盤選択 -->
+    <section id="step-keyboard" class="step hidden">
+      <h2><span class="step-num">2</span> お使いの鍵盤（キーボード・電子ピアノ）は？</h2>
+      <p class="hint">メーカーを選んで機種名を検索してください。機種名は本体の右上や背面のシールに書かれています。</p>
+      <div class="choices maker-choices" id="maker-choices"></div>
+      <div id="model-search-area" class="hidden">
+        <input type="text" id="model-search" placeholder="機種名を入力（例: P-125, CT-S300）" autocomplete="off">
+        <ul id="model-results"></ul>
+      </div>
+      <button class="link-btn" id="unknown-model-btn">機種がわからない・一覧にない</button>
+    </section>
+
+    <!-- STEP 3: 結果表示 -->
+    <section id="step-result" class="step hidden">
+      <h2><span class="step-num">3</span> 接続方法</h2>
+      <div id="result-card"></div>
+      <div class="consult-area">
+        <p>うまくいかない場合や不明点は、この内容のままトークで相談できます。</p>
+        <textarea id="consult-note" placeholder="（任意）困っている内容があれば入力してください　例: ケーブルをつないだが音が出ない"></textarea>
+        <button id="consult-btn" class="primary-btn">この内容でトークに送信して相談する</button>
+      </div>
+      <button class="link-btn" id="restart-btn">最初からやり直す</button>
+    </section>
+
+    <!-- 機種不明フロー -->
+    <section id="step-unknown" class="step hidden">
+      <h2>機種を調べてお答えします</h2>
+      <p>わかる範囲で構いませんので、鍵盤の情報を入力してください。こちらで端子仕様を調査してご案内します。</p>
+      <input type="text" id="unknown-maker" placeholder="メーカー名（わかれば）">
+      <input type="text" id="unknown-model" placeholder="機種名・型番（本体のシールに記載）">
+      <textarea id="unknown-note" placeholder="（任意）困っている内容"></textarea>
+      <button id="unknown-consult-btn" class="primary-btn">トークに送信して調べてもらう</button>
+      <button class="link-btn" id="unknown-back-btn">戻る</button>
+    </section>
+
+  </main>
+
+  <footer>
+    <p id="liff-status"></p>
+  </footer>
+
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
