@@ -52,17 +52,33 @@ document.addEventListener("DOMContentLoaded", async () => {
   bindEvents();
 });
 
+// LINEアプリ内でのみ利用可。LINE外からのアクセスはゲート画面で弾く。
+// 完全な防御ではなく実用上のガード（静的サイトのため偽装は技術的に可能）。
+// 動作確認用に ?preview=1 でバイパスできる。
 async function initLiff() {
-  const status = document.getElementById("liff-status");
+  const bypass = new URLSearchParams(location.search).has("preview");
   try {
     await liff.init({ liffId: LIFF_ID });
     liffReady = true;
-    if (!liff.isInClient()) {
-      status.textContent = "※ LINEアプリのトークから開くと、そのまま相談を送信できます";
+    if (liff.isInClient() || bypass) {
+      showApp();
+    } else {
+      showGate();
     }
   } catch (e) {
-    status.textContent = "";
+    if (bypass) showApp();
+    else showGate();
   }
+}
+
+function showApp() {
+  document.getElementById("app").classList.remove("hidden");
+  document.getElementById("gate").classList.add("hidden");
+}
+
+function showGate() {
+  document.getElementById("gate").classList.remove("hidden");
+  document.getElementById("app").classList.add("hidden");
 }
 
 // ---------- STEP 1: 端末 ----------

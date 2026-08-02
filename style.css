@@ -147,3 +147,16 @@ textarea { min-height: 72px; resize: vertical; }
 
 footer { text-align: center; padding: 12px; }
 #liff-status { font-size: 11px; color: #aaa; }
+
+#gate { padding: 16px; max-width: 560px; margin: 40px auto 0; }
+#gate-card {
+  background: #fff;
+  border: 1.5px solid #ddd;
+  border-radius: 12px;
+  padding: 28px 20px;
+  text-align: center;
+}
+#gate-card .gate-icon { font-size: 40px; }
+#gate-card h2 { margin: 8px 0; }
+#gate-card p { font-size: 14px; color: #555; }
+a.primary-btn { text-decoration: none; text-align: center; max-width: 260px; margin: 16px auto 0; }
