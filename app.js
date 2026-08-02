@@ -1,5 +1,5 @@
 const LIFF_ID = "2010931633-3uzRGseS";
-const LOG_ENDPOINT = ""; // GAS WebアプリのURL（未設定なら送信しない）
+const LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbyirD-1iBPuaiR7rVhMT7NUeF6pGZbLlzJxNgSL-qjzzuRakrOEn8ygfnm9Sv4agYo7KQ/exec"; // GAS WebアプリのURL（未設定なら送信しない）
 
 const DEVICES = {
   "iphone-lightning": { label: "iPhone（Lightning端子）", port: "lightning" },
