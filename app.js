@@ -6,6 +6,8 @@ const DEVICES = {
   "ipad-usbc":        { label: "iPad（USB-C端子）",       port: "usbc" },
   "ipad-lightning":   { label: "iPad（Lightning端子）",   port: "lightning" },
   "android":          { label: "Android",                 port: "usbc" },
+  "pc-usba":          { label: "パソコン（USB-A端子）",   port: "usba" },
+  "pc-usbc":          { label: "パソコン（USB-C端子）",   port: "usbc" },
 };
 
 const MAKER_ORDER = ["YAMAHA", "CASIO", "Roland", "KORG", "KAWAI"];
@@ -31,6 +33,19 @@ const CABLE_RECIPES = {
     "mini-B":  ["USB-C - mini Bケーブル"],
     "USB-C":   ["USB-C - USB-Cケーブル（データ通信対応のもの）"],
   },
+  usba: {
+    "USB-B":   ["USB A-Bケーブル 1本（プリンタ用と同じ）"],
+    "micro-B": ["USB A - micro Bケーブル 1本（データ通信対応のもの）"],
+    "mini-B":  ["USB A - mini Bケーブル 1本"],
+    "USB-C":   ["USB A - Cケーブル 1本（データ通信対応のもの）"],
+  },
+};
+
+// MIDI DIN接続時に端末側で追加で必要になるもの
+const DIN_ADAPTER = {
+  lightning: "<li>Apple Lightning - USB 3カメラアダプタ（純正推奨）</li>",
+  usbc: "<li>USB-C変換アダプタ（インターフェースがUSB-Aの場合）</li>",
+  usba: "",
 };
 
 let db = [];
@@ -91,18 +106,13 @@ function bindEvents() {
       btn.classList.add("selected");
       show("step-keyboard");
       document.getElementById("step-keyboard").scrollIntoView({ behavior: "smooth" });
+      if (state.keyboard) renderResult(); // 端末変更時は結果を更新
     });
   });
 
   document.getElementById("model-search").addEventListener("input", renderModelResults);
-  document.getElementById("unknown-model-btn").addEventListener("click", () => {
-    hide("step-result");
-    show("step-unknown");
-  });
-  document.getElementById("unknown-back-btn").addEventListener("click", () => hide("step-unknown"));
   document.getElementById("restart-btn").addEventListener("click", () => location.reload());
   document.getElementById("consult-btn").addEventListener("click", sendConsult);
-  document.getElementById("unknown-consult-btn").addEventListener("click", sendUnknownConsult);
 }
 
 // ---------- STEP 2: 鍵盤 ----------
@@ -115,7 +125,7 @@ function renderMakers() {
   area.innerHTML = "";
   makers.forEach((maker) => {
     const btn = document.createElement("button");
-    btn.className = "choice";
+    btn.className = "choice maker";
     btn.textContent = maker;
     btn.addEventListener("click", () => {
       state.maker = maker;
@@ -147,7 +157,7 @@ function renderModelResults() {
   });
   if (candidates.length === 0 && q) {
     const li = document.createElement("li");
-    li.textContent = "見つかりません → 下の「機種がわからない・一覧にない」からご相談ください";
+    li.textContent = "見つかりません。機種名の表記をご確認いただくか、トークで直接ご相談ください。";
     list.appendChild(li);
   }
 }
@@ -158,7 +168,6 @@ function selectKeyboard(kb) {
   state.keyboard = kb;
   renderResult();
   show("step-result");
-  hide("step-unknown");
   document.getElementById("step-result").scrollIntoView({ behavior: "smooth" });
 }
 
@@ -197,7 +206,7 @@ function renderResult() {
         <p>必要なもの：</p>
         <ol>
           <li>USB-MIDIインターフェース（例：YAMAHA UX16）</li>
-          ${dev.port === "lightning" ? "<li>Apple Lightning - USB 3カメラアダプタ（純正推奨）</li>" : "<li>USB-C変換アダプタ（インターフェースがUSB-Aの場合）</li>"}
+          ${DIN_ADAPTER[dev.port] || ""}
         </ol>
         <p class="item-note">鍵盤のMIDI IN/OUT端子とインターフェースを接続します（INとOUTをクロスでつなぎます）。</p>
       </div>`);
@@ -242,24 +251,6 @@ async function sendConsult() {
     `端末: ${state.device.label}`,
     `鍵盤: ${kb.maker} ${kb.model}${kb.verified ? "" : "（DB未検証）"}`,
     `案内した接続方法: ${state.methodSummary}`,
-  ];
-  if (note) lines.push(`相談内容: ${note}`);
-  await sendToTalk(lines.join("\n"));
-}
-
-async function sendUnknownConsult() {
-  const maker = document.getElementById("unknown-maker").value.trim();
-  const model = document.getElementById("unknown-model").value.trim();
-  const note = document.getElementById("unknown-note").value.trim();
-  if (!model && !note) {
-    alert("機種名または相談内容を入力してください");
-    return;
-  }
-  const lines = [
-    "【機器接続サポート・機種調査依頼】",
-    `端末: ${state.device ? state.device.label : "未選択"}`,
-    `メーカー: ${maker || "不明"}`,
-    `機種名: ${model || "不明"}`,
   ];
   if (note) lines.push(`相談内容: ${note}`);
   await sendToTalk(lines.join("\n"));

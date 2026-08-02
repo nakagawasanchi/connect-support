@@ -47,10 +47,15 @@ h2 { font-size: 16px; margin-bottom: 12px; }
   font-weight: 600;
   text-align: left;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
 }
 .choice small { display: block; font-weight: 400; font-size: 12px; color: #777; }
 .choice:active, .choice.selected { border-color: #06c755; background: #f0fff5; }
-.maker-choices .choice { text-align: center; padding: 12px 4px; }
+.choice .plug-icon { flex-shrink: 0; }
+.maker-choices .choice { text-align: center; padding: 12px 4px; display: block; }
 
 .hint {
   font-size: 12.5px;
