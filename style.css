@@ -1,38 +1,53 @@
+/* Jazz-Steps 機器接続サポート
+   配色はLINEリッチメニューのトンマナに合わせる
+   見出しはADS-strongのPNG（Adobe Fonts同期のためWeb配信不可）*/
+:root {
+  --teal: #117fa4;
+  --teal-dark: #005b78;
+  --teal-light: #d1e7ed;
+  --orange: #e18700;
+  --ink: #2d2926;
+  --line: #ddd;
+  --bg: #f7f8f9;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
-  background: #f7f8f9;
-  color: #222;
+  background: var(--bg);
+  color: var(--ink);
   line-height: 1.7;
   padding-bottom: 60px;
 }
 
 header {
-  background: #06c755;
+  background: var(--teal);
   color: #fff;
   padding: 20px 16px 16px;
+  text-align: center;
 }
-
-h1 { font-size: 20px; }
-.subtitle { font-size: 13px; opacity: 0.9; }
+.h-img { display: block; height: auto; }
+header .h-img { height: 26px; margin: 0 auto; }
+.subtitle { font-size: 12.5px; opacity: 0.92; margin-top: 6px; }
 
 main { padding: 16px; max-width: 560px; margin: 0 auto; }
 
 .step { margin-bottom: 24px; }
 .hidden { display: none; }
 
-h2 { font-size: 16px; margin-bottom: 12px; }
+h2 { font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+h2 .h-img { height: 19px; }
 .step-num {
   display: inline-block;
-  background: #06c755;
+  background: var(--teal);
   color: #fff;
   border-radius: 50%;
   width: 24px; height: 24px;
   text-align: center;
   line-height: 24px;
   font-size: 14px;
-  margin-right: 6px;
+  flex-shrink: 0;
 }
 
 .choices { display: grid; gap: 10px; }
@@ -40,8 +55,8 @@ h2 { font-size: 16px; margin-bottom: 12px; }
 
 .choice {
   background: #fff;
-  border: 1.5px solid #ddd;
-  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
   padding: 14px 12px;
   font-size: 15px;
   font-weight: 600;
@@ -51,9 +66,10 @@ h2 { font-size: 16px; margin-bottom: 12px; }
   justify-content: space-between;
   align-items: center;
   gap: 8px;
+  color: var(--ink);
 }
 .choice small { display: block; font-weight: 400; font-size: 12px; color: #777; }
-.choice:active, .choice.selected { border-color: #06c755; background: #f0fff5; }
+.choice:active, .choice.selected { border-color: var(--teal); background: #f0f8fb; }
 .choice .plug-icon {
   flex-shrink: 0;
   width: 74px;
@@ -64,8 +80,8 @@ h2 { font-size: 16px; margin-bottom: 12px; }
 
 .hint {
   font-size: 12.5px;
-  color: #666;
-  background: #eef3f0;
+  color: #34515c;
+  background: var(--teal-light);
   border-radius: 8px;
   padding: 10px 12px;
   margin-top: 12px;
@@ -85,7 +101,7 @@ textarea { min-height: 72px; resize: vertical; }
 #model-results { list-style: none; margin-top: 6px; }
 #model-results li {
   background: #fff;
-  border: 1px solid #ddd;
+  border: 1px solid var(--line);
   border-radius: 8px;
   padding: 10px 12px;
   margin-bottom: 6px;
@@ -93,29 +109,33 @@ textarea { min-height: 72px; resize: vertical; }
   font-size: 15px;
 }
 #model-results li small { color: #777; margin-left: 6px; }
-#model-results li:active { background: #f0fff5; }
+#model-results li:active { background: #f0f8fb; }
+#model-results li.not-found { display: flex; align-items: center; gap: 8px; color: #555; cursor: default; }
+#model-results li.not-found img { width: 56px; height: auto; flex-shrink: 0; }
 
 .primary-btn {
   display: block;
   width: 100%;
-  background: #06c755;
+  background: var(--orange);
   color: #fff;
   border: none;
-  border-radius: 10px;
-  padding: 14px;
+  border-radius: 12px;
+  padding: 15px;
   font-size: 16px;
   font-weight: 700;
   margin-top: 12px;
   cursor: pointer;
+  text-align: center;
 }
-.primary-btn:disabled { background: #aaa; }
+.primary-btn:disabled { background: #b8bcc0; }
+.primary-btn .h-img { height: 18px; margin: 0 auto; }
 
 .link-btn {
   display: block;
   margin: 16px auto 0;
   background: none;
   border: none;
-  color: #0a7d3c;
+  color: var(--teal-dark);
   font-size: 14px;
   text-decoration: underline;
   cursor: pointer;
@@ -124,29 +144,32 @@ textarea { min-height: 72px; resize: vertical; }
 #result-card .item-note { font-size: 12.5px; color: #666; margin-top: 8px; }
 
 .result-head {
-  background: #2b2f33;
+  background: var(--teal-dark);
   color: #fff;
   border-radius: 12px;
   padding: 14px 16px;
   margin-bottom: 12px;
 }
 .result-head .kb-name { font-size: 17px; font-weight: 700; }
-.result-head .dev-name { font-size: 13px; opacity: 0.85; }
+.result-head .dev-name { font-size: 13px; color: var(--teal-light); }
 
 .method {
   background: #fff;
-  border: 1.5px solid #ddd;
+  border: 1.5px solid var(--line);
   border-radius: 12px;
   padding: 14px;
   margin-bottom: 12px;
 }
-.method.rec-method { border-color: #06c755; }
+.method.rec-method { border-color: var(--teal); }
+.method.alert-method { border-color: #d93025; background: #fff8f7; }
+.method.info-method { border-color: var(--teal); background: #f5fbfd; }
+.method.sub-method { border-color: var(--line); background: #fafbfc; }
 .method h3 { font-size: 16px; margin-bottom: 8px; }
 .method-tag {
   display: inline-block;
   font-size: 11px;
   font-weight: 700;
-  background: #06c755;
+  background: var(--teal);
   color: #fff;
   border-radius: 10px;
   padding: 2px 8px;
@@ -163,13 +186,13 @@ textarea { min-height: 72px; resize: vertical; }
   margin-bottom: 8px;
   background: #fafbfc;
 }
-.plan.rec { border-color: #06c755; background: #f4fff8; }
+.plan.rec { border-color: var(--orange); background: #fffcf2; }
 .plan-head { font-size: 13px; font-weight: 700; color: #555; }
-.plan.rec .plan-head { color: #0a7d3c; }
+.plan.rec .plan-head { color: #8c5400; }
 .rec-badge {
   display: inline-block;
   font-size: 11px;
-  background: #06c755;
+  background: var(--orange);
   color: #fff;
   border-radius: 10px;
   padding: 1px 8px;
@@ -212,6 +235,30 @@ textarea { min-height: 72px; resize: vertical; }
   margin-top: 10px;
 }
 
+.common-note {
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+.common-note p { font-size: 13.5px; margin-bottom: 6px; }
+.common-note ul { padding-left: 18px; color: #444; }
+.common-note li { margin-bottom: 4px; }
+
+.trouble {
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+.trouble summary { cursor: pointer; font-weight: 700; font-size: 14px; }
+.trouble ol { padding-left: 20px; margin-top: 8px; font-size: 13px; color: #444; }
+.trouble ol li { margin-bottom: 5px; }
+.trouble code { background: #f0f2f4; border-radius: 4px; padding: 1px 5px; font-size: 11.5px; word-break: break-all; }
+
 .kb-notes {
   background: #fff;
   border: 1.5px dashed #ccc;
@@ -224,41 +271,9 @@ textarea { min-height: 72px; resize: vertical; }
 .kb-notes summary { cursor: pointer; font-weight: 600; font-size: 13px; }
 .kb-notes p { margin-top: 6px; }
 
-/* 警告・情報カード */
-.method.alert-method { border-color: #d93025; background: #fff8f7; }
-.method.info-method { border-color: #117fa4; background: #f5fbfd; }
-.method.sub-method { border-color: #ddd; background: #fafbfc; }
-
-/* 共通注意 */
-.common-note {
-  background: #fff;
-  border: 1.5px solid #ddd;
-  border-radius: 12px;
-  padding: 12px 14px;
-  margin-bottom: 12px;
-  font-size: 13px;
-}
-.common-note p { font-size: 13.5px; margin-bottom: 6px; }
-.common-note ul { padding-left: 18px; color: #444; }
-.common-note li { margin-bottom: 4px; }
-
-/* トラブルシューティング */
-.trouble {
-  background: #fff;
-  border: 1.5px solid #ddd;
-  border-radius: 12px;
-  padding: 12px 14px;
-  margin-bottom: 12px;
-}
-.trouble summary { cursor: pointer; font-weight: 700; font-size: 14px; }
-.trouble ol { padding-left: 20px; margin-top: 8px; font-size: 13px; color: #444; }
-.trouble ol li { margin-bottom: 5px; }
-.trouble code { background: #f0f2f4; border-radius: 4px; padding: 1px 5px; font-size: 11.5px; word-break: break-all; }
-
-/* これから買う方へ */
 #recommend-box {
   background: #fff;
-  border: 1.5px solid #ddd;
+  border: 1.5px solid var(--line);
   border-radius: 12px;
   padding: 14px;
   margin-top: 12px;
@@ -271,12 +286,44 @@ textarea { min-height: 72px; resize: vertical; }
   margin-bottom: 8px;
   background: #fafbfc;
 }
-.rec-use { font-size: 11.5px; color: #0a6d8f; font-weight: 700; }
+.rec-use { font-size: 11.5px; color: var(--teal-dark); font-weight: 700; }
 .rec-model { font-size: 15.5px; font-weight: 700; margin: 2px 0; }
 .rec-spec { font-size: 12px; color: #666; margin-bottom: 6px; }
 .rec-caution { font-size: 12px; color: #6b4e00; background: #fff3d6; border-radius: 8px; padding: 8px 10px; margin-top: 8px; }
 
-.soft-consult { font-size: 13px; color: #555; margin: 4px 2px 0; }
+.consult-area {
+  margin-top: 16px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  border: 1.5px solid var(--line);
+}
+.consult-area p { font-size: 13px; color: #555; }
+.consult-chara { display: flex; align-items: center; gap: 10px; }
+.consult-chara img { width: 84px; height: auto; flex-shrink: 0; }
+.consult-chara .bubble {
+  background: #f0f7fa;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #333;
+}
+
+footer { text-align: center; padding: 12px; }
+#liff-status { font-size: 11px; color: #aaa; }
+
+#gate { padding: 16px; max-width: 560px; margin: 40px auto 0; }
+#gate-card {
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  padding: 28px 20px;
+  text-align: center;
+}
+#gate-card .gate-icon { font-size: 40px; }
+#gate-card .h-img { height: 19px; margin: 8px auto; }
+#gate-card p { font-size: 14px; color: #555; }
+a.primary-btn { text-decoration: none; max-width: 260px; margin: 16px auto 0; }
 
 /* 免責ポップアップ */
 #disclaimer-overlay {
@@ -296,10 +343,12 @@ textarea { min-height: 72px; resize: vertical; }
   padding: 22px 18px;
   max-width: 440px;
   width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
 }
-#disclaimer-card h2 { font-size: 17px; margin-bottom: 10px; }
+#disclaimer-card .h-img { height: 19px; margin-bottom: 10px; }
 #disclaimer-card p { font-size: 13.5px; color: #444; margin-bottom: 8px; }
-#disclaimer-card p.soft { color: #0a7d3c; }
+#disclaimer-card p.soft { color: var(--teal-dark); }
 #agree-label {
   display: block;
   font-size: 14px;
@@ -311,42 +360,3 @@ textarea { min-height: 72px; resize: vertical; }
   cursor: pointer;
 }
 #agree-label input { transform: scale(1.2); margin-right: 6px; }
-
-.consult-area {
-  margin-top: 16px;
-  background: #fff;
-  border-radius: 12px;
-  padding: 14px;
-  border: 1.5px solid #ddd;
-}
-.consult-area p { font-size: 13px; color: #555; }
-
-.consult-chara { display: flex; align-items: center; gap: 10px; }
-.consult-chara img { width: 84px; height: auto; flex-shrink: 0; }
-.consult-chara .bubble {
-  background: #f0f7fa;
-  border-radius: 12px;
-  padding: 10px 12px;
-  font-size: 13px;
-  color: #333;
-  position: relative;
-}
-
-#model-results li.not-found { display: flex; align-items: center; gap: 8px; color: #555; }
-#model-results li.not-found img { width: 56px; height: auto; flex-shrink: 0; }
-
-footer { text-align: center; padding: 12px; }
-#liff-status { font-size: 11px; color: #aaa; }
-
-#gate { padding: 16px; max-width: 560px; margin: 40px auto 0; }
-#gate-card {
-  background: #fff;
-  border: 1.5px solid #ddd;
-  border-radius: 12px;
-  padding: 28px 20px;
-  text-align: center;
-}
-#gate-card .gate-icon { font-size: 40px; }
-#gate-card h2 { margin: 8px 0; }
-#gate-card p { font-size: 14px; color: #555; }
-a.primary-btn { text-decoration: none; text-align: center; max-width: 260px; margin: 16px auto 0; }
