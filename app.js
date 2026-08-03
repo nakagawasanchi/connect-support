@@ -1,6 +1,12 @@
 const LIFF_ID = "2010931633-3uzRGseS";
 const LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbyirD-1iBPuaiR7rVhMT7NUeF6pGZbLlzJxNgSL-qjzzuRakrOEn8ygfnm9Sv4agYo7KQ/exec"; // GAS WebアプリのURL（未設定なら送信しない）
 
+// 楽天アフィリエイト検索リンク
+const RAKUTEN_AFF = "https://hb.afl.rakuten.co.jp/hgc/0f41feae.fb92208b.0f41feaf.5965d44d/?pc=";
+function rakutenLink(q) {
+  return RAKUTEN_AFF + encodeURIComponent("https://search.rakuten.co.jp/search/mall/" + encodeURIComponent(q) + "/");
+}
+
 const DEVICES = {
   "iphone-lightning": { label: "iPhone（Lightning端子）", port: "lightning" },
   "iphone-usbc":      { label: "iPhone（USB-C端子）",     port: "usbc" },
@@ -21,50 +27,51 @@ const PORT_LABEL = {
 };
 
 // 端末側の端子 × 鍵盤側の端子 → 購入プラン（先頭がおすすめ）
+// items: t=表示名, q=楽天検索ワード（省略時は購入リンクなし＝手持ち品）
 const CABLE_PLANS = {
   lightning: {
     "USB-B": [
-      { items: ["Apple Lightning - USB 3カメラアダプタ（純正推奨）", "USB A-Bケーブル（プリンタ用と同じ）"] },
+      { items: [{ t: "Apple Lightning - USB 3カメラアダプタ（純正推奨）", q: "Apple Lightning USB 3 カメラアダプタ" }, { t: "USB A-Bケーブル（プリンタ用と同じ）", q: "USB A-B ケーブル プリンタ" }] },
     ],
     "micro-B": [
-      { items: ["Apple Lightning - USB 3カメラアダプタ（純正推奨）", "USB A - micro Bケーブル（データ通信対応）"] },
+      { items: [{ t: "Apple Lightning - USB 3カメラアダプタ（純正推奨）", q: "Apple Lightning USB 3 カメラアダプタ" }, { t: "USB A - micro Bケーブル（データ通信対応）", q: "USB microB ケーブル データ通信" }] },
     ],
     "mini-B": [
-      { items: ["Apple Lightning - USB 3カメラアダプタ（純正推奨）", "USB A - mini Bケーブル"] },
+      { items: [{ t: "Apple Lightning - USB 3カメラアダプタ（純正推奨）", q: "Apple Lightning USB 3 カメラアダプタ" }, { t: "USB A - mini Bケーブル", q: "USB miniB ケーブル" }] },
     ],
     "USB-C": [
-      { items: ["Apple Lightning - USB 3カメラアダプタ（純正推奨）", "USB A - Cケーブル（データ通信対応）"] },
+      { items: [{ t: "Apple Lightning - USB 3カメラアダプタ（純正推奨）", q: "Apple Lightning USB 3 カメラアダプタ" }, { t: "USB A - Cケーブル（データ通信対応）", q: "USB-C USB-A ケーブル データ通信" }] },
     ],
   },
   usbc: {
     "USB-B": [
-      { items: ["USB-C → USB-Bケーブル 1本"], note: "ケーブル1本で完結。迷ったらこちら。" },
-      { items: ["手持ちのUSB A-Bケーブル（プリンタ用）", "USB変換アダプタ（A→C）"], note: "プリンタ用ケーブルが家にあるなら、変換アダプタだけ買えばOK。" },
+      { items: [{ t: "USB-C → USB-Bケーブル 1本", q: "USB-C USB-B ケーブル" }], note: "ケーブル1本で完結。迷ったらこちら。" },
+      { items: [{ t: "手持ちのUSB A-Bケーブル（プリンタ用）" }, { t: "USB変換アダプタ（A→C）", q: "USB 変換アダプタ A to C" }], note: "プリンタ用ケーブルが家にあるなら、変換アダプタだけ買えばOK。" },
     ],
     "micro-B": [
-      { items: ["USB-C → micro Bケーブル（データ通信対応） 1本"], note: "ケーブル1本で完結。" },
-      { items: ["手持ちのUSB A - micro Bケーブル（データ通信対応）", "USB変換アダプタ（A→C）"], note: "昔のAndroid充電ケーブル等が使える場合があります（データ通信対応のもの）。" },
+      { items: [{ t: "USB-C → micro Bケーブル（データ通信対応） 1本", q: "USB-C microB ケーブル データ通信" }], note: "ケーブル1本で完結。" },
+      { items: [{ t: "手持ちのUSB A - micro Bケーブル（データ通信対応）" }, { t: "USB変換アダプタ（A→C）", q: "USB 変換アダプタ A to C" }], note: "昔のAndroid充電ケーブル等が使える場合があります（データ通信対応のもの）。" },
     ],
     "mini-B": [
-      { items: ["USB-C → mini Bケーブル 1本"], note: "ケーブル1本で完結。" },
-      { items: ["手持ちのUSB A - mini Bケーブル", "USB変換アダプタ（A→C）"] },
+      { items: [{ t: "USB-C → mini Bケーブル 1本", q: "USB-C miniB ケーブル" }], note: "ケーブル1本で完結。" },
+      { items: [{ t: "手持ちのUSB A - mini Bケーブル" }, { t: "USB変換アダプタ（A→C）", q: "USB 変換アダプタ A to C" }] },
     ],
     "USB-C": [
-      { items: ["USB-C → USB-Cケーブル（データ通信対応） 1本"], note: "「データ通信対応」の表記があるものを選んでください（充電専用は不可）。" },
+      { items: [{ t: "USB-C → USB-Cケーブル（データ通信対応） 1本", q: "USB-C USB-C ケーブル データ対応" }], note: "「データ通信対応」の表記があるものを選んでください（充電専用は不可）。" },
     ],
   },
   usba: {
-    "USB-B":   [{ items: ["USB A-Bケーブル（プリンタ用と同じ） 1本"] }],
-    "micro-B": [{ items: ["USB A - micro Bケーブル（データ通信対応） 1本"] }],
-    "mini-B":  [{ items: ["USB A - mini Bケーブル 1本"] }],
-    "USB-C":   [{ items: ["USB A - Cケーブル（データ通信対応） 1本"] }],
+    "USB-B":   [{ items: [{ t: "USB A-Bケーブル（プリンタ用と同じ） 1本", q: "USB A-B ケーブル プリンタ" }] }],
+    "micro-B": [{ items: [{ t: "USB A - micro Bケーブル（データ通信対応） 1本", q: "USB microB ケーブル データ通信" }] }],
+    "mini-B":  [{ items: [{ t: "USB A - mini Bケーブル 1本", q: "USB miniB ケーブル" }] }],
+    "USB-C":   [{ items: [{ t: "USB A - Cケーブル（データ通信対応） 1本", q: "USB-C USB-A ケーブル データ通信" }] }],
   },
 };
 
 // MIDI DIN接続時に端末側で追加で必要になるもの
 const DIN_ADAPTER = {
-  lightning: "Apple Lightning - USB 3カメラアダプタ（純正推奨）",
-  usbc: "USB変換アダプタ（A→C・インターフェースがUSB-Aの場合）",
+  lightning: { t: "Apple Lightning - USB 3カメラアダプタ（純正推奨）", q: "Apple Lightning USB 3 カメラアダプタ" },
+  usbc: { t: "USB変換アダプタ（A→C・インターフェースがUSB-Aの場合）", q: "USB 変換アダプタ A to C" },
   usba: null,
 };
 
@@ -203,7 +210,8 @@ function renderModelResults() {
   });
   if (candidates.length === 0 && q) {
     const li = document.createElement("li");
-    li.textContent = "見つかりません。機種名の表記をご確認いただくか、トークで直接ご相談ください。";
+    li.className = "not-found";
+    li.innerHTML = '<img src="images/chara-thinking.png" alt=""><span>見つかりません。機種名の表記をご確認いただくか、トークで直接ご相談ください。</span>';
     list.appendChild(li);
     if (notFoundLogged !== q) {
       notFoundLogged = q;
@@ -224,6 +232,11 @@ function selectKeyboard(kb) {
 
 function planLabel(i) { return "購入プラン" + String.fromCharCode(65 + i); }
 
+function buyItem(it) {
+  const link = it.q ? `<a class="buy-link" href="${rakutenLink(it.q)}" target="_blank" rel="noopener">楽天で探す ▸</a>` : "";
+  return `<li><span class="buy-name">🛒 ${escapeHtml(it.t)}</span>${link}</li>`;
+}
+
 function renderResult() {
   const kb = state.keyboard;
   const dev = state.device;
@@ -243,7 +256,7 @@ function renderResult() {
     const planHtml = plans.map((p, i) => `
       <div class="plan ${i === 0 ? "rec" : ""}">
         <div class="plan-head">${planLabel(i)}${i === 0 ? '<span class="rec-badge">おすすめ</span>' : ""}</div>
-        <ul class="buy-list">${p.items.map((it) => `<li>🛒 ${escapeHtml(it)}</li>`).join("")}</ul>
+        <ul class="buy-list">${p.items.map((it) => buyItem(it)).join("")}</ul>
         ${p.note ? `<p class="plan-note">${escapeHtml(p.note)}</p>` : ""}
       </div>`).join("");
     parts.push(`
@@ -266,8 +279,8 @@ function renderResult() {
         <div class="plan rec">
           <div class="plan-head">購入プランA<span class="rec-badge">おすすめ</span></div>
           <ul class="buy-list">
-            <li>🛒 USB-MIDIインターフェース（例：YAMAHA UX16）</li>
-            ${adapter ? `<li>🛒 ${escapeHtml(adapter)}</li>` : ""}
+            ${buyItem({ t: "USB-MIDIインターフェース（例：YAMAHA UX16）", q: "YAMAHA UX16" })}
+            ${adapter ? buyItem(adapter) : ""}
           </ul>
         </div>
         <p class="item-note">鍵盤のMIDI IN/OUT端子とインターフェースを接続します（INとOUTをクロスでつなぎます）。</p>

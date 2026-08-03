@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>機器接続サポート</title>
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
   <header>
@@ -44,37 +44,37 @@
 
         <button class="choice" data-device="iphone-lightning">
           <span class="txt">iPhone<small>Lightning端子（iPhone 14以前）</small></span>
-          <img class="plug-icon" src="images/plug-lightning.jpg" alt="Lightningケーブルの先端">
+          <img class="plug-icon" src="images/illust-lightning.png" alt="Lightningケーブルの先端">
         </button>
 
         <button class="choice" data-device="iphone-usbc">
           <span class="txt">iPhone<small>USB-C端子（iPhone 15以降）</small></span>
-          <img class="plug-icon" src="images/plug-usbc.jpg" alt="USB-Cケーブルの先端">
+          <img class="plug-icon" src="images/illust-usbc.png" alt="USB-Cケーブルの先端">
         </button>
 
         <button class="choice" data-device="ipad-usbc">
           <span class="txt">iPad<small>USB-C端子</small></span>
-          <img class="plug-icon" src="images/plug-usbc.jpg" alt="USB-Cケーブルの先端">
+          <img class="plug-icon" src="images/illust-usbc.png" alt="USB-Cケーブルの先端">
         </button>
 
         <button class="choice" data-device="ipad-lightning">
           <span class="txt">iPad<small>Lightning端子</small></span>
-          <img class="plug-icon" src="images/plug-lightning.jpg" alt="Lightningケーブルの先端">
+          <img class="plug-icon" src="images/illust-lightning.png" alt="Lightningケーブルの先端">
         </button>
 
         <button class="choice" data-device="android">
           <span class="txt">Android<small>スマホ・タブレット（USB-C端子）</small></span>
-          <img class="plug-icon" src="images/plug-usbc.jpg" alt="USB-Cケーブルの先端">
+          <img class="plug-icon" src="images/illust-usbc.png" alt="USB-Cケーブルの先端">
         </button>
 
         <button class="choice" data-device="pc-usba">
           <span class="txt">パソコン<small>USB-A端子（昔ながらの四角いUSB）</small></span>
-          <img class="plug-icon" src="images/plug-usba.jpg" alt="USB-Aケーブルの先端">
+          <img class="plug-icon" src="images/illust-usba.png" alt="USB-Aケーブルの先端">
         </button>
 
         <button class="choice" data-device="pc-usbc">
           <span class="txt">パソコン<small>USB-C端子のみ（MacBookなど）</small></span>
-          <img class="plug-icon" src="images/plug-usbc.jpg" alt="USB-Cケーブルの先端">
+          <img class="plug-icon" src="images/illust-usbc.png" alt="USB-Cケーブルの先端">
         </button>
 
       </div>
@@ -97,7 +97,10 @@
       <h2><span class="step-num">3</span> 接続方法</h2>
       <div id="result-card"></div>
       <div class="consult-area">
-        <p>うまくいかない場合や不明点は、この内容のままトークで相談できます。</p>
+        <div class="consult-chara">
+          <img src="images/chara-guide.png" alt="案内キャラクター">
+          <p class="bubble">うまくいかないときや不安なときは、そのまま気軽に相談してください！確認してお返事します。</p>
+        </div>
         <textarea id="consult-note" placeholder="（任意）困っている内容があれば入力してください　例: ケーブルをつないだが音が出ない"></textarea>
         <button id="consult-btn" class="primary-btn">この内容でトークに送信して相談する</button>
       </div>
@@ -111,6 +114,6 @@
   </footer>
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-  <script src="app.js?v=7"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>
