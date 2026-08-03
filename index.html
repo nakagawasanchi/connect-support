@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>機器接続サポート</title>
-  <link rel="stylesheet" href="style.css?v=9">
+  <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
   <header>
@@ -26,7 +26,7 @@
   <div id="disclaimer-overlay" class="hidden">
     <div id="disclaimer-card">
       <h2>ご利用の前に</h2>
-      <p>このツールは、各メーカーの公開情報をもとに接続方法をご案内しますが、<b>すべての機種・環境での動作を保証するものではありません</b>。</p>
+      <p>ご紹介する製品につきましては、<b>動作保証を行うものではございません</b>。ご利用環境や機器構成によって動作状況が異なる場合があるため、あくまで参考情報としてご確認いただけますと幸いです。</p>
       <p>ケーブル等をご購入の際は、お手元の取扱説明書やメーカーサイトもあわせてご確認ください。</p>
       <p class="soft">診断結果に不安がある場合は、結果画面の相談ボタンからお気軽にご相談ください。確認してお返事します。</p>
       <label id="agree-label"><input type="checkbox" id="agree-check"> 上記を理解し、自己責任で利用します</label>
@@ -90,6 +90,12 @@
         <input type="text" id="model-search" placeholder="機種名を入力（例: P-125, CT-S300）" autocomplete="off">
         <ul id="model-results"></ul>
       </div>
+      <button class="link-btn" id="no-keyboard-btn">鍵盤をこれから買う方はこちら</button>
+      <div id="recommend-box" class="hidden">
+        <p class="rec-lead">Jazz-Stepsのレッスンには <b>61鍵以上</b> と <b>MIDI接続（USB Type-B または MIDI端子）</b> が必要です。この条件を満たすおすすめ機種です。</p>
+        <div id="recommend-list"></div>
+        <p class="rec-caution">⚠️ 購入時は<b>USB端子の種類（Type-B / Type-C）</b>を必ずご確認ください。ここを間違えるとケーブルの買い直しになります。<br>⚠️「Bluetooth対応」と書かれていても、音楽再生用の<b>Bluetoothオーディオ</b>だけで<b>Bluetooth MIDIは非対応</b>の機種があります。仕様表に「Bluetooth MIDI」と明記されているかをご確認ください。</p>
+      </div>
     </section>
 
     <!-- STEP 3: 結果表示 -->
@@ -114,6 +120,6 @@
   </footer>
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-  <script src="app.js?v=9"></script>
+  <script src="app.js?v=10"></script>
 </body>
 </html>

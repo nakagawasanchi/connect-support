@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-02",
+  "updated": "2026-08-03",
   "batch": 2,
   "keyboards": [
     {
@@ -14,7 +14,8 @@
       "bluetooth_midi": false,
       "notes": "USB TO HOSTはMIDIのみ対応（旧P-125はMIDI/オーディオ両対応だったが変更）。コネクタ形状はUSB Type-B(A-Bケーブル)。公式仕様表には形状記載なくWeb通販・フォーラム情報で確認",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/p_series/p-125a/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": false
     },
     {
       "maker": "YAMAHA",
@@ -28,7 +29,8 @@
       "bluetooth_midi": false,
       "notes": "USB TO HOSTはMIDI/オーディオ両対応。生産終了・後継はP-125a。コネクタ形状は公式仕様表に記載なく社外情報で確認（USB Type-B）",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/p_series/p-125/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": true
     },
     {
       "maker": "YAMAHA",
@@ -42,7 +44,8 @@
       "bluetooth_midi": false,
       "notes": "USB TO HOSTはMIDI/オーディオ両対応。エントリーモデル。Bluetooth非搭載（BT搭載版はP-145BT）",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/p_series/p-145/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": true
     },
     {
       "maker": "YAMAHA",
@@ -56,7 +59,8 @@
       "bluetooth_midi": false,
       "notes": "USB TO HOSTはMIDI/オーディオ両対応。Bluetoothはオーディオ受信専用（Bluetooth MIDIではない点に注意）",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/p_series/p-145bt/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": true
     },
     {
       "maker": "YAMAHA",
@@ -70,7 +74,8 @@
       "bluetooth_midi": false,
       "notes": "USB TO HOSTはMIDI/オーディオ両対応。Bluetoothはオーディオ受信専用（Bluetooth MIDIではない）",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/p_series/p-225/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": true
     },
     {
       "maker": "YAMAHA",
@@ -84,7 +89,8 @@
       "bluetooth_midi": false,
       "notes": "USB TO HOST〇のみ記載でMIDI/オーディオ区分・コネクタ形状は公式ページで未確認。要確認",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/p_series/p-s500/specs.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": true
     },
     {
       "maker": "YAMAHA",
@@ -98,7 +104,8 @@
       "bluetooth_midi": true,
       "notes": "Pシリーズ最上位モデル。USB TO HOSTはType-C（MIDI/オーディオ）。MIDI IN/OUT端子あり（5ピンDINと推定・要確認）。Bluetoothはオーディオ受信＋MIDI送受信の両対応",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/p_series/p-525/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": true
     },
     {
       "maker": "YAMAHA",
@@ -112,7 +119,8 @@
       "bluetooth_midi": true,
       "notes": "2026年6月発売の新モデル。BluetoothはMIDI送受信＋オーディオ受信の両対応（アプリ連携可）",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/arius/ydp-146/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -126,7 +134,8 @@
       "bluetooth_midi": true,
       "notes": "2026年6月発売の新モデル。BluetoothはMIDI送受信＋オーディオ受信の両対応",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/arius/ydp-166/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -140,7 +149,8 @@
       "bluetooth_midi": true,
       "notes": "2026年6月発売の新モデル。BluetoothはMIDI送受信＋オーディオ受信の両対応",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/arius/ydp-s36/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -154,7 +164,8 @@
       "bluetooth_midi": true,
       "notes": "2026年6月発売の新モデル。BluetoothはMIDI送受信＋オーディオ受信の両対応",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/arius/ydp-s56/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -168,7 +179,8 @@
       "bluetooth_midi": false,
       "notes": "生産完了品。公式仕様表にBluetooth記載なし（非搭載と推定）。USBコネクタ形状は公式ページに明記なくシリーズ共通仕様(Type-B)から推定",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/arius/ydp-144/specs.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -182,7 +194,8 @@
       "bluetooth_midi": false,
       "notes": "生産完了品。公式仕様表にBluetooth記載なし（非搭載と推定）。USBコネクタ形状は公式ページに明記なくシリーズ共通仕様(Type-B)から推定",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/arius/ydp-164/specs.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -196,7 +209,8 @@
       "bluetooth_midi": false,
       "notes": "MIDI IN/OUT/THRU搭載（5ピンDIN想定）。Bluetooth非搭載。USBコネクタ形状は公式ページに明記なくシリーズ共通仕様から推定",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/clavinova/clp-735/specs.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -210,7 +224,8 @@
       "bluetooth_midi": true,
       "notes": "USB TO HOST、USB TO DEVICEの両方搭載。MIDI IN/OUT/THRU搭載（5ピンDIN想定）。BluetoothはMIDI送受信＋オーディオ受信対応。USBコネクタ形状は公式ページに明記なくシリーズ共通仕様から推定",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/clavinova/clp-745/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -224,7 +239,8 @@
       "bluetooth_midi": true,
       "notes": "MIDI 5ピンDIN端子は非搭載、MIDIはBluetooth経由の送受信のみ",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/clavinova/clp-800_series/clp-825/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -238,7 +254,8 @@
       "bluetooth_midi": true,
       "notes": "USB TO HOST、USB TO DEVICEの両方搭載。MIDI 5ピンDIN端子は非搭載、MIDIはBluetooth経由の送受信のみ",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/clavinova/clp-800_series/clp-845/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -252,7 +269,8 @@
       "bluetooth_midi": true,
       "notes": "本体接続用USBはUSB-C。USB TO DEVICEは別売無線LANアダプター専用でUSBメモリ非対応。MIDI IN/OUT/THRU搭載。BluetoothはMIDI送受信＋オーディオ受信対応（Smart Pianistアプリ連携）",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/clavinova/csp-275/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -266,7 +284,8 @@
       "bluetooth_midi": false,
       "notes": "Bluetooth非搭載（スマホ連携は別売USB無線LANアダプター経由）。MIDI IN/OUT/THRU搭載。USBコネクタ形状は公式ページに明記なくシリーズ共通仕様から推定",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/clavinova/csp-150/specs.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -280,7 +299,8 @@
       "bluetooth_midi": false,
       "notes": "エントリー機。USB端子・MIDI端子・Bluetoothいずれも非搭載。iPhone/PCとの接続手段なし",
       "source": "https://jp.yamaha.com/products/musical_instruments/keyboards/portable_keyboards/psr-e273/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -294,7 +314,8 @@
       "bluetooth_midi": false,
       "notes": "USB TO HOSTはMIDI/オーディオ対応。コネクタ形状は仕様表に記載なく要確認。Bluetooth非搭載",
       "source": "https://jp.yamaha.com/products/musical_instruments/keyboards/portable_keyboards/psr-e373/specs.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": true
     },
     {
       "maker": "YAMAHA",
@@ -308,7 +329,8 @@
       "bluetooth_midi": false,
       "notes": "USB TO HOSTはMIDI/オーディオ対応。コネクタ形状は仕様表に記載なく要確認。Bluetooth非搭載",
       "source": "https://jp.yamaha.com/products/musical_instruments/keyboards/portable_keyboards/psr-e473/specs.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": true
     },
     {
       "maker": "YAMAHA",
@@ -322,7 +344,8 @@
       "bluetooth_midi": false,
       "notes": "2026年3月発売。USB TO HOSTがUSB Type-Cに変更（MIDI/オーディオ対応）。旧モデルPSR-E473はmicro-B系だった可能性が高い（要個別確認）。Bluetoothは仕様表に記載なし",
       "source": "https://jp.yamaha.com/products/musical_instruments/keyboards/portable_keyboards/psr-e483/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": true
     },
     {
       "maker": "YAMAHA",
@@ -336,7 +359,8 @@
       "bluetooth_midi": false,
       "notes": "USB TO HOSTはMIDI/オーディオ対応。コネクタ形状は仕様表に記載なく要確認（上位機PSR-E483はUSB-Cに変更されたがE383は不明）",
       "source": "https://jp.yamaha.com/products/musical_instruments/keyboards/portable_keyboards/psr-e383/specs.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": true
     },
     {
       "maker": "YAMAHA",
@@ -350,7 +374,8 @@
       "bluetooth_midi": false,
       "notes": "エントリー機。USB端子・MIDI端子・Bluetoothいずれも非搭載",
       "source": "https://jp.yamaha.com/products/musical_instruments/keyboards/portable_keyboards/psr-e283/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -364,7 +389,8 @@
       "bluetooth_midi": false,
       "notes": "37ミニ鍵。USB TO HOSTはmicro-B、MIDI録音対応（オーディオファイル非対応）。Bluetooth非搭載",
       "source": "https://jp.yamaha.com/products/musical_instruments/keyboards/portable_keyboards/pss-a50/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -378,7 +404,8 @@
       "bluetooth_midi": false,
       "notes": "生産完了品だが中古で非常に多く流通。USB TO HOSTはMIDIのみ（オーディオ非対応）。Bluetooth非搭載。コネクタ形状は仕様表に記載なくA-BケーブルというYamahaの案内から推定",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/p_series/p-45/specs.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": false
     },
     {
       "maker": "CASIO",
@@ -392,7 +419,8 @@
       "bluetooth_midi": true,
       "notes": "USB Type-A（別売/付属ワイヤレスMIDI&AUDIOアダプターWU-BT10接続用）とUSB Type-B（PC/スマホMIDI接続用）を両方搭載。5ピンDIN MIDI非搭載。BluetoothはWU-BT10アダプター経由でMIDI/オーディオ対応（本体単体では非対応）。公式仕様ページは接続タイムアウトのため二次情報（casio.com掲載内容の検索結果）で確認",
       "source": "https://www.casio.com/us/electronic-musical-instruments/product.PX-S1100BK/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -406,7 +434,8 @@
       "bluetooth_midi": false,
       "notes": "USB MIDIはクラスコンプライアント。Bluetooth非搭載",
       "source": "https://www.casio.com/us/electronic-musical-instruments/product.CT-S300/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -420,7 +449,8 @@
       "bluetooth_midi": true,
       "notes": "ボーカルシンセシス機能搭載モデル。付属のワイヤレスMIDI&AUDIOアダプター(WU-BT10)によりBluetooth MIDI/オーディオ対応",
       "source": "https://www.casio.com/us/electronic-musical-instruments/product.CT-S1000V/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -434,7 +464,8 @@
       "bluetooth_midi": true,
       "notes": "USB Type A（付属ワイヤレスMIDI&AUDIOアダプターWU-BT10接続用）とUSB Type B micro（PC接続用）を搭載。Bluetoothはアダプター付属で標準対応",
       "source": "https://web.casio.jp/emi/pdf/casiotone_spec.pdf",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -448,7 +479,8 @@
       "bluetooth_midi": true,
       "notes": "Bluetoothは別売ワイヤレスMIDI&AUDIOアダプター(WU-BT10)使用時のみ対応（本体単体では非対応）",
       "source": "https://web.casio.jp/emi/pdf/casiotone_spec.pdf",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -462,7 +494,8 @@
       "bluetooth_midi": false,
       "notes": "Bluetooth非対応（アダプター対応も無し）。USB(micro-B)でMIDI通信のみ可能",
       "source": "https://web.casio.jp/emi/pdf/casiotone_spec.pdf",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -476,7 +509,8 @@
       "bluetooth_midi": true,
       "notes": "USB Type A（別売ワイヤレスMIDI&AUDIOアダプターWU-BT10接続用）とUSB Type B micro（PC接続用）を搭載。Bluetoothは別売アダプター使用時のみ対応",
       "source": "https://web.casio.jp/emi/pdf/casiotone_spec.pdf",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -490,7 +524,8 @@
       "bluetooth_midi": true,
       "notes": "CT-S1の76鍵盤版。USB Type A（別売アダプター用）とUSB Type B micro（PC接続用）を搭載。Bluetoothは別売ワイヤレスMIDI&AUDIOアダプター使用時のみ対応",
       "source": "https://web.casio.jp/emi/pdf/casiotone_spec.pdf",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -504,7 +539,8 @@
       "bluetooth_midi": true,
       "notes": "鍵盤が光る光ナビゲーション機能搭載。USB Type A（別売アダプター用）とUSB Type B micro搭載。Bluetoothは別売ワイヤレスMIDI&AUDIOアダプター使用時のみ対応。発売年は仕様表に記載なく要確認",
       "source": "https://web.casio.jp/emi/pdf/casiotone_spec.pdf",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -518,7 +554,8 @@
       "bluetooth_midi": false,
       "notes": "USB端子・Bluetooth共に非搭載（仕様比較表でUSB Type A・Type Bともに「−」）。発売年は仕様表に記載なく要確認",
       "source": "https://web.casio.jp/emi/pdf/casiotone_spec.pdf",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -532,7 +569,8 @@
       "bluetooth_midi": false,
       "notes": "USB Type A・Type Bとも搭載（micro-Bではなく通常のType B）。Bluetooth非搭載。発売年は仕様表に記載なく要確認",
       "source": "https://web.casio.jp/emi/pdf/casiotone_spec.pdf",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -546,7 +584,8 @@
       "bluetooth_midi": false,
       "notes": "USB Type A・Type Bとも搭載（micro-Bではなく通常のType B）。Bluetooth非搭載。発売年は仕様表に記載なく要確認",
       "source": "https://web.casio.jp/emi/pdf/casiotone_spec.pdf",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -560,7 +599,8 @@
       "bluetooth_midi": false,
       "notes": "USB Type A（USBメモリ用）とType B（PC接続・A-Bケーブル）の両方搭載。5ピンMIDI端子は非搭載でUSB経由のみ。Bluetooth非搭載",
       "source": "https://www.casiomusic.co.nz/pages/px-870-specifications",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -574,7 +614,8 @@
       "bluetooth_midi": false,
       "notes": "USB TO HOST（Type B）のみ搭載（USB TO DEVICEは非搭載でUSBメモリ録音不可）。クラスコンプライアントでドライバ不要。5ピンMIDI非搭載。Bluetooth非搭載",
       "source": "https://www.casio.com/us/electronic-musical-instruments/product.PX-770BK/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -588,7 +629,8 @@
       "bluetooth_midi": false,
       "notes": "USB Type B（A-Bケーブル、フルサイズでmicroではない）。本体単体ではBluetooth非対応、別売WU-BT10アダプターで対応可",
       "source": "https://www.pianodreamers.com/casio-cdp-s110-s160-review/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -602,7 +644,8 @@
       "bluetooth_midi": false,
       "notes": "USB Type B（A-Bケーブル、フルサイズでmicroではない）。クラスコンプライアント。本体単体ではBluetooth非対応、別売WU-BT10アダプターで対応可",
       "source": "https://www.casio.com/us/electronic-musical-instruments/product.CDP-S160BK/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -616,7 +659,8 @@
       "bluetooth_midi": false,
       "notes": "生産完了品。クラスコンプライアントUSB MIDI（ドライバ不要）。5ピンMIDI IN/OUT非搭載でUSB経由のみ。Bluetooth非搭載",
       "source": "https://www.manualslib.com/manual/2249117/Casio-Privia-Px-160.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -630,7 +674,8 @@
       "bluetooth_midi": false,
       "notes": "エントリー機。USB・MIDI・Bluetoothいずれも非搭載（公式仕様ページに端子として記載なし）。発売年は仕様表に記載なく要確認",
       "source": "https://casio.jp/emi/products/ctk2550/spec/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -644,7 +689,8 @@
       "bluetooth_midi": false,
       "notes": "USB Type B（A-Bケーブル）でMIDI通信可能（PC側でCASIO USB-MIDIをMIDIデバイスとして選択）。Bluetooth非搭載",
       "source": "https://www.manualslib.com/manual/1854787/Casio-Ctk-3500.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -658,7 +704,8 @@
       "bluetooth_midi": true,
       "notes": "USB Computer port（Type B、MIDI/オーディオ対応）とUSB Memory port（Type A）を搭載。5ピンMIDI DIN非搭載。Bluetooth標準内蔵（オーディオ：Ver3.0、MIDI：Ver4.0）。Roland Piano App/GarageBand等に対応",
       "source": "https://www.roland.com/global/products/fp-30x/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": true
     },
     {
       "maker": "Roland",
@@ -672,7 +719,8 @@
       "bluetooth_midi": true,
       "notes": "USB COMPUTER port（Type B）とUpdate port（Type A、アップデート専用）。5ピンMIDI DIN非搭載。Bluetooth MIDI標準内蔵（Ver4.0）。オーディオ用Bluetoothの記載なし",
       "source": "https://www.roland.com/global/products/fp-10/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -686,7 +734,8 @@
       "bluetooth_midi": true,
       "notes": "USB Computer port（Type B、MIDI/オーディオ対応）とUSB Memory port（Type A）を搭載。5ピンMIDI DIN非搭載。Bluetooth標準内蔵（オーディオ：Ver3.0、MIDI：Ver4.0）",
       "source": "https://www.roland.com/global/products/fp-60x/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": true
     },
     {
       "maker": "Roland",
@@ -700,7 +749,8 @@
       "bluetooth_midi": true,
       "notes": "上位機のためMIDI（IN/OUT）5ピンDIN端子を搭載（FP-30X/FP-60Xは非搭載）。USB Computer port（Type B、MIDI/オーディオ対応）とUSB Memory port（Type A）。Bluetooth標準内蔵（オーディオ：Ver3.0、MIDI：Ver4.0）",
       "source": "https://www.roland.com/global/products/fp-90x/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": true
     },
     {
       "maker": "Roland",
@@ -714,7 +764,8 @@
       "bluetooth_midi": true,
       "notes": "USB-C端子でオーディオ/MIDI両対応（クラスコンプライアント）。5ピンMIDI DIN非搭載。Bluetooth標準内蔵（Ver5.0、A2DPオーディオ＋GATT MIDI）。下位モデルGO-88P（無印）は機能簡略版で仕様が異なる可能性あり要確認",
       "source": "https://static.roland.com/manuals/go-88px_reference/en-US/219636875.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -728,7 +779,8 @@
       "bluetooth_midi": true,
       "notes": "USB COMPUTER portはmicro-B（MIDIのみ、オーディオ非対応）。5ピンMIDI DIN非搭載。Bluetooth標準内蔵（Ver4.2、A2DPオーディオ＋GATT MIDI）",
       "source": "https://www.roland.com/us/products/gokeys_go-61k/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": false
     },
     {
       "maker": "Roland",
@@ -742,7 +794,8 @@
       "bluetooth_midi": true,
       "notes": "USB COMPUTER port（Type B）とUSB MEMORY port（Type A）。5ピンMIDI DIN非搭載。Bluetooth MIDI対応（Ver4.0）だが購入国により非搭載の場合あり。オーディオ用Bluetoothは非対応（後継FP-30Xで追加）",
       "source": "https://www.roland.com/us/products/fp-30/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -756,7 +809,8 @@
       "bluetooth_midi": true,
       "notes": "USB Computer port（Type B、MIDI/オーディオ対応）とUSB Memory port（Type A）。5ピンMIDI DIN非搭載。Bluetooth標準内蔵（Ver4.2、A2DPオーディオ＋GATT MIDI）",
       "source": "https://www.merriammusic.com/blog/pianos-blog/roland-rp107/",
-      "verified": true
+      "verified": true,
+      "usb_audio": true
     },
     {
       "maker": "KORG",
@@ -770,7 +824,8 @@
       "bluetooth_midi": false,
       "notes": "USB Type Bのみ搭載。5ピンMIDI DIN非搭載。Bluetooth非搭載（仕様一覧に記載なし）",
       "source": "https://www.korg.com/us/products/digitalpianos/b2/specifications.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -784,7 +839,8 @@
       "bluetooth_midi": false,
       "notes": "USB端子は仕様表に記載なし（非搭載と考えられる）。MIDI IN/OUT（5ピンDIN）搭載。BluetoothはA2DP（オーディオ受信）のみでMIDI非対応",
       "source": "https://www.korg.com/us/products/digitalpianos/c1_air/specifications.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -798,7 +854,8 @@
       "bluetooth_midi": false,
       "notes": "USB Type Bのみ搭載でMIDIキーボードとして使用可。5ピンMIDI DIN非搭載。Bluetooth非搭載",
       "source": "https://www.korg.com/us/products/digitalpianos/lp_380u/specifications.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -812,7 +869,8 @@
       "bluetooth_midi": false,
       "notes": "USB Type Bのみ搭載。5ピンMIDI DIN非搭載。Bluetooth非搭載",
       "source": "https://www.korg.com/us/products/digitalpianos/liano/specifications.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -826,7 +884,8 @@
       "bluetooth_midi": false,
       "notes": "USB A port（フラッシュメモリ用）とUSB B port（パソコン接続用）を搭載。5ピンMIDI DIN・Bluetoothともに仕様表に記載なし（非搭載）",
       "source": "https://www.korg.com/us/products/synthesizers/ek_50/specifications.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -840,7 +899,8 @@
       "bluetooth_midi": false,
       "notes": "USB Type A（フラッシュメモリ用）とUSB Type B（PC接続、USB MIDI対応）を搭載。MIDI OUT端子（5ピンDIN）のみ搭載でMIDI INは非搭載。Bluetooth非搭載",
       "source": "https://www.korg.com/us/products/synthesizers/i3/specifications.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -854,7 +914,8 @@
       "bluetooth_midi": false,
       "notes": "USB A port（USBメモリ・コントローラー用）とUSB B port（PC接続用）を搭載。5ピンMIDI DIN・Bluetoothともに仕様表に記載なし（非搭載）",
       "source": "https://www.korg.com/us/products/digitalpianos/xe20/specifications.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -868,7 +929,8 @@
       "bluetooth_midi": true,
       "notes": "前モデルES110の5ピンMIDI DIN×2から、USB Type-B一本に変更（DIN非搭載）。Bluetooth標準内蔵（MIDI：Ver5.0 GATT対応、オーディオ：Ver5.1 A2DP対応）",
       "source": "https://www.kawai-global.com/product/es120/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -882,7 +944,8 @@
       "bluetooth_midi": true,
       "notes": "USB to Host（Type B）とUSB to Deviceの両方搭載。MIDI IN/OUT（5ピンDIN）搭載（ES120にはない）。Bluetooth標準内蔵（MIDI：Ver4.1 GATT対応、オーディオ：aptX対応）",
       "source": "https://www.kawai-global.com/product/es920/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -896,7 +959,8 @@
       "bluetooth_midi": true,
       "notes": "USB to HostとUSB to Deviceの両方搭載。MIDI IN/OUT（5ピンDIN）搭載。Bluetooth標準内蔵（MIDI：Ver4.1 GATT対応、オーディオ：aptX対応）",
       "source": "https://www.kawai-global.com/product/es520/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -910,7 +974,8 @@
       "bluetooth_midi": true,
       "notes": "USB to Host搭載（ポート形状は仕様ページに明記なくES120等シリーズ共通のType-Bと推定・要確認）。5ピンMIDI DIN非搭載。Bluetooth標準内蔵（MIDI：Ver5.0 GATT対応、オーディオ：Ver5.1 A2DP対応）",
       "source": "https://www.kawai-global.com/product/cn201/",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -924,7 +989,8 @@
       "bluetooth_midi": true,
       "notes": "USB to HostとUSB to Deviceの両方搭載（ポート形状は仕様ページに明記なく要確認）。5ピンMIDI DIN非搭載でUSB-MIDI/Bluetooth MIDIのみ対応。Bluetooth標準内蔵（MIDI：Ver5.0 GATT対応、オーディオ：Ver5.1 A2DP対応）",
       "source": "https://www.kawai-global.com/product/cn301/",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -938,7 +1004,8 @@
       "bluetooth_midi": true,
       "notes": "木製鍵盤モデル。USB to HostとUSB to Deviceの両方搭載（ポート形状は仕様ページに明記なく要確認）。5ピンMIDI DIN非搭載。Bluetooth標準内蔵（MIDI：Ver5.0 GATT対応、オーディオ：Ver5.1 A2DP対応）",
       "source": "https://www.kawai-global.com/product/ca501/",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -952,7 +1019,8 @@
       "bluetooth_midi": true,
       "notes": "USB to Host搭載（ポート形状は仕様ページに明記なく要確認）。5ピンMIDI DIN非搭載。BluetoothはMIDIのみ対応（Ver4.1 GATT対応）でBluetoothオーディオ（A2DP）の記載なし＝上位CN/CAシリーズと異なる可能性、要確認",
       "source": "https://www.kawai-global.com/product/kdp120/",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -966,7 +1034,8 @@
       "bluetooth_midi": false,
       "notes": "生産完了品。USB TO HOST搭載（形状は仕様表に記載なく要確認）。PC接続には別途Music Soft Downloader・USB-MIDIドライバが必要（Windows専用ソフト）。Bluetooth非搭載",
       "source": "https://jp.yamaha.com/products/musical_instruments/keyboards/portable_keyboards/psr-e353/specs.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -980,7 +1049,8 @@
       "bluetooth_midi": false,
       "notes": "生産完了品。5ピンMIDI DIN非搭載（仕様表で「MIDI No」と明記）。Bluetooth非搭載。USBコネクタ形状は仕様表に記載なくシリーズ共通仕様(Type-B)から推定",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/p_series/p-115/specs.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -994,7 +1064,8 @@
       "bluetooth_midi": false,
       "notes": "生産完了品。5ピンMIDI DIN非搭載。Bluetooth非搭載。USBコネクタ形状は仕様表に記載なくシリーズ共通仕様(Type-B)から推定",
       "source": "https://jp.yamaha.com/products/musical_instruments/pianos/arius/ydp-142/specs.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -1008,7 +1079,8 @@
       "bluetooth_midi": false,
       "notes": "生産完了品。クラスコンプライアントUSB MIDIに加え5ピンMIDI IN/OUT搭載（上位ステージピアノ的仕様）。Bluetooth非搭載。USBポート形状は仕様表に記載なくType-Bと推定・要確認",
       "source": "https://equipboard.com/items/casio-privia-px-350",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -1022,7 +1094,8 @@
       "bluetooth_midi": true,
       "notes": "PX-S1100の上位機。USB Type A（付属ワイヤレスMIDI&AUDIOアダプターWU-BT10接続用）とType B（PC接続用）を搭載。5ピンMIDI DIN非搭載。Bluetoothは付属アダプターでMIDI/オーディオとも標準対応",
       "source": "https://www.amazon.com/Casio-88-Key-Digital-Pianos-Home-PX-S3100/dp/B09S6RVRCZ",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -1036,7 +1109,8 @@
       "bluetooth_midi": true,
       "notes": "USB Computer port（Type B、MIDI/オーディオ対応）とUSB Memory port（Type A）。5ピンMIDI DIN非搭載（変換方法はサポートFAQで別途案内）。Bluetooth標準内蔵（Ver4.2、A2DPオーディオ＋GATT MIDI）",
       "source": "https://www.roland.com/us/products/fp-e50/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": true
     },
     {
       "maker": "KAWAI",
@@ -1050,7 +1124,8 @@
       "bluetooth_midi": true,
       "notes": "生産完了品。USB端子は非搭載（仕様表に記載なし）。MIDI IN/OUT（5ピンDIN×2）搭載。後継ES120ではこのDIN×2がUSB Type-B一本に置き換わった。BluetoothはMIDIのみ対応（Ver4.1 GATT、オーディオ非対応）",
       "source": "https://www.kawai-global.com/product/es110/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -1064,7 +1139,8 @@
       "bluetooth_midi": true,
       "notes": "木製鍵盤フラッグシップ機。USB to HostとUSB to Deviceの両方搭載（ポート形状は仕様ページに明記なく要確認）。5ピンMIDI DIN非搭載（USB-MIDI/Bluetooth MIDIのみ）。Bluetooth標準内蔵（MIDI：Ver5.0 GATT対応、オーディオ：Ver5.1 A2DP対応）",
       "source": "https://www.kawai-global.com/product/ca701/",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -1078,7 +1154,8 @@
       "bluetooth_midi": false,
       "notes": "USB Type A（TO DEVICE）とType B（TO HOST）を搭載、USB経由でMIDI通信可。参照した仕様ページ(page_2)にはBluetooth・5ピンMIDI DINの記載なしだが、上位アレンジャー機種の慣例からMIDI DIN搭載の可能性あり要確認",
       "source": "https://www.korg.com/us/products/synthesizers/pa300/page_2.php",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -1092,7 +1169,8 @@
       "bluetooth_midi": false,
       "notes": "37ミニ鍵の子供向けキーボード。USB・MIDI・Bluetoothいずれも非搭載（ヘッドホン/外部出力端子のみ）",
       "source": "https://jp.yamaha.com/products/musical_instruments/keyboards/portable_keyboards/pss-e30/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -1106,7 +1184,8 @@
       "bluetooth_midi": true,
       "notes": "USB Computer port（Type B）とUSB Memory port（Type A）。5ピンMIDI DIN非搭載。Bluetooth標準内蔵（オーディオ：Ver3.0、MIDI：Ver4.0）。Bluetoothヘッドホン/イヤホンは非対応（有線のみ）",
       "source": "https://www.roland.com/us/products/hp704/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -1120,7 +1199,8 @@
       "bluetooth_midi": false,
       "notes": "生産完了品。USB to Host搭載（形状は仕様表に記載なく要確認）、USB-MIDI対応。Bluetooth非搭載（後継KDP120でBluetooth MIDI対応に）",
       "source": "https://www.kawai-global.com/product/kdp75/",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -1135,7 +1215,8 @@
       "bluetooth_midi": true,
       "notes": "MIDI DINなし、有線MIDIはUSB Computer端子のみ。Bluetooth Ver4.0でMIDI/オーディオ対応",
       "source": "https://www.roland.com/jp/products/hp702/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -1150,7 +1231,8 @@
       "bluetooth_midi": true,
       "notes": "MIDI DINなし。Bluetooth Ver4.0でMIDI対応（譜めくり機能も搭載）",
       "source": "https://www.roland.com/jp/products/hp601/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -1165,7 +1247,8 @@
       "bluetooth_midi": true,
       "notes": "MIDI DINなし。Bluetooth MIDI対応",
       "source": "https://www.roland.com/jp/products/hp603/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -1180,7 +1263,8 @@
       "bluetooth_midi": true,
       "notes": "ハイブリッド・グランド鍵盤。MIDI DINなし、Bluetooth Ver4.0でMIDI対応",
       "source": "https://www.roland.com/jp/products/lx706/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -1195,7 +1279,8 @@
       "bluetooth_midi": true,
       "notes": "上位グランド型モデル。MIDI DINなし、Bluetooth MIDI(GATT)/オーディオ(A2DP)対応",
       "source": "https://www.roland.com/jp/products/gp-9/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -1210,7 +1295,8 @@
       "bluetooth_midi": false,
       "notes": "MIDI IN/OUT1/THRU-OUT2のDIN端子を搭載。Bluetooth非搭載（仕様表に記載なし）",
       "source": "https://www.roland.com/jp/products/rd-2000/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -1225,7 +1311,8 @@
       "bluetooth_midi": false,
       "notes": "MIDI DINはOUTのみ搭載（MIDI INはUSB経由）。USB COMPUTER端子はUSB MIDI/Audio対応",
       "source": "https://www.roland.com/jp/products/rd-88/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -1240,7 +1327,8 @@
       "bluetooth_midi": false,
       "notes": "MIDI OUTのみ記載でDIN型MIDI IN/Bluetooth MIDIは非搭載と思われる。USB FOR UPDATE端子(USB-A)とUSB COMPUTER端子(USB-B)を搭載",
       "source": "https://www.roland.com/jp/products/rd-08/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -1255,7 +1343,8 @@
       "bluetooth_midi": false,
       "notes": "MIDI IN/OUTのDIN端子を搭載。USB COMPUTER端子(MIDI/Audio対応)の形状は公式仕様表に明記なし",
       "source": "https://www.roland.com/jp/products/juno-ds61/specifications/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -1270,7 +1359,8 @@
       "bluetooth_midi": true,
       "notes": "USB端子はmicro USB（データ通信対応ケーブルが必要、充電専用ケーブル不可）。Bluetooth MIDI/オーディオ両対応",
       "source": "https://support.roland.com/hc/ja/articles/360061945872",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -1285,7 +1375,8 @@
       "bluetooth_midi": false,
       "notes": "接続端子はPHONES/PEDALのみで、USB・MIDI・Bluetoothいずれも非搭載の最エントリーモデル",
       "source": "https://www.korg.com/us/products/digitalpianos/b1/specifications.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -1300,7 +1391,8 @@
       "bluetooth_midi": false,
       "notes": "MIDI IN/OUT端子を搭載。USB端子の有無は公式仕様表に明記なし（要確認）",
       "source": "https://www.korg.com/us/products/digitalpianos/d1/specifications.php",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -1315,7 +1407,8 @@
       "bluetooth_midi": false,
       "notes": "USB 2.0 Type BでMIDIインターフェース兼用。MIDI IN/OUT(DIN)搭載。USB TO DEVICE(ストレージ用)の記載なし",
       "source": "https://www.korg.com/us/products/synthesizers/sv_2/specifications.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -1330,7 +1423,8 @@
       "bluetooth_midi": false,
       "notes": "USB B(MIDIインターフェース)とUSB A(ストレージメディア用)を搭載。MIDI IN/OUT(DIN)あり。73鍵モデルも存在",
       "source": "https://www.korg.com/us/products/synthesizers/grandstage/specifications.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -1345,7 +1439,8 @@
       "bluetooth_midi": false,
       "notes": "USB MIDI/オーディオインターフェース対応(TYPE B)。MIDI IN/OUT記載あり（DIN形状かは明記なし）",
       "source": "https://www.korg.com/us/products/synthesizers/kross2/specifications.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -1360,7 +1455,8 @@
       "bluetooth_midi": false,
       "notes": "USB-MIDIインターフェース(TYPE B)搭載。MIDI IN/OUT(DIN)あり。生産終了・後継はKROME EX。USB TO DEVICE(ストレージ)の記載なし",
       "source": "https://www.korg.com/us/products/synthesizers/krome/page_4.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -1375,7 +1471,8 @@
       "bluetooth_midi": false,
       "notes": "KORG表記の「DEVICE(Type B・PC接続用)」が本DBのusb_to_host、「HOST(Type A・USBメモリ用)」がusb_to_deviceに相当。MIDI IN/OUT標準端子あり",
       "source": "https://www.korg.com/us/products/synthesizers/pa1000/specifications.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -1390,7 +1487,8 @@
       "bluetooth_midi": false,
       "notes": "USB Type A(HOST、メモリ/コントローラ用)×2とType B(DEVICE、PC/タブレット用)×1を搭載。MIDI IN/OUT/THRU標準端子あり。61鍵モデルも存在",
       "source": "https://www.korg.com/us/products/synthesizers/pa4x/page_3.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -1405,7 +1503,8 @@
       "bluetooth_midi": true,
       "notes": "USB TO HOST/DEVICEとも搭載を確認。MIDIはUSB-MIDIとBluetooth MIDI(Ver5.0)の記載のみでDIN端子の有無は仕様表に明記なし（要確認）",
       "source": "https://www.kawai-global.com/product/ca901/",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -1420,7 +1519,8 @@
       "bluetooth_midi": true,
       "notes": "USB TO HOST/DEVICE、MIDI IN/OUT(DIN)、Bluetooth MIDI(Ver4.1)すべて搭載",
       "source": "https://www.kawai-global.com/product/cn39/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -1435,7 +1535,8 @@
       "bluetooth_midi": true,
       "notes": "USB TO DEVICEは非搭載。MIDI IN/OUT(DIN)とBluetooth MIDI(Ver4.1)は搭載",
       "source": "https://www.kawai-global.com/product/cn29/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -1450,7 +1551,8 @@
       "bluetooth_midi": true,
       "notes": "後継はCA701。USB TO HOST/DEVICE搭載、Bluetooth MIDI(Ver4.1)対応。MIDI DIN端子の形状詳細は仕様表に明記なし",
       "source": "https://www.kawai-global.com/product/ca79/",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -1465,7 +1567,8 @@
       "bluetooth_midi": true,
       "notes": "後継はCA501。USB TO HOST/DEVICE、MIDI IN/OUT(DIN)、Bluetooth MIDI(Ver4.1)すべて搭載",
       "source": "https://www.kawai-global.com/product/ca59/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -1480,7 +1583,8 @@
       "bluetooth_midi": false,
       "notes": "音源非搭載のMIDIコントローラー専用機。USB TO DEVICE非搭載、Bluetooth非搭載。MIDI IN/OUT/THRU(DIN)を搭載",
       "source": "https://www.kawai-global.com/product/vpc1/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -1495,7 +1599,8 @@
       "bluetooth_midi": false,
       "notes": "USB TO HOST/DEVICE、MIDI IN/OUT/THRU(DIN)搭載。Bluetooth非搭載",
       "source": "https://www.kawai-global.com/product/mp7se/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -1510,7 +1615,8 @@
       "bluetooth_midi": false,
       "notes": "ES110の前身。USB TO HOST/DEVICEともに非搭載、MIDI IN/OUT(DIN)のみ搭載、Bluetooth非搭載",
       "source": "https://www.kawai-global.com/product/es100/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -1525,7 +1631,8 @@
       "bluetooth_midi": null,
       "notes": "USB TO HOST/TO DEVICE、MIDI IN/OUTを搭載。端子形状・Bluetooth有無は公式仕様表(米国版)に明記なし（要確認）",
       "source": "https://usa.yamaha.com/products/music_production/synthesizers/cp88_73/specs.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": true
     },
     {
       "maker": "YAMAHA",
@@ -1540,7 +1647,8 @@
       "bluetooth_midi": null,
       "notes": "初代MODX7(2018年)の後継。USB TO DEVICE、MIDI IN/OUTを搭載。端子形状・Bluetooth有無は公式仕様表(米国版)に明記なし（要確認）",
       "source": "https://usa.yamaha.com/products/music_production/synthesizers/modxplus/specs.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -1555,7 +1663,8 @@
       "bluetooth_midi": false,
       "notes": "USB TO DEVICE×2、MIDI IN/OUT搭載。Bluetoothはオーディオ用のみでMIDIには非対応",
       "source": "https://usa.yamaha.com/products/musical_instruments/keyboards/arranger_workstations/psr-sx900/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "YAMAHA",
@@ -1570,7 +1679,8 @@
       "bluetooth_midi": false,
       "notes": "USB TO HOST/DEVICE搭載。BluetoothはオーディオのみでMIDI非対応（別売アダプターUD-BT01でMIDI対応可）。MIDI DIN端子の記載なし",
       "source": "https://usa.yamaha.com/products/musical_instruments/pianos/p_series/dgx-670/specs.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -1585,7 +1695,8 @@
       "bluetooth_midi": false,
       "notes": "USB TypeB(ホスト/MIDIコントローラー用)とUSB TypeA(主にBluetoothアダプターWU-BT10接続用)を搭載。本体単体でのBluetooth内蔵はなく別売アダプター経由。MIDI DIN端子なし",
       "source": "https://www.casio.com/us/electronic-musical-instruments/product.PX-S7000BK/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -1600,7 +1711,8 @@
       "bluetooth_midi": false,
       "notes": "class-compliant USBでMac/PC/iOS/Android接続可能。Bluetooth非搭載（MIDIはUSB経由のみ）",
       "source": "https://www.casio.com/us/electronic-musical-instruments/product.AP-470BK/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -1615,7 +1727,8 @@
       "bluetooth_midi": false,
       "notes": "class-compliant USB TypeBでMIDI通信。USB TO DEVICE(ストレージ用)・MIDI DIN・Bluetoothはいずれも非搭載",
       "source": "https://casio.jp/emi/products/ap270/spec/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "CASIO",
@@ -1630,7 +1743,8 @@
       "bluetooth_midi": false,
       "notes": "USB(A-Bケーブル)でMIDI通信可能、MIDI IN/OUT端子は非搭載と公式明記。Bluetoothなし",
       "source": "https://casio.jp/emi/products/wk6600/spec/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "Alesis",
@@ -1645,7 +1759,8 @@
       "bluetooth_midi": false,
       "notes": "USB-MIDI出力を搭載（PCソフト/教育アプリ用）。ポート形状は公式資料に明記なし（USB-B対応ケーブルが通販で案内されておりUSB-Bの可能性が高いが要確認）。MIDI DIN・Bluetoothは非搭載",
       "source": "https://www.alesis.com/products/view2/recital-61",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "Alesis",
@@ -1660,7 +1775,8 @@
       "bluetooth_midi": false,
       "notes": "USB-MIDI搭載（標準USBケーブルでPC接続しMIDI送受信）。ポート形状は仕様表に明記なし。MIDI DIN・Bluetoothは非搭載",
       "source": "https://www.alesis.com/products/view2/melody-61-mk4.html",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "Alesis",
@@ -1675,7 +1791,8 @@
       "bluetooth_midi": false,
       "notes": "音源非搭載のUSB MIDIコントローラー専用機（USBバスパワー駆動）。MIDI DIN・Bluetoothは非搭載",
       "source": "https://www.alesis.com/products/view2/v61-mkii",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "M-Audio",
@@ -1690,7 +1807,8 @@
       "bluetooth_midi": false,
       "notes": "音源非搭載のUSB MIDIコントローラー。5ピンDIN MIDI OUTのみ搭載（INなし）。USBバスパワー駆動、iOS接続はLightning-USBカメラアダプター(別売)対応",
       "source": "https://www.m-audio.com/keyboard-controllers/keystation-61-mk3.html",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "M-Audio",
@@ -1705,7 +1823,8 @@
       "bluetooth_midi": false,
       "notes": "音源非搭載のハンマーアクションUSB MIDIコントローラー。MIDI OUT搭載（Proシリーズ上位モデルはMIDI IN/OUT両対応）。USB端子形状は要確認",
       "source": "https://us.m-audio.com/products/view3/hammer-88",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "Donner",
@@ -1720,7 +1839,8 @@
       "bluetooth_midi": false,
       "notes": "USB-MIDIポートでMac/PC/iOS/Android接続可能。ポート形状・MIDI DIN・Bluetoothの詳細は公式資料に明記なし（要確認、通販定番の格安ハンマーアクション機）",
       "source": "https://us.donnermusic.com/products/donner-dep-20-beginner-digital-piano-88-key-full-size-weighted-keyboard-portable-electric-piano-with-with-furniture-stand-and-3-pedal-unit",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "Donner",
@@ -1735,7 +1855,8 @@
       "bluetooth_midi": false,
       "notes": "USB-MIDIでPC/タブレット/スマホ接続可能。ポート形状は公式資料に明記なし。上位モデルDDP-95はワイヤレスMIDI対応だが本機は非対応（要確認）",
       "source": "https://us.donnermusic.com/products/donner-ddp-90-pro-fully-weighted-home-digital-piano",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "Carina",
@@ -1750,7 +1871,8 @@
       "bluetooth_midi": null,
       "notes": "Amazon商品説明に「MIDI Compatible」の記載はあるが、USB端子形状・DIN・Bluetoothの詳細は商品ページから確認できず要確認。型番表記が販売時期・出品者により揺れがある通販ブランド",
       "source": "https://www.amazon.co.jp/dp/B09HHGPVN5",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "TORTE",
@@ -1765,7 +1887,8 @@
       "bluetooth_midi": null,
       "notes": "商品説明・仕様欄にUSB/MIDI/Bluetooth機能の明記が確認できず、電源はACアダプター/電池のみの可能性あり。要確認（通販定番の格安61鍵キーボード）",
       "source": "https://www.amazon.co.jp/dp/B093V1H2L8",
-      "verified": false
+      "verified": false,
+      "usb_audio": null
     },
     {
       "maker": "Roland",
@@ -1780,7 +1903,8 @@
       "bluetooth_midi": false,
       "notes": "中古市場で定番の旧モデル。USB(MIDI)コネクタとMIDI IN/OUT(DIN)を搭載。USB端子形状は資料に明記なし。Bluetooth非搭載（発売当時未対応）",
       "source": "https://www.manualslib.com/manual/460970/Roland-Fp-4.html?page=130",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KORG",
@@ -1795,7 +1919,8 @@
       "bluetooth_midi": false,
       "notes": "音源非搭載のミニ鍵盤USBバスパワーMIDIコントローラー。USB経由のみでMIDI通信、DIN端子・Bluetoothは非搭載（無線対応版はmicroKEY Air）",
       "source": "https://www.korg.com/us/products/computergear/microkey2/page_1.php",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -1810,7 +1935,8 @@
       "bluetooth_midi": true,
       "notes": "後継はKDP120。USB TO HOST搭載・USB TO DEVICEは非搭載。MIDI IN/OUT(DIN)とBluetooth MIDI(Ver4.1)に対応",
       "source": "https://www.kawai-global.com/product/kdp110/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     },
     {
       "maker": "KAWAI",
@@ -1825,7 +1951,8 @@
       "bluetooth_midi": false,
       "notes": "後継はES920。USB TO DEVICE搭載、MIDI IN/OUT搭載（DIN規格かは要確認）。Bluetoothは非搭載",
       "source": "https://www.kawai-global.com/product/es8/",
-      "verified": true
+      "verified": true,
+      "usb_audio": null
     }
   ]
 }

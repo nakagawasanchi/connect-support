@@ -1,5 +1,5 @@
 const LIFF_ID = "2010931633-3uzRGseS";
-const LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbyirD-1iBPuaiR7rVhMT7NUeF6pGZbLlzJxNgSL-qjzzuRakrOEn8ygfnm9Sv4agYo7KQ/exec"; // GAS WebアプリのURL（未設定なら送信しない）
+const LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbyirD-1iBPuaiR7rVhMT7NUeF6pGZbLlzJxNgSL-qjzzuRakrOEn8ygfnm9Sv4agYo7KQ/exec";
 
 // 楽天アフィリエイト検索リンク
 const RAKUTEN_AFF = "https://hb.afl.rakuten.co.jp/hgc/0f41feae.fb92208b.0f41feaf.5965d44d/?pc=";
@@ -7,23 +7,24 @@ function rakutenLink(q) {
   return RAKUTEN_AFF + encodeURIComponent("https://search.rakuten.co.jp/search/mall/" + encodeURIComponent(q) + "/");
 }
 
+// platform: Bluetooth MIDIはiOSアプリのみ対応（Androidアプリ・WEBは有線のみ）
 const DEVICES = {
-  "iphone-lightning": { label: "iPhone（Lightning端子）", port: "lightning" },
-  "iphone-usbc":      { label: "iPhone（USB-C端子）",     port: "usbc" },
-  "ipad-usbc":        { label: "iPad（USB-C端子）",       port: "usbc" },
-  "ipad-lightning":   { label: "iPad（Lightning端子）",   port: "lightning" },
-  "android":          { label: "Android",                 port: "usbc" },
-  "pc-usba":          { label: "パソコン（USB-A端子）",   port: "usba" },
-  "pc-usbc":          { label: "パソコン（USB-C端子）",   port: "usbc" },
+  "iphone-lightning": { label: "iPhone（Lightning端子）", port: "lightning", platform: "ios" },
+  "iphone-usbc":      { label: "iPhone（USB-C端子）",     port: "usbc",      platform: "ios" },
+  "ipad-usbc":        { label: "iPad（USB-C端子）",       port: "usbc",      platform: "ios" },
+  "ipad-lightning":   { label: "iPad（Lightning端子）",   port: "lightning", platform: "ios" },
+  "android":          { label: "Android",                 port: "usbc",      platform: "android" },
+  "pc-usba":          { label: "パソコン（USB-A端子）",   port: "usba",      platform: "web" },
+  "pc-usbc":          { label: "パソコン（USB-C端子）",   port: "usbc",      platform: "web" },
 };
 
 const MAKER_ORDER = ["YAMAHA", "CASIO", "Roland", "KORG", "KAWAI"];
 
 const PORT_LABEL = {
-  "USB-B":   "USB-B（四角い形・プリンタと同じ）",
+  "USB-B":   "USB Type-B（四角い形・プリンタと同じ）",
   "micro-B": "USB micro-B（小さい台形）",
   "mini-B":  "USB mini-B（小さい六角形）",
-  "USB-C":   "USB-C（楕円形）",
+  "USB-C":   "USB Type-C（楕円形）",
 };
 
 // 端末側の端子 × 鍵盤側の端子 → 購入プラン（先頭がおすすめ）
@@ -31,49 +32,63 @@ const PORT_LABEL = {
 const CABLE_PLANS = {
   lightning: {
     "USB-B": [
-      { items: [{ t: "Apple Lightning - USB 3カメラアダプタ（純正推奨）", q: "Apple Lightning USB 3 カメラアダプタ" }, { t: "USB A-Bケーブル（プリンタ用と同じ）", q: "USB A-B ケーブル プリンタ" }] },
+      { items: [{ t: "USB Type-B → Lightning ケーブル 1本", q: "USB TypeB Lightning MIDI ケーブル" }], note: "ケーブル1本で完結します。迷ったらこちら。" },
+      { items: [{ t: "Apple Lightning - USB 3カメラアダプタ", q: "Apple Lightning USB 3 カメラアダプタ" }, { t: "USB A-Bケーブル（プリンタ用と同じ）", q: "USB A-B ケーブル プリンタ" }], note: "プリンタ用ケーブルが家にあるなら、アダプタだけ買う手もあります。" },
     ],
     "micro-B": [
-      { items: [{ t: "Apple Lightning - USB 3カメラアダプタ（純正推奨）", q: "Apple Lightning USB 3 カメラアダプタ" }, { t: "USB A - micro Bケーブル（データ通信対応）", q: "USB microB ケーブル データ通信" }] },
+      { items: [{ t: "Apple Lightning - USB 3カメラアダプタ", q: "Apple Lightning USB 3 カメラアダプタ" }, { t: "USB A - micro Bケーブル（データ通信対応）", q: "USB microB ケーブル データ通信" }] },
     ],
     "mini-B": [
-      { items: [{ t: "Apple Lightning - USB 3カメラアダプタ（純正推奨）", q: "Apple Lightning USB 3 カメラアダプタ" }, { t: "USB A - mini Bケーブル", q: "USB miniB ケーブル" }] },
+      { items: [{ t: "Apple Lightning - USB 3カメラアダプタ", q: "Apple Lightning USB 3 カメラアダプタ" }, { t: "USB A - mini Bケーブル", q: "USB miniB ケーブル" }] },
     ],
     "USB-C": [
-      { items: [{ t: "Apple Lightning - USB 3カメラアダプタ（純正推奨）", q: "Apple Lightning USB 3 カメラアダプタ" }, { t: "USB A - Cケーブル（データ通信対応）", q: "USB-C USB-A ケーブル データ通信" }] },
+      { items: [{ t: "Apple Lightning - USB 3カメラアダプタ", q: "Apple Lightning USB 3 カメラアダプタ" }, { t: "USB A - Cケーブル（データ通信対応）", q: "USB-C USB-A ケーブル データ通信" }] },
     ],
   },
   usbc: {
     "USB-B": [
-      { items: [{ t: "USB-C → USB-Bケーブル 1本", q: "USB-C USB-B ケーブル" }], note: "ケーブル1本で完結。迷ったらこちら。" },
-      { items: [{ t: "手持ちのUSB A-Bケーブル（プリンタ用）" }, { t: "USB変換アダプタ（A→C）", q: "USB 変換アダプタ A to C" }], note: "プリンタ用ケーブルが家にあるなら、変換アダプタだけ買えばOK。" },
+      { items: [{ t: "USB Type-B → Type-C ケーブル 1本", q: "USB TypeB TypeC MIDI ケーブル" }], note: "ケーブル1本で完結します。迷ったらこちら。" },
+      { items: [{ t: "手持ちのUSB A-Bケーブル（プリンタ用）" }, { t: "USB変換アダプタ（A→C・OTG対応）", q: "USB 変換アダプタ A to C OTG" }], note: "プリンタ用ケーブルが家にあるなら、変換アダプタだけ買えばOK。" },
     ],
     "micro-B": [
-      { items: [{ t: "USB-C → micro Bケーブル（データ通信対応） 1本", q: "USB-C microB ケーブル データ通信" }], note: "ケーブル1本で完結。" },
-      { items: [{ t: "手持ちのUSB A - micro Bケーブル（データ通信対応）" }, { t: "USB変換アダプタ（A→C）", q: "USB 変換アダプタ A to C" }], note: "昔のAndroid充電ケーブル等が使える場合があります（データ通信対応のもの）。" },
+      { items: [{ t: "USB Type-C → micro B ケーブル（データ通信対応） 1本", q: "USB-C microB ケーブル データ通信" }], note: "ケーブル1本で完結します。" },
+      { items: [{ t: "手持ちのUSB A - micro Bケーブル（データ通信対応）" }, { t: "USB変換アダプタ（A→C・OTG対応）", q: "USB 変換アダプタ A to C OTG" }] },
     ],
     "mini-B": [
-      { items: [{ t: "USB-C → mini Bケーブル 1本", q: "USB-C miniB ケーブル" }], note: "ケーブル1本で完結。" },
-      { items: [{ t: "手持ちのUSB A - mini Bケーブル" }, { t: "USB変換アダプタ（A→C）", q: "USB 変換アダプタ A to C" }] },
+      { items: [{ t: "USB Type-C → mini B ケーブル 1本", q: "USB-C miniB ケーブル" }], note: "ケーブル1本で完結します。" },
+      { items: [{ t: "手持ちのUSB A - mini Bケーブル" }, { t: "USB変換アダプタ（A→C・OTG対応）", q: "USB 変換アダプタ A to C OTG" }] },
     ],
     "USB-C": [
-      { items: [{ t: "USB-C → USB-Cケーブル（データ通信対応） 1本", q: "USB-C USB-C ケーブル データ対応" }], note: "「データ通信対応」の表記があるものを選んでください（充電専用は不可）。" },
+      { items: [{ t: "USB Type-C → Type-C ケーブル（データ通信対応） 1本", q: "USB-C USB-C ケーブル データ通信 OTG" }], note: "充電専用ケーブルはMIDI信号を通しません。「データ通信対応」の表記があるものを選んでください。" },
     ],
   },
   usba: {
     "USB-B":   [{ items: [{ t: "USB A-Bケーブル（プリンタ用と同じ） 1本", q: "USB A-B ケーブル プリンタ" }] }],
     "micro-B": [{ items: [{ t: "USB A - micro Bケーブル（データ通信対応） 1本", q: "USB microB ケーブル データ通信" }] }],
     "mini-B":  [{ items: [{ t: "USB A - mini Bケーブル 1本", q: "USB miniB ケーブル" }] }],
-    "USB-C":   [{ items: [{ t: "USB A - Cケーブル（データ通信対応） 1本", q: "USB-C USB-A ケーブル データ通信" }] }],
+    "USB-C":   [{ items: [{ t: "USB A - Type-C ケーブル（データ通信対応） 1本", q: "USB-C USB-A ケーブル データ通信" }] }],
   },
 };
 
-// MIDI DIN接続時に端末側で追加で必要になるもの
-const DIN_ADAPTER = {
-  lightning: { t: "Apple Lightning - USB 3カメラアダプタ（純正推奨）", q: "Apple Lightning USB 3 カメラアダプタ" },
-  usbc: { t: "USB変換アダプタ（A→C・インターフェースがUSB-Aの場合）", q: "USB 変換アダプタ A to C" },
-  usba: null,
+// 丸型MIDI（5ピンDIN）接続の購入プラン
+const DIN_PLANS = {
+  lightning: [
+    { items: [{ t: "MIDI → USB Type-A 変換ケーブル", q: "MIDI USB 変換ケーブル" }, { t: "USB Type-A → Lightning 変換アダプタ", q: "Apple Lightning USB 3 カメラアダプタ" }], note: "2点必要です。" },
+  ],
+  usbc: [
+    { items: [{ t: "MIDI → USB Type-C ケーブル 1本", q: "MIDI USB TypeC 変換ケーブル" }], note: "ケーブル1本で完結します。" },
+  ],
+  usba: [
+    { items: [{ t: "MIDI → USB Type-A 変換ケーブル 1本", q: "MIDI USB 変換ケーブル" }] },
+  ],
 };
+
+// 鍵盤が無い方への推奨機種（高田さん監修）
+const RECOMMENDED = [
+  { use: "とにかく安く始めたい", model: "Alesis Melody 61 MK4", keys: "61鍵", price: "8,000〜9,000円", port: "USB Type-B", q: "Alesis Melody 61 MK4" },
+  { use: "88鍵で省スペース", model: "PLAYTECH PFK88", keys: "88鍵（折りたたみ）", price: "25,000円前後", port: "USB Type-C", q: "PLAYTECH PFK88" },
+  { use: "本格的に長く続ける", model: "CASIO CDP-S105BK", keys: "88鍵（ハンマーアクション）", price: "35,000円前後", port: "USB Type-B", q: "CASIO CDP-S105" },
+];
 
 let db = [];
 let state = { device: null, keyboard: null, methodSummary: "" };
@@ -91,6 +106,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     db = [];
   }
   renderMakers();
+  renderRecommended();
   bindEvents();
 });
 
@@ -102,11 +118,8 @@ async function initLiff() {
   try {
     await liff.init({ liffId: LIFF_ID });
     liffReady = true;
-    if (liff.isInClient() || bypass) {
-      showApp();
-    } else {
-      showGate();
-    }
+    if (liff.isInClient() || bypass) showApp();
+    else showGate();
   } catch (e) {
     if (bypass) showApp();
     else showGate();
@@ -116,9 +129,7 @@ async function initLiff() {
 function showApp() {
   document.getElementById("app").classList.remove("hidden");
   document.getElementById("gate").classList.add("hidden");
-  if (!localStorage.getItem("disclaimerAccepted")) {
-    show("disclaimer-overlay");
-  }
+  if (!localStorage.getItem("disclaimerAccepted")) show("disclaimer-overlay");
 }
 
 function showGate() {
@@ -139,7 +150,6 @@ function logEvent(type, data = {}) {
 // ---------- イベント ----------
 
 function bindEvents() {
-  // 免責同意
   const agreeCheck = document.getElementById("agree-check");
   const agreeBtn = document.getElementById("agree-btn");
   agreeCheck.addEventListener("change", () => { agreeBtn.disabled = !agreeCheck.checked; });
@@ -164,6 +174,27 @@ function bindEvents() {
   document.getElementById("model-search").addEventListener("input", renderModelResults);
   document.getElementById("restart-btn").addEventListener("click", () => location.reload());
   document.getElementById("consult-btn").addEventListener("click", sendConsult);
+  document.getElementById("no-keyboard-btn").addEventListener("click", () => {
+    const box = document.getElementById("recommend-box");
+    box.classList.toggle("hidden");
+    if (!box.classList.contains("hidden")) {
+      box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      logEvent("recommend_open");
+    }
+  });
+}
+
+// ---------- 鍵盤をこれから買う方へ ----------
+
+function renderRecommended() {
+  const box = document.getElementById("recommend-list");
+  box.innerHTML = RECOMMENDED.map((r) => `
+    <div class="rec-item">
+      <p class="rec-use">${escapeHtml(r.use)}</p>
+      <p class="rec-model">${escapeHtml(r.model)}</p>
+      <p class="rec-spec">${escapeHtml(r.keys)}／${escapeHtml(r.port)}／目安 ${escapeHtml(r.price)}</p>
+      <a class="buy-link" href="${rakutenLink(r.q)}" target="_blank" rel="noopener">楽天で探す ▸</a>
+    </div>`).join("");
 }
 
 // ---------- STEP 2: 鍵盤 ----------
@@ -237,6 +268,15 @@ function buyItem(it) {
   return `<li><span class="buy-name">🛒 ${escapeHtml(it.t)}</span>${link}</li>`;
 }
 
+function planBlock(plans) {
+  return plans.map((p, i) => `
+    <div class="plan ${i === 0 ? "rec" : ""}">
+      <div class="plan-head">${planLabel(i)}${i === 0 && plans.length > 1 ? '<span class="rec-badge">おすすめ</span>' : ""}</div>
+      <ul class="buy-list">${p.items.map((it) => buyItem(it)).join("")}</ul>
+      ${p.note ? `<p class="plan-note">${escapeHtml(p.note)}</p>` : ""}
+    </div>`).join("");
+}
+
 function renderResult() {
   const kb = state.keyboard;
   const dev = state.device;
@@ -250,69 +290,118 @@ function renderResult() {
       <p class="dev-name">📱 ${escapeHtml(dev.label)}</p>
     </div>`);
 
+  // 61鍵未満はレッスンが成立しない
+  if (kb.keys && kb.keys < 61) {
+    parts.push(`
+      <div class="method alert-method">
+        <h3>⚠️ この機種はレッスンに使えません</h3>
+        <p class="item-note">Jazz-Stepsのレッスンは<b>61鍵以上</b>を前提に作られています。この機種は${kb.keys}鍵のため、演奏範囲が足りず一部レッスンが成立しません。下の「鍵盤をこれから買う方へ」もご覧ください。</p>
+      </div>`);
+  }
+
+  const hasUsb = kb.usb_to_host && kb.usb_port_type && CABLE_PLANS[dev.port] && CABLE_PLANS[dev.port][kb.usb_port_type];
+  const hasDin = kb.midi_din;
+  // Bluetooth MIDIはiOSアプリのみ対応（Androidアプリ・パソコンは有線のみ）
+  const btUsable = kb.bluetooth_midi && dev.platform === "ios";
+
   // 有線USB
-  const plans = kb.usb_to_host && kb.usb_port_type && CABLE_PLANS[dev.port] ? CABLE_PLANS[dev.port][kb.usb_port_type] : null;
-  if (plans) {
-    const planHtml = plans.map((p, i) => `
-      <div class="plan ${i === 0 ? "rec" : ""}">
-        <div class="plan-head">${planLabel(i)}${i === 0 ? '<span class="rec-badge">おすすめ</span>' : ""}</div>
-        <ul class="buy-list">${p.items.map((it) => buyItem(it)).join("")}</ul>
-        ${p.note ? `<p class="plan-note">${escapeHtml(p.note)}</p>` : ""}
-      </div>`).join("");
+  if (hasUsb) {
     parts.push(`
       <div class="method rec-method">
         <h3>🔌 USBケーブルで接続<span class="method-tag">いちばん確実</span></h3>
         <p class="port-line">鍵盤側の端子：<b>${PORT_LABEL[kb.usb_port_type] || escapeHtml(kb.usb_port_type)}</b></p>
-        ${planHtml}
+        ${planBlock(CABLE_PLANS[dev.port][kb.usb_port_type])}
         <p class="to-host-note">⚠️ 鍵盤にUSB端子が2つある機種は挿し間違いにご注意ください。USBメモリ用の「TO DEVICE」端子ではなく、<b>「USB TO HOST」端子</b>に接続します。</p>
-        <p class="item-note">つなぐ順番：鍵盤の電源を入れる → ケーブルを接続 → アプリを起動${dev.label === "Android" ? "<br>※ Android側はOTG（USBホスト機能）対応が必要です（近年のほとんどの機種は対応）。" : ""}</p>
+        <p class="item-note">つなぐ順番：鍵盤の電源を入れる → ケーブルを接続 → アプリを起動（MIDI機器は自動で検知されます）${dev.platform === "web" ? "<br>※ パソコンは<b>Chrome</b>をお使いください。またピアノを接続した<b>あとに画面を再読み込み</b>してください。" : ""}${dev.platform === "android" ? "<br>※ Android側はOTG（USBホスト機能）対応が必要です（近年のほとんどの機種は対応）。" : ""}</p>
       </div>`);
     summaries.push(`USB接続（鍵盤側:${kb.usb_port_type}）`);
   }
 
-  // MIDI DIN（USBがない場合のみメイン案内）
-  if (kb.midi_din && !kb.usb_to_host) {
-    const adapter = DIN_ADAPTER[dev.port];
+  // 丸型MIDI（USBが使えないときの手段）
+  if (hasDin && !hasUsb) {
     parts.push(`
       <div class="method rec-method">
-        <h3>🔌 MIDI端子（丸い5ピン）で接続<span class="method-tag">この機種の接続方法</span></h3>
-        <div class="plan rec">
-          <div class="plan-head">購入プランA<span class="rec-badge">おすすめ</span></div>
-          <ul class="buy-list">
-            ${buyItem({ t: "USB-MIDIインターフェース（例：YAMAHA UX16）", q: "YAMAHA UX16" })}
-            ${adapter ? buyItem(adapter) : ""}
-          </ul>
-        </div>
-        <p class="item-note">鍵盤のMIDI IN/OUT端子とインターフェースを接続します（INとOUTをクロスでつなぎます）。</p>
+        <h3>🔌 丸型MIDI端子（5ピン）で接続<span class="method-tag">この機種の接続方法</span></h3>
+        ${planBlock(DIN_PLANS[dev.port])}
+        <p class="to-host-note">⚠️ <b>挿す向きに注意</b>。ピアノ側の「MIDI OUT」に、ケーブル側の「MIDI IN」を挿します。逆向きだと信号が流れません。</p>
       </div>`);
-    summaries.push("MIDI DIN接続（USB-MIDIインターフェース使用）");
+    summaries.push("丸型MIDI接続");
+  } else if (hasDin && hasUsb) {
+    parts.push(`
+      <div class="method sub-method">
+        <h3>🔌 丸型MIDI端子（5ピン）でも接続できます<span class="method-tag sub">USBが使えないとき</span></h3>
+        ${planBlock(DIN_PLANS[dev.port])}
+        <p class="to-host-note">⚠️ ピアノ側の「MIDI OUT」に、ケーブル側の「MIDI IN」を挿します（向き注意）。</p>
+      </div>`);
+  }
+
+  // USBオーディオ機能付き機種：つなぐと端末から音が出なくなる（仕様・正常）
+  if (hasUsb && kb.usb_audio) {
+    parts.push(`
+      <div class="method info-method">
+        <h3>ℹ️ つなぐとスマホ・PCから音が出なくなります（正常です）</h3>
+        <p class="item-note">この機種はUSBケーブル1本で音の信号もやり取りするため、接続すると<b>音の出口がピアノ本体側に切り替わります</b>。故障ではありません。<br><b>ピアノ本体の音量を上げ、本体のスピーカー（またはピアノのヘッドホン端子）で聴いてください。</b>ヘッドホン端子に何か挿さっていないかもご確認ください。<br>採点・クリア判定は鍵盤の信号だけで行うので、音の出口が変わっても<b>正常に判定されます</b>。ケーブルを抜けば元に戻ります。</p>
+      </div>`);
   }
 
   // Bluetooth
   if (kb.bluetooth_midi) {
-    parts.push(`
-      <div class="method bt-method">
-        <h3>📶 Bluetooth MIDI<span class="method-tag sub">ケーブル不要・遅延あり</span></h3>
-        <p class="item-note">わずかな遅延が出るため、演奏の反応が気になる場合は有線がおすすめです。設定のBluetooth画面ではなく、アプリ内のMIDI設定から接続してください。</p>
-      </div>`);
-    summaries.push("Bluetooth MIDI対応");
+    if (btUsable) {
+      parts.push(`
+        <div class="method bt-method">
+          <h3>📶 Bluetooth MIDIも使えます<span class="method-tag sub">iPhone・iPadのみ</span></h3>
+          <p class="item-note">ケーブル不要ですが、わずかな遅延が出るため、演奏の反応が気になる場合は有線をおすすめします。<br><b>有線とBluetoothの同時接続はしないでください</b>（入力が二重になり、押していない音が判定されることがあります）。</p>
+        </div>`);
+      summaries.push("Bluetooth MIDI対応（iOS）");
+    } else {
+      parts.push(`
+        <div class="method sub-method">
+          <h3>📶 Bluetooth MIDIは今回は使えません</h3>
+          <p class="item-note">この鍵盤はBluetooth MIDIに対応していますが、<b>Jazz-StepsのBluetooth接続はiPhone・iPadのアプリのみ対応</b>です。${dev.platform === "android" ? "Androidアプリ" : "パソコン（ブラウザ）"}は有線接続のみとなります。</p>
+        </div>`);
+    }
   }
 
-  // どれもない
+  // 接続手段なし
   if (summaries.length === 0) {
     parts.push(`
-      <div class="method">
-        <h3>⚠️ 外部接続端子が確認できませんでした</h3>
-        <p class="item-note">MIDI接続に対応していない可能性があります。下のボタンからご相談ください。</p>
+      <div class="method alert-method">
+        <h3>⚠️ この機種はJazz-Stepsに接続できない可能性があります</h3>
+        <p class="item-note">USB端子・MIDI端子が確認できませんでした。Jazz-Stepsのトレーニングには<b>MIDI接続（USB Type-BまたはMIDI端子）</b>が必要です。下のボタンからご相談いただくか、「鍵盤をこれから買う方へ」もご覧ください。</p>
       </div>`);
-    summaries.push("接続端子なしの可能性");
+    summaries.push("接続手段が確認できず");
   }
+
+  // 共通の注意
+  parts.push(`
+    <div class="common-note">
+      <p><b>接続時の共通の注意</b></p>
+      <ul>
+        <li>USBハブを経由せず、<b>直接つないで</b>ください（ハブ経由で不安定になる例があります）</li>
+        <li>有線とBluetoothの<b>同時接続はしない</b>でください（入力が二重になります）</li>
+        <li>ケーブルは<b>データ通信対応</b>のものを。充電専用ケーブルではMIDI信号が流れません</li>
+      </ul>
+    </div>`);
+
+  // トラブルシューティング
+  parts.push(`
+    <details class="trouble">
+      <summary>🔧 つないでも認識されないときは</summary>
+      <ol>
+        <li>ケーブルを繋いだまま、アプリ（またはブラウザ）を<b>完全に終了して開き直す</b></li>
+        <li>設定画面（歯車）でMIDI機器が接続されているか確認する</li>
+        <li>アプリを最新版に更新して、ケーブルを抜き差しする</li>
+        <li>端末を再起動する</li>
+        <li>ケーブルの緩み・断線、充電専用ケーブルでないかを確認する</li>
+        <li>GarageBandなど他のMIDIアプリで認識されるか試す（他でも認識されないなら端末かケーブル側の問題です）</li>
+      </ol>
+      ${dev.platform === "web" ? `<p class="item-note"><b>パソコンの場合</b>：Chromeをお使いください。認識しないときは <code>chrome://settings/content/midiDevices</code> の「許可しないサイト」にJazz-Stepsが入っていないか確認を。音が出ないときはピアノ接続後に画面を再読み込みしてください。</p>` : ""}
+      <p class="item-note"><b>弾いた音と違う音が判定される・音域がずれる場合</b>は、まずピアノ本体の<b>オクターブ調整・トランスポーズ（移調）が0になっているか</b>を確認してください。「昨日まで普通に使えていたのに急にずれた」ときは、ほぼこれが原因です。</p>
+    </details>`);
 
   if (kb.notes) {
     parts.push(`<details class="kb-notes"><summary>この機種の補足情報</summary><p>${escapeHtml(kb.notes)}</p></details>`);
   }
-
-  parts.push(`<p class="soft-consult">💬 ご案内に不安がある場合は、下のボタンからお気軽にご相談ください。確認してお返事します。</p>`);
 
   state.methodSummary = summaries.join(" / ");
   card.innerHTML = parts.join("");
