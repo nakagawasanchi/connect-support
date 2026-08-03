@@ -56,8 +56,8 @@ h2 { font-size: 16px; margin-bottom: 12px; }
 .choice:active, .choice.selected { border-color: #06c755; background: #f0fff5; }
 .choice .plug-icon {
   flex-shrink: 0;
-  width: 110px;
-  height: 55px;
+  width: 74px;
+  height: 74px;
   object-fit: contain;
 }
 .maker-choices .choice { text-align: center; padding: 12px 4px; display: block; }
