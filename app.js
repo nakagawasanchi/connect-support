@@ -224,14 +224,23 @@ function renderMakers() {
   });
 }
 
+// 全角英数字も検索できるように正規化する（「ｋｍ」で引けない事例があったため）
+function normalize(s) {
+  return s
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0))
+    .replace(/[‐‑‒–—―ー－]/g, "-")
+    .toLowerCase()
+    .replace(/[-\s]/g, "");
+}
+
 let notFoundLogged = "";
 function renderModelResults() {
-  const q = document.getElementById("model-search").value.trim().toLowerCase().replace(/[-\s]/g, "");
+  const q = normalize(document.getElementById("model-search").value.trim());
   const list = document.getElementById("model-results");
   list.innerHTML = "";
   const candidates = db
     .filter((k) => k.maker === state.maker)
-    .filter((k) => !q || k.model.toLowerCase().replace(/[-\s]/g, "").includes(q))
+    .filter((k) => !q || normalize(k.model).includes(q))
     .slice(0, 12);
   candidates.forEach((k) => {
     const li = document.createElement("li");
@@ -300,6 +309,9 @@ function renderResult() {
   }
 
   const hasUsb = kb.usb_to_host && kb.usb_port_type && CABLE_PLANS[dev.port] && CABLE_PLANS[dev.port][kb.usb_port_type];
+  // USB接続はできるが端子形状が未確認の機種（Alesis Melody 61 MK4 等）。
+  // 「接続できない」と誤って案内しないよう、形状をユーザーに選んでもらう。
+  const usbPortUnknown = kb.usb_to_host && !kb.usb_port_type;
   const hasDin = kb.midi_din;
   // Bluetooth MIDIはiOSアプリのみ対応（Androidアプリ・パソコンは有線のみ）
   const btUsable = kb.bluetooth_midi && dev.platform === "ios";
@@ -317,8 +329,22 @@ function renderResult() {
     summaries.push(`USB接続（鍵盤側:${kb.usb_port_type}）`);
   }
 
+  // USB対応だが端子形状が未確認 → 形状を選んでもらう
+  if (usbPortUnknown) {
+    const opts = Object.keys(CABLE_PLANS[dev.port]).map((p) =>
+      `<button class="port-pick" data-port="${p}">${escapeHtml(PORT_LABEL[p] || p)}</button>`).join("");
+    parts.push(`
+      <div class="method rec-method">
+        <h3>🔌 USBケーブルで接続<span class="method-tag">この機種の接続方法</span></h3>
+        <p class="item-note">この機種は<b>USB接続に対応しています</b>が、公開情報では端子の形状までは確認できませんでした。お手元の鍵盤の端子を見て、下から近いものを選んでください。必要なケーブルをご案内します。</p>
+        <div class="port-picks">${opts}</div>
+        <div id="port-result"></div>
+      </div>`);
+    summaries.push("USB接続（端子形状は要確認）");
+  }
+
   // 丸型MIDI（USBが使えないときの手段）
-  if (hasDin && !hasUsb) {
+  if (hasDin && !hasUsb && !usbPortUnknown) {
     parts.push(`
       <div class="method rec-method">
         <h3>🔌 丸型MIDI端子（5ピン）で接続<span class="method-tag">この機種の接続方法</span></h3>
@@ -405,6 +431,17 @@ function renderResult() {
 
   state.methodSummary = summaries.join(" / ");
   card.innerHTML = parts.join("");
+
+  card.querySelectorAll(".port-pick").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      card.querySelectorAll(".port-pick").forEach((b) => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      const p = btn.dataset.port;
+      document.getElementById("port-result").innerHTML = planBlock(CABLE_PLANS[dev.port][p]);
+      logEvent("port_pick", { maker: kb.maker, model: kb.model, device: dev.label, note: p });
+    });
+  });
+
   logEvent("result_show", { maker: kb.maker, model: kb.model, device: dev.label, summary: state.methodSummary });
 }
 
