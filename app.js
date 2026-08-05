@@ -139,8 +139,12 @@ function showGate() {
 
 // ---------- 利用ログ ----------
 
+// ?preview=1 は開発者用のバイパス。検証アクセスが利用実績に混ざると
+// デイリーレポートの数字が歪むため、preview時はログを送らない。
+const IS_PREVIEW = new URLSearchParams(location.search).has("preview");
+
 function logEvent(type, data = {}) {
-  if (!LOG_ENDPOINT) return;
+  if (!LOG_ENDPOINT || IS_PREVIEW) return;
   try {
     const payload = JSON.stringify(Object.assign({ type }, data));
     fetch(LOG_ENDPOINT, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: payload }).catch(() => {});
