@@ -99,7 +99,11 @@ let liffReady = false;
 document.addEventListener("DOMContentLoaded", async () => {
   initLiff();
   try {
-    const res = await fetch("data/keyboards.json");
+    // 機種DBはCSS/JSと違い、アプリを更新せずデータだけ差し替えることが多い。
+    // ?v=方式だと更新のたびに手で番号を上げる必要があり、上げ忘れると
+    // 再訪ユーザーが古いDBを掴んだままになる（実際に取りこぼしかけた）。
+    // no-cacheでETag再検証を強制する。変化がなければ304なので転送量はほぼゼロ。
+    const res = await fetch("data/keyboards.json", { cache: "no-cache" });
     const json = await res.json();
     db = json.keyboards || [];
   } catch (e) {
