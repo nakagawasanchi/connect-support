@@ -7,16 +7,39 @@ function rakutenLink(q) {
   return RAKUTEN_AFF + encodeURIComponent("https://search.rakuten.co.jp/search/mall/" + encodeURIComponent(q) + "/");
 }
 
+// ---------- イラスト（外部依存を増やさないためインラインSVG） ----------
+
+const ART = {
+  phone: '<svg viewBox="0 0 48 64" aria-hidden="true"><rect x="9" y="2" width="30" height="60" rx="6" class="s-body"/><rect x="13" y="8" width="22" height="44" rx="2" class="s-screen"/><circle cx="24" cy="57" r="2.4" class="s-dot"/></svg>',
+  tablet: '<svg viewBox="0 0 56 64" aria-hidden="true"><rect x="5" y="3" width="46" height="58" rx="5" class="s-body"/><rect x="10" y="9" width="36" height="43" rx="2" class="s-screen"/><circle cx="28" cy="56" r="2.2" class="s-dot"/></svg>',
+  laptop: '<svg viewBox="0 0 72 56" aria-hidden="true"><rect x="11" y="5" width="50" height="34" rx="3" class="s-body"/><rect x="15" y="9" width="42" height="26" class="s-screen"/><path d="M3 45h66l-4 6H7z" class="s-body"/></svg>',
+  piano: '<svg viewBox="0 0 84 48" aria-hidden="true"><rect x="2" y="4" width="80" height="40" rx="3" class="s-body"/><rect x="2" y="4" width="80" height="8" rx="3" class="s-cap"/><g class="s-line"><path d="M14 13v30M25 13v30M36 13v30M47 13v30M58 13v30M69 13v30"/></g><g class="s-dot"><rect x="10" y="13" width="7" height="17" rx="1"/><rect x="21" y="13" width="7" height="17" rx="1"/><rect x="43" y="13" width="7" height="17" rx="1"/><rect x="54" y="13" width="7" height="17" rx="1"/><rect x="65" y="13" width="7" height="17" rx="1"/></g></svg>',
+  q: '<svg viewBox="0 0 48 48" aria-hidden="true"><text x="24" y="34" text-anchor="middle" class="s-q">?</text></svg>',
+};
+
+// 端子の形（コネクタ）のイラスト
+const PLUG_ART = {
+  lightning: '<svg viewBox="0 0 34 24" aria-hidden="true"><rect x="8" y="9" width="18" height="6" rx="1.5" class="s-dot"/><path d="M17 15v6" class="s-line"/></svg>',
+  usbc:      '<svg viewBox="0 0 34 24" aria-hidden="true"><rect x="6" y="8" width="22" height="8" rx="4" class="s-body"/><path d="M17 16v5" class="s-line"/></svg>',
+  usba:      '<svg viewBox="0 0 34 24" aria-hidden="true"><rect x="6" y="6" width="22" height="11" rx="1.5" class="s-body"/><rect x="9" y="9" width="16" height="3" rx="1" class="s-dot"/><path d="M17 17v4" class="s-line"/></svg>',
+  "USB-B":   '<svg viewBox="0 0 34 24" aria-hidden="true"><path d="M9 18v-7l3.5-4h9l3.5 4v7z" class="s-body"/><path d="M17 18v4" class="s-line"/></svg>',
+  "micro-B": '<svg viewBox="0 0 34 24" aria-hidden="true"><path d="M9 9h16v5l-2.5 3h-11L9 14z" class="s-body"/><path d="M17 17v5" class="s-line"/></svg>',
+  "mini-B":  '<svg viewBox="0 0 34 24" aria-hidden="true"><path d="M8 8h18v6l-3 3H11l-3-3z" class="s-body"/><path d="M17 17v5" class="s-line"/></svg>',
+  "USB-C":   '<svg viewBox="0 0 34 24" aria-hidden="true"><rect x="6" y="8" width="22" height="8" rx="4" class="s-body"/><path d="M17 16v5" class="s-line"/></svg>',
+};
+
 // platform: Bluetooth MIDIはiOSアプリのみ対応（Androidアプリ・WEBは有線のみ）
 const DEVICES = {
-  "iphone-lightning": { label: "iPhone（Lightning端子）", port: "lightning", platform: "ios" },
-  "iphone-usbc":      { label: "iPhone（USB-C端子）",     port: "usbc",      platform: "ios" },
-  "ipad-usbc":        { label: "iPad（USB-C端子）",       port: "usbc",      platform: "ios" },
-  "ipad-lightning":   { label: "iPad（Lightning端子）",   port: "lightning", platform: "ios" },
-  "android":          { label: "Android",                 port: "usbc",      platform: "android" },
-  "pc-usba":          { label: "パソコン（USB-A端子）",   port: "usba",      platform: "web" },
-  "pc-usbc":          { label: "パソコン（USB-C端子）",   port: "usbc",      platform: "web" },
+  "iphone-lightning": { label: "iPhone", sub: "Lightning端子（14以前）", port: "lightning", platform: "ios",     art: "phone" },
+  "iphone-usbc":      { label: "iPhone", sub: "USB-C端子（15以降）",     port: "usbc",      platform: "ios",     art: "phone" },
+  "ipad-usbc":        { label: "iPad",   sub: "USB-C端子",               port: "usbc",      platform: "ios",     art: "tablet" },
+  "ipad-lightning":   { label: "iPad",   sub: "Lightning端子",           port: "lightning", platform: "ios",     art: "tablet" },
+  "android":          { label: "Android", sub: "スマホ・タブレット",     port: "usbc",      platform: "android", art: "phone" },
+  "pc-usba":          { label: "パソコン", sub: "USB-A端子（四角）",     port: "usba",      platform: "web",     art: "laptop" },
+  "pc-usbc":          { label: "パソコン", sub: "USB-C端子のみ",         port: "usbc",      platform: "web",     art: "laptop" },
 };
+
+const DEVICE_ORDER = ["iphone-lightning", "iphone-usbc", "ipad-usbc", "ipad-lightning", "android", "pc-usba", "pc-usbc"];
 
 const MAKER_ORDER = ["YAMAHA", "CASIO", "Roland", "KORG", "KAWAI"];
 
@@ -26,6 +49,8 @@ const PORT_LABEL = {
   "mini-B":  "USB mini-B（小さい六角形）",
   "USB-C":   "USB Type-C（楕円形）",
 };
+const PORT_SHORT = { "USB-B": "Type-B", "micro-B": "micro-B", "mini-B": "mini-B", "USB-C": "Type-C" };
+const DEV_PORT_SHORT = { lightning: "Lightning", usbc: "Type-C", usba: "Type-A" };
 
 // 端末側の端子 × 鍵盤側の端子 → 購入プラン（先頭がおすすめ）
 // items: t=表示名, q=楽天検索ワード（省略時は購入リンクなし＝手持ち品）
@@ -91,7 +116,7 @@ const RECOMMENDED = [
 ];
 
 let db = [];
-let state = { device: null, keyboard: null, methodSummary: "" };
+let state = { device: null, maker: null, keyboard: null, port: null, methodSummary: "" };
 let liffReady = false;
 
 // ---------- 初期化 ----------
@@ -109,9 +134,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (e) {
     db = [];
   }
-  renderMakers();
-  renderRecommended();
-  bindEvents();
+  bindGlobal();
+  renderStrip();
+  goStep("device");
 });
 
 // LINEアプリ内でのみ利用可。LINE外からのアクセスはゲート画面で弾く。
@@ -155,9 +180,7 @@ function logEvent(type, data = {}) {
   } catch (e) { /* ログ失敗は無視 */ }
 }
 
-// ---------- イベント ----------
-
-function bindEvents() {
+function bindGlobal() {
   const agreeCheck = document.getElementById("agree-check");
   const agreeBtn = document.getElementById("agree-btn");
   agreeCheck.addEventListener("change", () => { agreeBtn.disabled = !agreeCheck.checked; });
@@ -167,21 +190,183 @@ function bindEvents() {
     logEvent("disclaimer_accept");
   });
 
-  document.querySelectorAll("#device-choices .choice").forEach((btn) => {
+  // 埋まったスロットをタップすると、その質問に戻れる
+  document.getElementById("slot-device").addEventListener("click", () => goStep("device"));
+  document.getElementById("slot-kb").addEventListener("click", () => goStep("keyboard"));
+  const toPort = () => { if (state.device && state.keyboard) goStep(needsPortPick() ? "port" : "result"); };
+  document.getElementById("plug-l").addEventListener("click", toPort);
+  document.getElementById("plug-r").addEventListener("click", toPort);
+
+  window.addEventListener("resize", positionTail);
+}
+
+// ---------- 完成図（サマリー帯） ----------
+
+// 鍵盤側の端子形状。DBに無ければユーザーが選んだ値を使う。
+function kbPort() {
+  if (!state.keyboard) return null;
+  return state.keyboard.usb_port_type || state.port;
+}
+
+// DBに端子形状が無く、かつUSB接続はできる機種はユーザーに形を選んでもらう
+function needsPortPick() {
+  const kb = state.keyboard;
+  return !!(kb && kb.usb_to_host && !kb.usb_port_type && !state.port);
+}
+
+function renderStrip() {
+  const dev = state.device;
+  const kb = state.keyboard;
+
+  // デバイス側
+  const dSlot = document.getElementById("slot-device");
+  dSlot.classList.toggle("filled", !!dev);
+  dSlot.querySelector(".slot-badge").textContent = dev ? "✓" : "1";
+  dSlot.querySelector(".slot-art").innerHTML = dev ? ART[dev.art] : ART.q;
+  dSlot.querySelector(".slot-label").textContent = dev ? dev.label : "デバイス";
+
+  // ピアノ側
+  const kSlot = document.getElementById("slot-kb");
+  kSlot.classList.toggle("filled", !!kb);
+  kSlot.querySelector(".slot-badge").textContent = kb ? "✓" : "2";
+  kSlot.querySelector(".slot-art").innerHTML = kb ? ART.piano : ART.q;
+  kSlot.querySelector(".slot-label").textContent = kb ? kb.model : "ピアノ";
+
+  // ケーブルの両端コネクタ
+  const pl = document.getElementById("plug-l");
+  const pr = document.getElementById("plug-r");
+  if (dev) {
+    pl.innerHTML = PLUG_ART[dev.port] + `<span class="plug-cap">${DEV_PORT_SHORT[dev.port]}</span>`;
+    pl.classList.add("known");
+  } else {
+    pl.innerHTML = '<span class="plug-q">?</span>';
+    pl.classList.remove("known");
+  }
+  const kp = kbPort();
+  if (kp && PLUG_ART[kp]) {
+    pr.innerHTML = PLUG_ART[kp] + `<span class="plug-cap">${PORT_SHORT[kp] || kp}</span>`;
+    pr.classList.add("known");
+  } else {
+    pr.innerHTML = '<span class="plug-q">?</span>';
+    pr.classList.remove("known");
+  }
+  document.getElementById("cable").classList.toggle("done", !!(dev && kp));
+}
+
+// 吹き出しの尻尾を、今答えている対象の真下に移動させる
+function positionTail() {
+  const target = document.querySelector("#strip .aiming");
+  const panel = document.getElementById("panel");
+  if (!target || !panel) return;
+  const t = target.getBoundingClientRect();
+  const p = panel.getBoundingClientRect();
+  const x = t.left + t.width / 2 - p.left;
+  panel.style.setProperty("--tail-x", Math.round(x) + "px");
+}
+
+function aimAt(id) {
+  document.querySelectorAll("#strip .aiming").forEach((el) => el.classList.remove("aiming"));
+  const el = document.getElementById(id);
+  if (el) el.classList.add("aiming");
+}
+
+// ---------- 質問パネル ----------
+
+function goStep(step) {
+  const body = document.getElementById("panel-body");
+  const panel = document.getElementById("panel");
+  panel.classList.remove("wide");
+  if (step === "device") { aimAt("slot-device"); body.innerHTML = devicePanel(); bindDevicePanel(); }
+  else if (step === "keyboard") { aimAt("slot-kb"); body.innerHTML = keyboardPanel(); bindKeyboardPanel(); }
+  else if (step === "port") { aimAt("plug-r"); body.innerHTML = portPanel(); bindPortPanel(); }
+  else if (step === "result") { aimAt("cable"); panel.classList.add("wide"); body.innerHTML = resultPanel(); bindResultPanel(); }
+  // 尻尾は同期で合わせる。requestAnimationFrame任せにすると、タブが非表示の間など
+  // コールバックが遅延したときに前の位置のまま取り残される。
+  // 遅延分は、画像の読み込みでスロット幅が変わったときの追従用。
+  positionTail();
+  setTimeout(positionTail, 320);
+  body.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+// --- 1. デバイス ---
+
+function devicePanel() {
+  const items = DEVICE_ORDER.map((k) => {
+    const d = DEVICES[k];
+    const sel = state.device === d ? " selected" : "";
+    return `<button class="choice${sel}" data-device="${k}">
+        <span class="choice-art">${ART[d.art]}</span>
+        <span class="txt">${escapeHtml(d.label)}<small>${escapeHtml(d.sub)}</small></span>
+        <span class="choice-plug">${PLUG_ART[d.port]}</span>
+      </button>`;
+  }).join("");
+  return `
+    <h2><img class="h-img" src="images/h-step1.png?v=2" alt="お使いのスマホ・タブレット・パソコンは？"></h2>
+    <p class="hint">右のアイコンは<strong>充電ケーブルの先端の形</strong>です。お手持ちのケーブルと見比べてください。</p>
+    <div class="choices">${items}</div>
+    <p class="hint">💡 iPhone/iPadは充電口の形で見分けられます。金属の板がむき出しなのがLightning、楕円の筒型なのがUSB-Cです。</p>`;
+}
+
+function bindDevicePanel() {
+  document.querySelectorAll("#panel-body .choice[data-device]").forEach((btn) => {
     btn.addEventListener("click", () => {
       state.device = DEVICES[btn.dataset.device];
-      document.querySelectorAll("#device-choices .choice").forEach((b) => b.classList.remove("selected"));
-      btn.classList.add("selected");
-      show("step-keyboard");
-      document.getElementById("step-keyboard").scrollIntoView({ behavior: "smooth" });
-      if (state.keyboard) renderResult();
-      logEvent("device_select", { device: state.device.label });
+      renderStrip();
+      logEvent("device_select", { device: state.device.label + "（" + state.device.sub + "）" });
+      if (state.keyboard) goStep(needsPortPick() ? "port" : "result");
+      else goStep("keyboard");
     });
   });
+}
 
-  document.getElementById("model-search").addEventListener("input", renderModelResults);
-  document.getElementById("restart-btn").addEventListener("click", () => location.reload());
-  document.getElementById("consult-btn").addEventListener("click", sendConsult);
+// --- 2. ピアノ ---
+
+function keyboardPanel() {
+  const makersInDb = [...new Set(db.map((k) => k.maker))];
+  const makers = [...MAKER_ORDER.filter((m) => makersInDb.includes(m)),
+                  ...makersInDb.filter((m) => !MAKER_ORDER.includes(m))];
+  const chips = makers.map((m) =>
+    `<button class="choice maker${state.maker === m ? " selected" : ""}" data-maker="${escapeHtml(m)}">${escapeHtml(m)}</button>`).join("");
+  const recs = RECOMMENDED.map((r) => `
+    <div class="rec-item">
+      <p class="rec-use">${escapeHtml(r.use)}</p>
+      <p class="rec-model">${escapeHtml(r.model)}</p>
+      <p class="rec-spec">${escapeHtml(r.keys)}／${escapeHtml(r.port)}／目安 ${escapeHtml(r.price)}</p>
+      <a class="buy-link" href="${rakutenLink(r.q)}" target="_blank" rel="noopener">楽天で探す ▸</a>
+    </div>`).join("");
+  return `
+    <h2><img class="h-img" src="images/h-step2.png?v=2" alt="お使いのキーボード・電子ピアノは？"></h2>
+    <p class="hint">メーカーを選んで機種名を検索してください。機種名は本体の右上や背面のシールに書かれています。</p>
+    <div class="choices maker-choices">${chips}</div>
+    <div id="model-search-area" class="${state.maker ? "" : "hidden"}">
+      <input type="text" id="model-search" placeholder="機種名を入力（例: P-125, CT-S300）" autocomplete="off">
+      <ul id="model-results"></ul>
+    </div>
+    <button class="link-btn" id="no-keyboard-btn">鍵盤をこれから買う方はこちら</button>
+    <div id="recommend-box" class="hidden">
+      <p class="rec-lead">Jazz-Stepsのレッスンには <b>61鍵以上</b> と <b>MIDI接続（USB Type-B または MIDI端子）</b> が必要です。この条件を満たすおすすめ機種です。</p>
+      ${recs}
+      <p class="rec-caution">⚠️ 購入時は<b>USB端子の種類（Type-B / Type-C）</b>を必ずご確認ください。ここを間違えるとケーブルの買い直しになります。<br>⚠️「Bluetooth対応」と書かれていても、音楽再生用の<b>Bluetoothオーディオ</b>だけで<b>Bluetooth MIDIは非対応</b>の機種があります。仕様表に「Bluetooth MIDI」と明記されているかをご確認ください。</p>
+    </div>`;
+}
+
+function bindKeyboardPanel() {
+  document.querySelectorAll("#panel-body .choice[data-maker]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.maker = btn.dataset.maker;
+      document.querySelectorAll("#panel-body .choice[data-maker]").forEach((b) => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      show("model-search-area");
+      const input = document.getElementById("model-search");
+      input.value = "";
+      renderModelResults();
+      input.focus();
+      logEvent("maker_select", { maker: state.maker });
+    });
+  });
+  const input = document.getElementById("model-search");
+  if (input) input.addEventListener("input", renderModelResults);
+  if (state.maker) renderModelResults();
   document.getElementById("no-keyboard-btn").addEventListener("click", () => {
     const box = document.getElementById("recommend-box");
     box.classList.toggle("hidden");
@@ -189,46 +374,6 @@ function bindEvents() {
       box.scrollIntoView({ behavior: "smooth", block: "nearest" });
       logEvent("recommend_open");
     }
-  });
-}
-
-// ---------- 鍵盤をこれから買う方へ ----------
-
-function renderRecommended() {
-  const box = document.getElementById("recommend-list");
-  box.innerHTML = RECOMMENDED.map((r) => `
-    <div class="rec-item">
-      <p class="rec-use">${escapeHtml(r.use)}</p>
-      <p class="rec-model">${escapeHtml(r.model)}</p>
-      <p class="rec-spec">${escapeHtml(r.keys)}／${escapeHtml(r.port)}／目安 ${escapeHtml(r.price)}</p>
-      <a class="buy-link" href="${rakutenLink(r.q)}" target="_blank" rel="noopener">楽天で探す ▸</a>
-    </div>`).join("");
-}
-
-// ---------- STEP 2: 鍵盤 ----------
-
-function renderMakers() {
-  const makersInDb = [...new Set(db.map((k) => k.maker))];
-  const makers = [...MAKER_ORDER.filter((m) => makersInDb.includes(m)),
-                  ...makersInDb.filter((m) => !MAKER_ORDER.includes(m))];
-  const area = document.getElementById("maker-choices");
-  area.innerHTML = "";
-  makers.forEach((maker) => {
-    const btn = document.createElement("button");
-    btn.className = "choice maker";
-    btn.textContent = maker;
-    btn.addEventListener("click", () => {
-      state.maker = maker;
-      document.querySelectorAll("#maker-choices .choice").forEach((b) => b.classList.remove("selected"));
-      btn.classList.add("selected");
-      show("model-search-area");
-      const input = document.getElementById("model-search");
-      input.value = "";
-      renderModelResults();
-      input.focus();
-      logEvent("maker_select", { maker });
-    });
-    area.appendChild(btn);
   });
 }
 
@@ -243,8 +388,11 @@ function normalize(s) {
 
 let notFoundLogged = "";
 function renderModelResults() {
-  const q = normalize(document.getElementById("model-search").value.trim());
+  const field = document.getElementById("model-search");
   const list = document.getElementById("model-results");
+  if (!field || !list) return;
+  const raw = field.value.trim();
+  const q = normalize(raw);
   list.innerHTML = "";
   const candidates = db
     .filter((k) => k.maker === state.maker)
@@ -263,20 +411,46 @@ function renderModelResults() {
     list.appendChild(li);
     if (notFoundLogged !== q) {
       notFoundLogged = q;
-      logEvent("model_not_found", { maker: state.maker, query: document.getElementById("model-search").value.trim() });
+      logEvent("model_not_found", { maker: state.maker, query: raw });
     }
   }
 }
 
-// ---------- STEP 3: 結果 ----------
-
 function selectKeyboard(kb) {
   state.keyboard = kb;
-  renderResult();
-  show("step-result");
-  document.getElementById("step-result").scrollIntoView({ behavior: "smooth" });
+  state.port = null;
+  renderStrip();
   logEvent("keyboard_select", { maker: kb.maker, model: kb.model, device: state.device ? state.device.label : "" });
+  goStep(needsPortPick() ? "port" : "result");
 }
+
+// --- 2.5. 端子の形（DBに無い機種のみ） ---
+
+function portPanel() {
+  const opts = Object.keys(CABLE_PLANS[state.device.port]).map((p) =>
+    `<button class="choice port-pick" data-port="${p}">
+       <span class="choice-art plug-art">${PLUG_ART[p]}</span>
+       <span class="txt">${escapeHtml(PORT_SHORT[p] || p)}<small>${escapeHtml((PORT_LABEL[p] || "").replace(/^[^（]*（|）$/g, ""))}</small></span>
+     </button>`).join("");
+  return `
+    <h2 class="txt-head">鍵盤側の端子はどの形ですか？</h2>
+    <p class="hint">この機種は<b>USB接続に対応しています</b>が、公開情報では端子の形状までは確認できませんでした。お手元の鍵盤の差込口を見て、近いものを選んでください。</p>
+    <div class="choices">${opts}</div>
+    <p class="hint">💡 端子は鍵盤の背面か底面にあります。「USB TO HOST」と書かれた差込口です。</p>`;
+}
+
+function bindPortPanel() {
+  document.querySelectorAll("#panel-body .port-pick").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.port = btn.dataset.port;
+      renderStrip();
+      logEvent("port_pick", { maker: state.keyboard.maker, model: state.keyboard.model, device: state.device.label, note: state.port });
+      goStep("result");
+    });
+  });
+}
+
+// --- 3. 結果 ---
 
 function planLabel(i) { return "購入プラン" + String.fromCharCode(65 + i); }
 
@@ -294,68 +468,47 @@ function planBlock(plans) {
     </div>`).join("");
 }
 
-function renderResult() {
+function resultPanel() {
   const kb = state.keyboard;
   const dev = state.device;
-  const card = document.getElementById("result-card");
   const parts = [];
   const summaries = [];
+  const port = kbPort();
 
-  parts.push(`
-    <div class="result-head">
-      <p class="kb-name">🎹 ${escapeHtml(kb.maker)} ${escapeHtml(kb.model)}</p>
-      <p class="dev-name">📱 ${escapeHtml(dev.label)}</p>
-    </div>`);
+  const hasUsb = kb.usb_to_host && port && CABLE_PLANS[dev.port] && CABLE_PLANS[dev.port][port];
+  const hasDin = kb.midi_din;
+  // Bluetooth MIDIはiOSアプリのみ対応（Androidアプリ・パソコンは有線のみ）
+  const btUsable = kb.bluetooth_midi && dev.platform === "ios";
+
+  parts.push('<h2><img class="h-img" src="images/h-step3.png?v=2" alt="接続方法"></h2>');
 
   // 61鍵未満はレッスンが成立しない
   if (kb.keys && kb.keys < 61) {
     parts.push(`
       <div class="method alert-method">
         <h3>⚠️ この機種はレッスンに使えません</h3>
-        <p class="item-note">Jazz-Stepsのレッスンは<b>61鍵以上</b>を前提に作られています。この機種は${kb.keys}鍵のため、演奏範囲が足りず一部レッスンが成立しません。下の「鍵盤をこれから買う方へ」もご覧ください。</p>
+        <p class="item-note">Jazz-Stepsのレッスンは<b>61鍵以上</b>を前提に作られています。この機種は${kb.keys}鍵のため、演奏範囲が足りず一部レッスンが成立しません。「鍵盤をこれから買う方はこちら」もご覧ください。</p>
       </div>`);
   }
 
-  const hasUsb = kb.usb_to_host && kb.usb_port_type && CABLE_PLANS[dev.port] && CABLE_PLANS[dev.port][kb.usb_port_type];
-  // USB接続はできるが端子形状が未確認の機種（Alesis Melody 61 MK4 等）。
-  // 「接続できない」と誤って案内しないよう、形状をユーザーに選んでもらう。
-  const usbPortUnknown = kb.usb_to_host && !kb.usb_port_type;
-  const hasDin = kb.midi_din;
-  // Bluetooth MIDIはiOSアプリのみ対応（Androidアプリ・パソコンは有線のみ）
-  const btUsable = kb.bluetooth_midi && dev.platform === "ios";
-
-  // 有線USB
+  // 有線USB（結論＝買うべきケーブル）
   if (hasUsb) {
     parts.push(`
       <div class="method rec-method">
-        <h3>🔌 USBケーブルで接続<span class="method-tag">いちばん確実</span></h3>
-        <p class="port-line">鍵盤側の端子：<b>${PORT_LABEL[kb.usb_port_type] || escapeHtml(kb.usb_port_type)}</b></p>
-        ${planBlock(CABLE_PLANS[dev.port][kb.usb_port_type])}
+        <h3>🔌 このケーブルでつなげます<span class="method-tag">いちばん確実</span></h3>
+        <p class="port-line">鍵盤側の端子：<b>${PORT_LABEL[port] || escapeHtml(port)}</b>${state.port ? "（お選びいただいた形）" : ""}</p>
+        ${planBlock(CABLE_PLANS[dev.port][port])}
         <p class="to-host-note">⚠️ 鍵盤にUSB端子が2つある機種は挿し間違いにご注意ください。USBメモリ用の「TO DEVICE」端子ではなく、<b>「USB TO HOST」端子</b>に接続します。</p>
         <p class="item-note">つなぐ順番：鍵盤の電源を入れる → ケーブルを接続 → アプリを起動（MIDI機器は自動で検知されます）${dev.platform === "web" ? "<br>※ パソコンは<b>Chrome</b>をお使いください。またピアノを接続した<b>あとに画面を再読み込み</b>してください。" : ""}${dev.platform === "android" ? "<br>※ Android側はOTG（USBホスト機能）対応が必要です（近年のほとんどの機種は対応）。" : ""}</p>
       </div>`);
-    summaries.push(`USB接続（鍵盤側:${kb.usb_port_type}）`);
-  }
-
-  // USB対応だが端子形状が未確認 → 形状を選んでもらう
-  if (usbPortUnknown) {
-    const opts = Object.keys(CABLE_PLANS[dev.port]).map((p) =>
-      `<button class="port-pick" data-port="${p}">${escapeHtml(PORT_LABEL[p] || p)}</button>`).join("");
-    parts.push(`
-      <div class="method rec-method">
-        <h3>🔌 USBケーブルで接続<span class="method-tag">この機種の接続方法</span></h3>
-        <p class="item-note">この機種は<b>USB接続に対応しています</b>が、公開情報では端子の形状までは確認できませんでした。お手元の鍵盤の端子を見て、下から近いものを選んでください。必要なケーブルをご案内します。</p>
-        <div class="port-picks">${opts}</div>
-        <div id="port-result"></div>
-      </div>`);
-    summaries.push("USB接続（端子形状は要確認）");
+    summaries.push(`USB接続（鍵盤側:${port}）`);
   }
 
   // 丸型MIDI（USBが使えないときの手段）
-  if (hasDin && !hasUsb && !usbPortUnknown) {
+  if (hasDin && !hasUsb) {
     parts.push(`
       <div class="method rec-method">
-        <h3>🔌 丸型MIDI端子（5ピン）で接続<span class="method-tag">この機種の接続方法</span></h3>
+        <h3>🔌 丸型MIDI端子（5ピン）でつなげます<span class="method-tag">この機種の接続方法</span></h3>
         ${planBlock(DIN_PLANS[dev.port])}
         <p class="to-host-note">⚠️ <b>挿す向きに注意</b>。ピアノ側の「MIDI OUT」に、ケーブル側の「MIDI IN」を挿します。逆向きだと信号が流れません。</p>
       </div>`);
@@ -401,23 +554,22 @@ function renderResult() {
     parts.push(`
       <div class="method alert-method">
         <h3>⚠️ この機種はJazz-Stepsに接続できない可能性があります</h3>
-        <p class="item-note">USB端子・MIDI端子が確認できませんでした。Jazz-Stepsのトレーニングには<b>MIDI接続（USB Type-BまたはMIDI端子）</b>が必要です。下のボタンからご相談いただくか、「鍵盤をこれから買う方へ」もご覧ください。</p>
+        <p class="item-note">USB端子・MIDI端子が確認できませんでした。Jazz-Stepsのトレーニングには<b>MIDI接続（USB Type-BまたはMIDI端子）</b>が必要です。下のボタンからご相談いただくか、ひとつ前の画面の「鍵盤をこれから買う方はこちら」もご覧ください。</p>
       </div>`);
     summaries.push("接続手段が確認できず");
   }
 
-  // 共通の注意
+  // 共通の注意（結論を邪魔しないよう畳んでおく）
   parts.push(`
-    <div class="common-note">
-      <p><b>接続時の共通の注意</b></p>
+    <details class="common-note">
+      <summary>接続時の共通の注意</summary>
       <ul>
         <li>USBハブを経由せず、<b>直接つないで</b>ください（ハブ経由で不安定になる例があります）</li>
         <li>有線とBluetoothの<b>同時接続はしない</b>でください（入力が二重になります）</li>
         <li>ケーブルは<b>データ通信対応</b>のものを。充電専用ケーブルではMIDI信号が流れません</li>
       </ul>
-    </div>`);
+    </details>`);
 
-  // トラブルシューティング
   parts.push(`
     <details class="trouble">
       <summary>🔧 つないでも認識されないときは</summary>
@@ -437,20 +589,26 @@ function renderResult() {
     parts.push(`<details class="kb-notes"><summary>この機種の補足情報</summary><p>${escapeHtml(kb.notes)}</p></details>`);
   }
 
+  // 相談
+  parts.push(`
+    <div class="consult-area">
+      <div class="consult-chara">
+        <img src="images/chara-guide.png" alt="案内キャラクター">
+        <p class="bubble">うまくいかないときや不安なときは、そのまま気軽に相談してください！確認してお返事します。</p>
+      </div>
+      <textarea id="consult-note" placeholder="（任意）困っている内容があれば入力してください　例: ケーブルをつないだが音が出ない"></textarea>
+      <button id="consult-btn" class="primary-btn"><img class="h-img" src="images/h-cta.png?v=2" alt="この内容でトークに相談する"></button>
+    </div>
+    <button class="link-btn" id="restart-btn">最初からやり直す</button>`);
+
   state.methodSummary = summaries.join(" / ");
-  card.innerHTML = parts.join("");
-
-  card.querySelectorAll(".port-pick").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      card.querySelectorAll(".port-pick").forEach((b) => b.classList.remove("selected"));
-      btn.classList.add("selected");
-      const p = btn.dataset.port;
-      document.getElementById("port-result").innerHTML = planBlock(CABLE_PLANS[dev.port][p]);
-      logEvent("port_pick", { maker: kb.maker, model: kb.model, device: dev.label, note: p });
-    });
-  });
-
   logEvent("result_show", { maker: kb.maker, model: kb.model, device: dev.label, summary: state.methodSummary });
+  return parts.join("");
+}
+
+function bindResultPanel() {
+  document.getElementById("consult-btn").addEventListener("click", sendConsult);
+  document.getElementById("restart-btn").addEventListener("click", () => location.reload());
 }
 
 // ---------- 相談送信 ----------
@@ -460,7 +618,7 @@ async function sendConsult() {
   const note = document.getElementById("consult-note").value.trim();
   const lines = [
     "【機器接続サポートからの相談】",
-    `端末: ${state.device.label}`,
+    `端末: ${state.device.label}（${state.device.sub}）`,
     `鍵盤: ${kb.maker} ${kb.model}`,
     `案内した接続方法: ${state.methodSummary}`,
   ];
@@ -485,8 +643,8 @@ async function sendToTalk(text) {
 
 // ---------- util ----------
 
-function show(id) { document.getElementById(id).classList.remove("hidden"); }
-function hide(id) { document.getElementById(id).classList.add("hidden"); }
+function show(id) { const e = document.getElementById(id); if (e) e.classList.remove("hidden"); }
+function hide(id) { const e = document.getElementById(id); if (e) e.classList.add("hidden"); }
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
