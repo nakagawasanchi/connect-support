@@ -28,6 +28,20 @@ const PLUG_ART = {
   "USB-C":   '<svg viewBox="0 0 34 24" aria-hidden="true"><rect x="6" y="8" width="22" height="8" rx="4" class="s-body"/><path d="M17 16v5" class="s-line"/></svg>',
 };
 
+// 以前作成したコネクタのイラスト画像（あればSVGより優先して使う。
+// 簡略SVGは「わかりづらい」と中川さんフィードバックがあったため 2026-08-11）
+const PLUG_IMG = {
+  lightning: "illust-lightning.png",
+  usbc:      "illust-usbc.png",
+  usba:      "illust-usba.png",
+  "USB-C":   "illust-usbc.png",
+};
+function plugArt(p) {
+  return PLUG_IMG[p]
+    ? `<img class="plug-img" src="images/${PLUG_IMG[p]}?v=2" alt="">`
+    : (PLUG_ART[p] || "");
+}
+
 // platform: Bluetooth MIDIはiOSアプリのみ対応（Androidアプリ・WEBは有線のみ）
 const DEVICES = {
   "iphone-lightning": { label: "iPhone", sub: "Lightning端子（14以前）", port: "lightning", platform: "ios",     art: "phone" },
@@ -236,15 +250,15 @@ function renderStrip() {
   const pl = document.getElementById("plug-l");
   const pr = document.getElementById("plug-r");
   if (dev) {
-    pl.innerHTML = PLUG_ART[dev.port] + `<span class="plug-cap">${DEV_PORT_SHORT[dev.port]}</span>`;
+    pl.innerHTML = plugArt(dev.port) + `<span class="plug-cap">${DEV_PORT_SHORT[dev.port]}</span>`;
     pl.classList.add("known");
   } else {
     pl.innerHTML = '<span class="plug-q">?</span>';
     pl.classList.remove("known");
   }
   const kp = kbPort();
-  if (kp && PLUG_ART[kp]) {
-    pr.innerHTML = PLUG_ART[kp] + `<span class="plug-cap">${PORT_SHORT[kp] || kp}</span>`;
+  if (kp && (PLUG_IMG[kp] || PLUG_ART[kp])) {
+    pr.innerHTML = plugArt(kp) + `<span class="plug-cap">${PORT_SHORT[kp] || kp}</span>`;
     pr.classList.add("known");
   } else {
     pr.innerHTML = '<span class="plug-q">?</span>';
@@ -285,7 +299,9 @@ function goStep(step) {
   // 遅延分は、画像の読み込みでスロット幅が変わったときの追従用。
   positionTail();
   setTimeout(positionTail, 320);
-  body.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  // 選択確定のたびにページ先頭へ戻す（下にスクロールしたままだと完成図の帯が
+  // 見えず気持ち悪い、との中川さんフィードバック 2026-08-11）
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // --- 1. デバイス ---
@@ -297,7 +313,7 @@ function devicePanel() {
     return `<button class="choice${sel}" data-device="${k}">
         <span class="choice-art">${ART[d.art]}</span>
         <span class="txt">${escapeHtml(d.label)}<small>${escapeHtml(d.sub)}</small></span>
-        <span class="choice-plug">${PLUG_ART[d.port]}</span>
+        <span class="choice-plug">${plugArt(d.port)}</span>
       </button>`;
   }).join("");
   return `
@@ -407,7 +423,7 @@ function renderModelResults() {
   if (candidates.length === 0 && q) {
     const li = document.createElement("li");
     li.className = "not-found";
-    li.innerHTML = '<img src="images/chara-thinking.png" alt=""><span>見つかりません。機種名の表記をご確認いただくか、トークで直接ご相談ください。</span>';
+    li.innerHTML = '<img src="images/chara-photo.png?v=1" alt=""><span>見つかりません。機種名の表記をご確認いただくか、トークで直接ご相談ください。</span>';
     list.appendChild(li);
     if (notFoundLogged !== q) {
       notFoundLogged = q;
@@ -429,7 +445,7 @@ function selectKeyboard(kb) {
 function portPanel() {
   const opts = Object.keys(CABLE_PLANS[state.device.port]).map((p) =>
     `<button class="choice port-pick" data-port="${p}">
-       <span class="choice-art plug-art">${PLUG_ART[p]}</span>
+       <span class="choice-art plug-art">${plugArt(p)}</span>
        <span class="txt">${escapeHtml(PORT_SHORT[p] || p)}<small>${escapeHtml((PORT_LABEL[p] || "").replace(/^[^（]*（|）$/g, ""))}</small></span>
      </button>`).join("");
   return `
@@ -593,7 +609,7 @@ function resultPanel() {
   parts.push(`
     <div class="consult-area">
       <div class="consult-chara">
-        <img src="images/chara-guide.png" alt="案内キャラクター">
+        <img src="images/chara-photo.png?v=1" alt="中川の写真">
         <p class="bubble">うまくいかないときや不安なときは、そのまま気軽に相談してください！確認してお返事します。</p>
       </div>
       <textarea id="consult-note" placeholder="（任意）困っている内容があれば入力してください　例: ケーブルをつないだが音が出ない"></textarea>
