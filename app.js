@@ -323,12 +323,20 @@ function devicePanel() {
     <p class="hint">💡 iPhone/iPadは充電口の形で見分けられます。金属の板がむき出しなのがLightning、楕円の筒型なのがUSB-Cです。</p>`;
 }
 
+// ログ用の端末名。labelは画面表示用に「iPhone」まで縮めてあるので、
+// そのまま記録するとLightning版とUSB-C版が区別できなくなる（案内するケーブルは
+// まったく別物なので、デイリーレポートの端末別内訳が意味をなさなくなる）。
+function deviceLogLabel() {
+  const d = state.device;
+  return d ? d.label + "（" + d.sub + "）" : "";
+}
+
 function bindDevicePanel() {
   document.querySelectorAll("#panel-body .choice[data-device]").forEach((btn) => {
     btn.addEventListener("click", () => {
       state.device = DEVICES[btn.dataset.device];
       renderStrip();
-      logEvent("device_select", { device: state.device.label + "（" + state.device.sub + "）" });
+      logEvent("device_select", { device: deviceLogLabel() });
       if (state.keyboard) goStep(needsPortPick() ? "port" : "result");
       else goStep("keyboard");
     });
@@ -436,7 +444,7 @@ function selectKeyboard(kb) {
   state.keyboard = kb;
   state.port = null;
   renderStrip();
-  logEvent("keyboard_select", { maker: kb.maker, model: kb.model, device: state.device ? state.device.label : "" });
+  logEvent("keyboard_select", { maker: kb.maker, model: kb.model, device: deviceLogLabel() });
   goStep(needsPortPick() ? "port" : "result");
 }
 
@@ -460,7 +468,7 @@ function bindPortPanel() {
     btn.addEventListener("click", () => {
       state.port = btn.dataset.port;
       renderStrip();
-      logEvent("port_pick", { maker: state.keyboard.maker, model: state.keyboard.model, device: state.device.label, note: state.port });
+      logEvent("port_pick", { maker: state.keyboard.maker, model: state.keyboard.model, device: deviceLogLabel(), note: state.port });
       goStep("result");
     });
   });
@@ -618,7 +626,7 @@ function resultPanel() {
     <button class="link-btn" id="restart-btn">最初からやり直す</button>`);
 
   state.methodSummary = summaries.join(" / ");
-  logEvent("result_show", { maker: kb.maker, model: kb.model, device: dev.label, summary: state.methodSummary });
+  logEvent("result_show", { maker: kb.maker, model: kb.model, device: deviceLogLabel(), summary: state.methodSummary });
   return parts.join("");
 }
 
@@ -639,7 +647,7 @@ async function sendConsult() {
     `案内した接続方法: ${state.methodSummary}`,
   ];
   if (note) lines.push(`相談内容: ${note}`);
-  logEvent("consult_send", { maker: kb.maker, model: kb.model, device: state.device.label, note });
+  logEvent("consult_send", { maker: kb.maker, model: kb.model, device: deviceLogLabel(), note });
   await sendToTalk(lines.join("\n"));
 }
 
