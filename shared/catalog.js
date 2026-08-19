@@ -148,6 +148,16 @@ function normalize(s) {
     .replace(/[-\s]/g, "");
 }
 
+// 機種検索の照合。「YAMAHA Piaggero NP-11」のようにメーカー名・シリーズ名ごと
+// 入力してもヒットするよう、空白区切りの各語が maker+series+model のどこかに
+// 含まれれば一致とみなす（従来はmodelのみ照合で、余計な語があると0件になっていた）
+function keyboardMatches(kb, raw) {
+  const tokens = String(raw).trim().split(/\s+/).map(normalize).filter(Boolean);
+  if (!tokens.length) return true;
+  const target = normalize((kb.maker || "") + (kb.series || "") + (kb.model || ""));
+  return tokens.every((t) => target.includes(t));
+}
+
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }

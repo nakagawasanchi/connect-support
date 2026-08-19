@@ -289,7 +289,7 @@ function renderModelResults() {
   list.innerHTML = "";
   const candidates = db
     .filter((k) => k.maker === state.maker)
-    .filter((k) => !q || normalize(k.model).includes(q))
+    .filter((k) => !q || keyboardMatches(k, raw))
     .slice(0, 12);
   candidates.forEach((k) => {
     const li = document.createElement("li");
