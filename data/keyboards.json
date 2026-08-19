@@ -1998,6 +1998,21 @@
    "source": "https://jp.yamaha.com/products/musical_instruments/keyboards/piaggero/np-11/specs.html",
    "verified": true,
    "usb_audio": false
+  },
+  {
+   "maker": "YAMAHA",
+   "model": "YUS1TA3",
+   "series": "TransAcoustic TA3（アップライトピアノ）",
+   "keys": 88,
+   "release_year": 2022,
+   "usb_to_host": true,
+   "usb_port_type": "USB-B",
+   "midi_din": false,
+   "bluetooth_midi": true,
+   "notes": "アコースティックのアップライトピアノにトランスアコースティック機構を搭載したモデル。USB TO HOST（MIDI/オーディオ両対応）とBluetooth MIDI/オーディオを搭載、公式仕様表で確認（2026-08-20）。USB TO HOSTの端子形状はヤマハ標準のType-Bとして登録（購入時に取説の記載も確認推奨）。消音（サイレント）状態でもMIDIは出力されるためアプリ利用と相性が良い",
+   "source": "https://jp.yamaha.com/products/musical_instruments/pianos/transacoustic/ta3/index.html",
+   "verified": true,
+   "usb_audio": true
   }
  ]
 }
