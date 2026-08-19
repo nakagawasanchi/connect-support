@@ -197,6 +197,16 @@
   margin-top: 2px;
 }
 
+/* 相談案内（公式トーン・写真なし） */
+.consult-lead {
+  font-size: 13.5px;
+  background: #f4fafc;
+  border: 1.5px solid #cfe2e9;
+  border-radius: 10px;
+  padding: 12px 14px;
+  line-height: 1.7;
+}
+
 /* 買うものが無いときの表示 */
 .no-buy {
   font-size: 13.5px;

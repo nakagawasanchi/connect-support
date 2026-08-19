@@ -295,7 +295,7 @@ function renderModelResults() {
   if (candidates.length === 0 && q) {
     const li = document.createElement("li");
     li.className = "not-found";
-    li.innerHTML = '<img src="images/chara-photo.png?v=1" alt=""><span>見つかりません。機種名の表記をご確認いただくか、オープンチャットで直接ご相談ください。</span>';
+    li.innerHTML = '<span>見つかりません。機種名の表記をご確認いただくか、オープンチャットで直接ご相談ください。</span>';
     list.appendChild(li);
     if (notFoundLogged !== q) {
       notFoundLogged = q;
@@ -446,7 +446,7 @@ function appSoundOut(conn) {
 
 // ---------- 結果 ----------
 
-// アカデミー版は楽天リンクを出さない（2026-08-19 中川さん指示）。
+// アカデミー版は楽天リンクを出さない（2026-08-19 運営方針）。
 // 検証済みのAmazon直接リンク（catalog.js の az フィールド）がある品だけリンクを付ける
 function buyItem(it) {
   const link = it.az
@@ -490,7 +490,7 @@ function soundRouting(pattern, conn) {
   const r = { lines: [], copy: "", earphones: 0, notes: [] };
 
   if (state.sound === "ok") {
-    // スピーカー派に音の経路の説明は不要（自明なため表示しない。2026-08-19 中川さん指示）
+    // スピーカー派に音の経路の説明は不要（自明なため表示しない。2026-08-19 運営方針）
     r.copy = "スピーカーで受講";
     return r;
   }
@@ -699,12 +699,10 @@ function resultPanel() {
   // --- コピー＆相談 ---
   state.methodSummary = summaries.join(" / ");
   state.copyText = buildCopyText(conn, pattern, routing);
+  // Jazz-Steps公式としての案内のため、個人の写真・名前は出さない（2026-08-19）
   parts.push(`
     <div class="consult-area">
-      <div class="consult-chara">
-        <img src="images/chara-photo.png?v=1" alt="中川の写真">
-        <p class="bubble">この結果をコピーしてオープンチャットに貼れば、そのまま相談できます。うまくいかないとき・不安なときは気軽にどうぞ！</p>
-      </div>
+      <p class="consult-lead">この結果をコピーしてオープンチャットに貼れば、そのまま運営に相談できます。うまくいかないとき・不安なときは気軽にどうぞ！</p>
       <button id="copy-btn" class="copy-btn">📋 結果をコピーする</button>
       <p class="copy-note">コピーしたらオープンチャットに貼り付けてください</p>
     </div>
