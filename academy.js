@@ -492,15 +492,8 @@ function soundRouting(pattern, conn) {
   const appSrc = appOut === "piano" ? `ピアノ本体（${kbName}）` : `ジャズステ端末（${jazzName}）`;
 
   if (state.sound === "ok") {
-    if (pattern === "pc1") {
-      r.lines.push(["app", "アプリの音", "パソコンのスピーカーから"]);
-      r.lines.push(["meet", "先生の声", "パソコンのスピーカーから"]);
-      r.copy = "スピーカーOK（PC1台なので音もPCから）";
-    } else {
-      r.lines.push(["app", "アプリの音", `${appSrc}のスピーカーから`]);
-      r.lines.push(["meet", "先生の声", `講義用（${lecName}）のスピーカーから`]);
-      r.copy = "スピーカーOK";
-    }
+    // スピーカー派に音の経路の説明は不要（自明なため表示しない。2026-08-19 中川さん指示）
+    r.copy = "スピーカーで受講";
     return r;
   }
 
@@ -558,13 +551,12 @@ function daySteps(pattern, conn) {
   } else if (pattern === "mobile1") {
     steps.push(cableStep);
     steps.push("同じ端末でGoogle Meetとジャズステアプリを<b>切り替えながら</b>受講する（講義を聞くときはMeet、弾くときはアプリ）");
-    steps.push(state.sound === "ng" ? "イヤホンを挿して、ピアノ本体の音量を0にする" : "音はそのままでOK");
+    if (state.sound === "ng") steps.push("イヤホンを挿して、ピアノ本体の音量を0にする");
     steps.push("切り替えが忙しく感じたら、次回から2台目（家族のスマホでも可）の用意をおすすめします");
   } else {
     steps.push(cableStep);
     steps.push(`講義用（${state.lecture.stripLabel}）でGoogle Meetを開く（カメラ・マイクはオフでOK）`);
     if (state.sound === "ng") steps.push("イヤホンを2本用意して、片耳ずつ装着する（下の「音の流れ」参照）");
-    else steps.push("音はそれぞれのスピーカーからでOK");
     steps.push("講義を見ながら、課題が出たらジャズステ端末で弾く。質問はMeetのチャットからどうぞ");
   }
   return steps;
@@ -603,14 +595,16 @@ function resultPanel() {
       </ul>
     </div>`);
 
-  // --- 音の流れ ---
-  parts.push(`
-    <div class="sound-map">
-      <h4>🎧 音の流れ</h4>
-      ${routing.lines.map(([cls, k, v]) => `
-        <div class="sound-line"><span class="sound-dot ${cls}"></span><span class="k">${k}</span><span>${v}</span></div>`).join("")}
-      ${routing.notes.map((n) => `<p class="item-note">${n}</p>`).join("")}
-    </div>`);
+  // --- 音の流れ（イヤホン運用のときだけ。スピーカー派には自明なので出さない） ---
+  if (routing.lines.length || routing.notes.length) {
+    parts.push(`
+      <div class="sound-map">
+        <h4>🎧 音の流れ</h4>
+        ${routing.lines.map(([cls, k, v]) => `
+          <div class="sound-line"><span class="sound-dot ${cls}"></span><span class="k">${k}</span><span>${v}</span></div>`).join("")}
+        ${routing.notes.map((n) => `<p class="item-note">${n}</p>`).join("")}
+      </div>`);
+  }
 
   // --- 当日の手順 ---
   parts.push(`<h3 class="txt-head" style="font-size:14.5px">📅 当日の流れ</h3><ol class="day-steps">${daySteps(pattern, conn).map((s) => `<li>${s}</li>`).join("")}</ol>`);
