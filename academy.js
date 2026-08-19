@@ -295,7 +295,7 @@ function renderModelResults() {
   if (candidates.length === 0 && q) {
     const li = document.createElement("li");
     li.className = "not-found";
-    li.innerHTML = '<span>見つかりません。機種名の表記をご確認いただくか、オープンチャットで直接ご相談ください。</span>';
+    li.innerHTML = '<span>見つかりません。機種名の表記をご確認いただくか、オープンチャットの「機材相談部屋」でご相談ください。</span>';
     list.appendChild(li);
     if (notFoundLogged !== q) {
       notFoundLogged = q;
@@ -671,7 +671,7 @@ function resultPanel() {
     parts.push(`
       <div class="method alert-method">
         <h3>⚠️ この機種はJazz-Stepsに接続できない可能性があります</h3>
-        <p class="item-note">USB端子・MIDI端子が確認できませんでした。トレーニングには<b>MIDI接続（USB Type-BまたはMIDI端子）</b>が必要です。下の「結果をコピー」してオープンチャットでご相談いただくか、ピアノ選択画面の「鍵盤をこれから買う方はこちら」もご覧ください。</p>
+        <p class="item-note">USB端子・MIDI端子が確認できませんでした。トレーニングには<b>MIDI接続（USB Type-BまたはMIDI端子）</b>が必要です。下の「結果をコピー」して「機材相談部屋」でご相談いただくか、ピアノ選択画面の「鍵盤をこれから買う方はこちら」もご覧ください。</p>
       </div>`);
     summaries.push("接続手段が確認できず");
   }
@@ -702,9 +702,9 @@ function resultPanel() {
   // Jazz-Steps公式としての案内のため、個人の写真・名前は出さない（2026-08-19）
   parts.push(`
     <div class="consult-area">
-      <p class="consult-lead">この結果をコピーしてオープンチャットに貼れば、そのまま運営に相談できます。うまくいかないとき・不安なときは気軽にどうぞ！</p>
+      <p class="consult-lead">この結果をコピーしてオープンチャットの「機材相談部屋」に貼れば、そのまま運営に相談できます。うまくいかないとき・不安なときは気軽にどうぞ！</p>
       <button id="copy-btn" class="copy-btn">📋 結果をコピーする</button>
-      <p class="copy-note">コピーしたらオープンチャットに貼り付けてください</p>
+      <p class="copy-note">コピーしたら「機材相談部屋」に貼ってください</p>
     </div>
     <button class="link-btn" id="restart-btn">最初からやり直す</button>`);
 
@@ -742,7 +742,7 @@ async function copySetup() {
   logEvent("setup_copy", { maker: state.keyboard.maker, model: state.keyboard.model, device: deviceLogLabel(), summary: state.methodSummary });
   try {
     await navigator.clipboard.writeText(state.copyText);
-    btn.textContent = "✅ コピーしました！オプチャに貼ってください";
+    btn.textContent = "✅ コピーしました！「機材相談部屋」に貼ってください";
     btn.classList.add("copied");
   } catch (e) {
     // クリップボードAPIが使えない環境（LINE内ブラウザの一部など）へのフォールバック
@@ -752,7 +752,7 @@ async function copySetup() {
     ta.select();
     try {
       document.execCommand("copy");
-      btn.textContent = "✅ コピーしました！オプチャに貼ってください";
+      btn.textContent = "✅ コピーしました！「機材相談部屋」に貼ってください";
       btn.classList.add("copied");
     } catch (e2) {
       alert("コピーできませんでした。お手数ですが、この内容を手で選択してコピーしてください：\n\n" + state.copyText);
