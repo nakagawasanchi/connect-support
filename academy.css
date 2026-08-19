@@ -1,0 +1,164 @@
+/* ============================================================
+   academy.css — アカデミー版の追加スタイル
+   style.css の後に読み込む。既存版に影響しないものだけ書く。
+   ============================================================ */
+
+/* テキストのタイトル（既存版は画像見出しだがアカデミー版は文字） */
+.txt-title {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* 完成図の2段目（講義用端末・音） */
+.strip-row2 {
+  margin-top: 10px;
+  justify-content: center;
+  gap: 24px;
+}
+
+/* ヘッドホンSVGの弧 */
+.s-arc { stroke: currentColor; }
+.slot.filled .s-arc { stroke: #2b3a42; }
+
+/* パネル内テキスト見出し（既存 .txt-head が無い場合に備えて定義） */
+.txt-head {
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--ink, #2b3a42);
+  margin-bottom: 6px;
+}
+
+/* おすすめバッジ付き選択肢 */
+.choice .opt-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  background: #2f9e4f;
+  border-radius: 99px;
+  padding: 2px 8px;
+  margin-left: 6px;
+  vertical-align: 2px;
+}
+
+/* ---------- 結果画面 ---------- */
+
+/* あなたの受講セット（サマリーカード） */
+.setup-card {
+  border: 2px solid var(--teal, #2a8ca8);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 14px;
+  background: #f4fafc;
+}
+.setup-card h3 { font-size: 15px; margin-bottom: 8px; }
+.setup-list { list-style: none; }
+.setup-list li {
+  display: flex;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 13.5px;
+  border-bottom: 1px dashed #cfe2e9;
+  align-items: baseline;
+}
+.setup-list li:last-child { border-bottom: none; }
+.setup-list .k {
+  flex-shrink: 0;
+  width: 86px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal-dark, #1d6a80);
+}
+
+/* 音の流れ（色分け凡例） */
+.sound-map {
+  border-radius: 10px;
+  background: #fff;
+  border: 1.5px solid #dde7eb;
+  padding: 12px;
+  margin: 12px 0;
+}
+.sound-map h4 { font-size: 13.5px; margin-bottom: 8px; }
+.sound-line {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 13px;
+  padding: 4px 0;
+}
+.sound-dot {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  align-self: center;
+}
+.sound-dot.app { background: #e8862e; }
+.sound-dot.meet { background: #2a72c8; }
+.sound-line .k { font-weight: 700; flex-shrink: 0; }
+
+/* 当日の手順 */
+.day-steps {
+  margin: 12px 0;
+  padding-left: 0;
+  counter-reset: daystep;
+  list-style: none;
+}
+.day-steps li {
+  position: relative;
+  padding: 8px 10px 8px 40px;
+  font-size: 13.5px;
+  background: #fff;
+  border: 1.5px solid #dde7eb;
+  border-radius: 10px;
+  margin-bottom: 6px;
+}
+.day-steps li::before {
+  counter-increment: daystep;
+  content: counter(daystep);
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--teal, #2a8ca8);
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* コピー用ボタン */
+.copy-btn {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  background: var(--teal, #2a8ca8);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  padding: 14px;
+  margin-top: 14px;
+  cursor: pointer;
+}
+.copy-btn.copied { background: #2f9e4f; }
+.copy-note { font-size: 12px; color: #666; text-align: center; margin-top: 6px; }
+
+/* 買うものが無いときの表示 */
+.no-buy {
+  font-size: 13.5px;
+  background: #eef8f0;
+  border: 1.5px solid #bfe3c8;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 10px 0;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>アカデミー受講セット診断</title>
+  <link rel="stylesheet" href="style.css?v=21">
+  <link rel="stylesheet" href="academy.css?v=1">
+</head>
+<body>
+
+  <!-- 免責事項の同意ポップアップ（既存版と同内容） -->
+  <div id="disclaimer-overlay" class="hidden">
+    <div id="disclaimer-card">
+      <h2><img class="h-img" src="images/h-agree.png?v=2" alt="ご利用の前に"></h2>
+      <p>ご紹介する製品につきましては、<b>動作保証を行うものではございません</b>。ご利用環境や機器構成によって動作状況が異なる場合があるため、あくまで参考情報としてご確認いただけますと幸いです。</p>
+      <p>ケーブル等をご購入の際は、お手元の取扱説明書やメーカーサイトもあわせてご確認ください。</p>
+      <p class="soft">診断結果に不安がある場合は、結果画面の内容をコピーしてオープンチャットで気軽に相談してください。確認してお返事します。</p>
+      <label id="agree-label"><input type="checkbox" id="agree-check"> 上記を理解し、自己責任で利用します</label>
+      <button id="agree-btn" class="primary-btn" disabled>診断を始める</button>
+    </div>
+  </div>
+
+  <main id="app" class="hidden">
+
+    <!-- 完成図（レッスン当日の机の上）。選ぶたびにここが埋まっていく -->
+    <div id="strip">
+      <h1 class="strip-title txt-title">アカデミー受講セット診断</h1>
+
+      <!-- 1段目：データの線（ピアノ⇔ジャズステ端末） -->
+      <div class="strip-row">
+        <button class="slot" id="slot-device" type="button">
+          <span class="slot-badge">1</span>
+          <span class="slot-art"></span>
+          <span class="slot-label">ジャズステ用</span>
+        </button>
+
+        <div class="cable" id="cable">
+          <button class="plug" id="plug-l" type="button"></button>
+          <span class="cable-line"></span>
+          <button class="plug" id="plug-r" type="button"></button>
+        </div>
+
+        <button class="slot" id="slot-kb" type="button">
+          <span class="slot-badge">2</span>
+          <span class="slot-art"></span>
+          <span class="slot-label">ピアノ</span>
+        </button>
+      </div>
+
+      <!-- 2段目：レッスンの線（講義用端末と音） -->
+      <div class="strip-row strip-row2">
+        <button class="slot" id="slot-lecture" type="button">
+          <span class="slot-badge">3</span>
+          <span class="slot-art"></span>
+          <span class="slot-label">講義用</span>
+        </button>
+
+        <button class="slot" id="slot-sound" type="button">
+          <span class="slot-badge">4</span>
+          <span class="slot-art"></span>
+          <span class="slot-label">音</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 今の質問。尻尾が上の該当スロットを指す -->
+    <section id="panel">
+      <div id="panel-body"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p id="liff-status"></p>
+  </footer>
+
+  <script>window.LOG_APP = "academy";</script>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script src="shared/catalog.js?v=1"></script>
+  <script src="shared/log.js?v=1"></script>
+  <script src="academy.js?v=1"></script>
+</body>
+</html>
