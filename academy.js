@@ -355,7 +355,7 @@ function lectureOptions() {
     { key: "pc",     label: "パソコン", sub: "画面が大きく、いちばん見やすい", art: "laptop", stripLabel: "パソコン", badge: "おすすめ" },
     { key: "tablet", label: "タブレット", sub: "", art: "tablet", stripLabel: "タブレット" },
     { key: "phone",  label: "スマホ", sub: "画面は小さめ。持ち方の工夫が必要", art: "phone", stripLabel: "スマホ" },
-    { key: "same",   label: "2台目はない", sub: "ジャズステと同じ端末で切り替えながら受講", art: state.device ? state.device.art : "phone", stripLabel: "同じ端末" },
+    { key: "same",   label: "2台目はない", sub: `${state.device ? state.device.label : "ジャズステ用の端末"}1台で切り替えながら受講`, art: state.device ? state.device.art : "phone", stripLabel: "同じ端末" },
   ];
 }
 
@@ -369,7 +369,7 @@ function lecturePanel() {
   }).join("");
   return `
     <h2 class="txt-head">講義（先生の画面）は何で見ますか？</h2>
-    <p class="hint">レッスン当日は <b>Google Meet</b> で講義を見ながら、ジャズステ用の端末で課題に取り組みます。カメラ・マイクはオフのままでOK、顔は映りません。</p>
+    <p class="hint">レッスン当日は <b>Google Meet</b> で講義を見ながら、${escapeHtml(state.device.label)}のジャズステで課題に取り組みます。カメラ・マイクはオフのままでOK、顔は映りません。</p>
     <div class="choices">${items}</div>`;
 }
 
@@ -489,8 +489,6 @@ function soundRouting(pattern, conn) {
   const lecName = state.lecture.stripLabel;
   const r = { lines: [], copy: "", earphones: 0, notes: [] };
 
-  const appSrc = appOut === "piano" ? `ピアノ本体（${kbName}）` : `ジャズステ端末（${jazzName}）`;
-
   if (state.sound === "ok") {
     // スピーカー派に音の経路の説明は不要（自明なため表示しない。2026-08-19 中川さん指示）
     r.copy = "スピーカーで受講";
@@ -510,16 +508,16 @@ function soundRouting(pattern, conn) {
       r.earphones = 2;
     }
   } else if (pattern === "mobile1") {
-    r.lines.push(["app", "アプリの音", appOut === "piano" ? "ピアノのヘッドホン端子に挿したイヤホンから" : "端末に挿したイヤホンから"]);
-    r.lines.push(["meet", "先生の声", appOut === "piano" ? "端末に挿したイヤホンから" : "同じイヤホンから（同じ端末なので1本でOK）"]);
-    r.copy = appOut === "piano" ? "音出せない → 片耳ずつ（アプリ=ピアノ／先生=端末）" : "音出せない → 端末にイヤホン1本";
+    r.lines.push(["app", "アプリの音", appOut === "piano" ? "ピアノのヘッドホン端子に挿したイヤホンから" : `${jazzName}に挿したイヤホンから`]);
+    r.lines.push(["meet", "先生の声", appOut === "piano" ? `${jazzName}に挿したイヤホンから` : "同じイヤホンから（同じ端末なので1本でOK）"]);
+    r.copy = appOut === "piano" ? `音出せない → 片耳ずつ（アプリ=ピアノ／先生=${jazzName}）` : `音出せない → ${jazzName}にイヤホン1本`;
     r.earphones = appOut === "piano" ? 2 : 1;
   } else {
     // 2台構成: 片耳ずつが基本
-    const appEar = appOut === "piano" ? "ピアノのヘッドホン端子に挿したイヤホン" : `ジャズステ端末（${jazzName}）に挿したイヤホン`;
+    const appEar = appOut === "piano" ? "ピアノのヘッドホン端子に挿したイヤホン" : `${jazzName}に挿したイヤホン`;
     r.lines.push(["app", "アプリの音", `${appEar}を片耳に`]);
     r.lines.push(["meet", "先生の声", `講義用（${lecName}）に挿したイヤホンをもう片耳に`]);
-    r.copy = `音出せない → イヤホン片耳ずつ（アプリ=${appOut === "piano" ? "ピアノ" : "ジャズステ端末"}／先生=講義用）`;
+    r.copy = `音出せない → イヤホン片耳ずつ（アプリ=${appOut === "piano" ? "ピアノ" : jazzName}／先生=講義用）`;
     r.earphones = 2;
 
     // iPhone/iPad はMIDIケーブルで唯一の端子がふさがる
@@ -539,9 +537,10 @@ function soundRouting(pattern, conn) {
 // 当日の手順
 function daySteps(pattern, conn) {
   const steps = [];
+  const jazz = state.device.label;
   const cableStep = conn.hasUsb || conn.hasDin
-    ? "ピアノの電源を入れて、ケーブルでジャズステ用の端末とつなぐ"
-    : "ピアノとジャズステ用の端末を接続する（Bluetooth設定）";
+    ? `ピアノの電源を入れて、ケーブルで${jazz}とつなぐ`
+    : `ピアノと${jazz}を接続する（Bluetooth設定）`;
 
   if (pattern === "pc1") {
     steps.push(cableStep + "（パソコンはつないだあとに画面を再読み込み）");
@@ -550,14 +549,14 @@ function daySteps(pattern, conn) {
     steps.push("Meetはカメラ・マイクともオフでOK。講義を見ながら、課題が出たらアプリ側で弾く");
   } else if (pattern === "mobile1") {
     steps.push(cableStep);
-    steps.push("同じ端末でGoogle Meetとジャズステアプリを<b>切り替えながら</b>受講する（講義を聞くときはMeet、弾くときはアプリ）");
+    steps.push(`${jazz}でGoogle Meetとジャズステアプリを<b>切り替えながら</b>受講する（講義を聞くときはMeet、弾くときはアプリ）`);
     if (state.sound === "ng") steps.push("イヤホンを挿して、ピアノ本体の音量を0にする");
     steps.push("切り替えが忙しく感じたら、次回から2台目（家族のスマホでも可）の用意をおすすめします");
   } else {
     steps.push(cableStep);
     steps.push(`講義用（${state.lecture.stripLabel}）でGoogle Meetを開く（カメラ・マイクはオフでOK）`);
     if (state.sound === "ng") steps.push("イヤホンを2本用意して、片耳ずつ装着する（下の「音の流れ」参照）");
-    steps.push("講義を見ながら、課題が出たらジャズステ端末で弾く。質問はMeetのチャットからどうぞ");
+    steps.push(`講義を見ながら、課題が出たら${jazz}で弾く。質問はMeetのチャットからどうぞ`);
   }
   return steps;
 }
@@ -630,7 +629,7 @@ function resultPanel() {
     summaries.push("丸型MIDI接続");
   }
   if (routing.earphones > 0) {
-    parts.push(`<div class="no-buy">🎧 イヤホン／ヘッドホン <b>${routing.earphones}本</b> を使います（お手持ちのものでOK。ジャズステ側は音の遅れが出にくい<b>有線</b>がおすすめです）</div>`);
+    parts.push(`<div class="no-buy">🎧 イヤホン／ヘッドホン <b>${routing.earphones}本</b> を使います（お手持ちのものでOK。アプリの音を聴く側は音の遅れが出にくい<b>有線</b>がおすすめです）</div>`);
   }
 
   // USBオーディオ機能付き機種の特記
