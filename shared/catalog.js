@@ -79,7 +79,7 @@ const DEV_PORT_SHORT = { lightning: "Lightning", usbc: "Type-C", usba: "Type-A" 
 const CABLE_PLANS = {
   lightning: {
     "USB-B": [
-      { items: [{ t: "USB Type-B → Lightning ケーブル 1本", q: "USB TypeB Lightning MIDI ケーブル" }], note: "ケーブル1本で完結します。迷ったらこちら。" },
+      { items: [{ t: "USB Type-B → Lightning ケーブル 1本", q: "USB TypeB Lightning MIDI ケーブル", az: "https://amzn.asia/d/04T3trQs" }], note: "ケーブル1本で完結します。迷ったらこちら。" },
       { items: [{ t: "Apple Lightning - USB 3カメラアダプタ", q: "Apple Lightning USB 3 カメラアダプタ" }, { t: "USB A-Bケーブル（プリンタ用と同じ）", q: "USB A-B ケーブル プリンタ" }], note: "プリンタ用ケーブルが家にあるなら、アダプタだけ買う手もあります。" },
     ],
     "micro-B": [
@@ -94,7 +94,7 @@ const CABLE_PLANS = {
   },
   usbc: {
     "USB-B": [
-      { items: [{ t: "USB Type-B → Type-C ケーブル 1本", q: "USB TypeB TypeC MIDI ケーブル" }], note: "ケーブル1本で完結します。迷ったらこちら。" },
+      { items: [{ t: "USB Type-B → Type-C ケーブル 1本", q: "USB TypeB TypeC MIDI ケーブル", az: "https://amzn.asia/d/0fRMVrxY", azNote: "長さが選べます" }], note: "ケーブル1本で完結します。迷ったらこちら。" },
       { items: [{ t: "手持ちのUSB A-Bケーブル（プリンタ用）" }, { t: "USB変換アダプタ（A→C・OTG対応）", q: "USB 変換アダプタ A to C OTG" }], note: "プリンタ用ケーブルが家にあるなら、変換アダプタだけ買えばOK。" },
     ],
     "micro-B": [
@@ -120,13 +120,13 @@ const CABLE_PLANS = {
 // 丸型MIDI（5ピンDIN）接続の購入プラン
 const DIN_PLANS = {
   lightning: [
-    { items: [{ t: "MIDI → USB Type-A 変換ケーブル", q: "MIDI USB 変換ケーブル" }, { t: "USB Type-A → Lightning 変換アダプタ", q: "Apple Lightning USB 3 カメラアダプタ" }], note: "2点必要です。" },
+    { items: [{ t: "MIDI → USB Type-A 変換ケーブル", q: "MIDI USB 変換ケーブル", az: "https://amzn.asia/d/03jpBaV9" }, { t: "USB Type-A → Lightning 変換アダプタ", q: "Apple Lightning USB 3 カメラアダプタ" }], note: "2点必要です。" },
   ],
   usbc: [
-    { items: [{ t: "MIDI → USB Type-C ケーブル 1本", q: "MIDI USB TypeC 変換ケーブル" }], note: "ケーブル1本で完結します。" },
+    { items: [{ t: "MIDI → USB Type-C ケーブル 1本", q: "MIDI USB TypeC 変換ケーブル", az: "https://amzn.asia/d/03TZunzn" }], note: "ケーブル1本で完結します。" },
   ],
   usba: [
-    { items: [{ t: "MIDI → USB Type-A 変換ケーブル 1本", q: "MIDI USB 変換ケーブル" }] },
+    { items: [{ t: "MIDI → USB Type-A 変換ケーブル 1本", q: "MIDI USB 変換ケーブル", az: "https://amzn.asia/d/03jpBaV9" }] },
   ],
 };
 

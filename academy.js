@@ -94,13 +94,13 @@ function renderStrip() {
   dSlot.classList.toggle("filled", !!dev);
   dSlot.querySelector(".slot-badge").textContent = dev ? "✓" : "1";
   dSlot.querySelector(".slot-art").innerHTML = dev ? ART[dev.art] : ART.q;
-  dSlot.querySelector(".slot-label").textContent = dev ? dev.label : "ジャズステ用";
+  dSlot.querySelector(".slot-label").textContent = dev ? dev.label : "未選択";
 
   const kSlot = document.getElementById("slot-kb");
   kSlot.classList.toggle("filled", !!kb);
   kSlot.querySelector(".slot-badge").textContent = kb ? "✓" : "2";
   kSlot.querySelector(".slot-art").innerHTML = kb ? ART.piano : ART.q;
-  kSlot.querySelector(".slot-label").textContent = kb ? kb.model : "ピアノ";
+  kSlot.querySelector(".slot-label").textContent = kb ? kb.model : "未選択";
 
   const pl = document.getElementById("plug-l");
   const pr = document.getElementById("plug-r");
@@ -127,14 +127,14 @@ function renderStrip() {
   lSlot.classList.toggle("filled", !!lec);
   lSlot.querySelector(".slot-badge").textContent = lec ? "✓" : "3";
   lSlot.querySelector(".slot-art").innerHTML = lec ? ART[lec.art] : ART.q;
-  lSlot.querySelector(".slot-label").textContent = lec ? lec.stripLabel : "講義用";
+  lSlot.querySelector(".slot-label").textContent = lec ? lec.stripLabel : "未選択";
 
   const sSlot = document.getElementById("slot-sound");
   sSlot.classList.toggle("filled", !!state.sound);
   sSlot.querySelector(".slot-badge").textContent = state.sound ? "✓" : "4";
   sSlot.querySelector(".slot-art").innerHTML = state.sound ? ART.ear : ART.q;
   sSlot.querySelector(".slot-label").textContent =
-    state.sound === "ng" ? "イヤホン" : state.sound === "ok" ? "スピーカー" : "音";
+    state.sound === "ng" ? "イヤホン" : state.sound === "ok" ? "スピーカー" : "未選択";
 }
 
 function positionTail() {
@@ -230,7 +230,6 @@ function keyboardPanel() {
       <p class="rec-use">${escapeHtml(r.use)}</p>
       <p class="rec-model">${escapeHtml(r.model)}</p>
       <p class="rec-spec">${escapeHtml(r.keys)}／${escapeHtml(r.port)}／目安 ${escapeHtml(r.price)}</p>
-      <a class="buy-link" href="${rakutenLink(r.q)}" target="_blank" rel="noopener">楽天で探す ▸</a>
     </div>`).join("");
   return `
     <h2 class="txt-head">お使いのキーボード・電子ピアノは？</h2>
@@ -447,20 +446,39 @@ function appSoundOut(conn) {
 
 // ---------- 結果 ----------
 
-function planLabel(i) { return "購入プラン" + String.fromCharCode(65 + i); }
-
+// アカデミー版は楽天リンクを出さない（2026-08-19 中川さん指示）。
+// 検証済みのAmazon直接リンク（catalog.js の az フィールド）がある品だけリンクを付ける
 function buyItem(it) {
-  const link = it.q ? `<a class="buy-link" href="${rakutenLink(it.q)}" target="_blank" rel="noopener">楽天で探す ▸</a>` : "";
-  return `<li><span class="buy-name">🛒 ${escapeHtml(it.t)}</span>${link}</li>`;
+  const link = it.az
+    ? `<a class="buy-link" href="${it.az}" target="_blank" rel="noopener">Amazonで見る ▸</a>`
+    : "";
+  const note = it.azNote ? `<small class="az-note">※${escapeHtml(it.azNote)}</small>` : "";
+  return `<li><span class="buy-name">🛒 ${escapeHtml(it.t)}${note}</span>${link}</li>`;
 }
 
-function planBlock(plans) {
-  return plans.map((p, i) => `
-    <div class="plan ${i === 0 ? "rec" : ""}">
-      <div class="plan-head">${planLabel(i)}${i === 0 && plans.length > 1 ? '<span class="rec-badge">おすすめ</span>' : ""}</div>
+// プランA＝「推奨ケーブル」として単独表示し、B以降はアコーディオンに畳む
+function planBlockMain(plan) {
+  return `
+    <div class="plan rec">
+      <div class="plan-head">推奨ケーブル</div>
+      <ul class="buy-list">${plan.items.map((it) => buyItem(it)).join("")}</ul>
+      ${plan.note ? `<p class="plan-note">${escapeHtml(plan.note)}</p>` : ""}
+    </div>`;
+}
+
+function planBlockAlts(plans) {
+  if (!plans.length) return "";
+  const inner = plans.map((p) => `
+    <div class="plan">
+      <div class="plan-head">代替案</div>
       <ul class="buy-list">${p.items.map((it) => buyItem(it)).join("")}</ul>
       ${p.note ? `<p class="plan-note">${escapeHtml(p.note)}</p>` : ""}
     </div>`).join("");
+  return `<details class="alt-plans"><summary>他の接続方法を見る</summary>${inner}</details>`;
+}
+
+function planBlock(plans) {
+  return planBlockMain(plans[0]) + planBlockAlts(plans.slice(1));
 }
 
 // 音の流れの説明（凡例2行と、コピー用の1行テキスト）

@@ -20,6 +20,18 @@
   gap: 24px;
 }
 
+/* スロットの常設キャプション（どのスロットが何用かを常に表示） */
+.slot-cap {
+  display: block;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  opacity: 0.8;
+  margin: 1px 0 2px;
+}
+.slot.filled .slot-cap { opacity: 0.6; }
+
 /* ヘッドホンSVGの弧 */
 .s-arc { stroke: currentColor; }
 .slot.filled .s-arc { stroke: #2b3a42; }
@@ -152,6 +164,31 @@
 }
 .copy-btn.copied { background: #2f9e4f; }
 .copy-note { font-size: 12px; color: #666; text-align: center; margin-top: 6px; }
+
+/* 代替ケーブル案のアコーディオン */
+.alt-plans {
+  margin-top: 8px;
+  border: 1.5px solid #dde7eb;
+  border-radius: 10px;
+  padding: 8px 12px;
+  background: #fafcfd;
+}
+.alt-plans summary {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--teal-dark, #1d6a80);
+  cursor: pointer;
+}
+.alt-plans .plan { margin-top: 8px; }
+
+/* Amazonリンクの補足（長さが選べます等） */
+.az-note {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: #777;
+  margin-top: 2px;
+}
 
 /* 買うものが無いときの表示 */
 .no-buy {
