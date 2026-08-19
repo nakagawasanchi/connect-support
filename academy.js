@@ -373,7 +373,7 @@ function lecturePanel() {
       </button>`;
   }).join("");
   return `
-    <h2 class="txt-head">講義（先生の画面）は何で見ますか？</h2>
+    <h2 class="txt-head">講義（講師の画面）は何で見ますか？</h2>
     <p class="hint">レッスン当日は <b>Google Meet</b> で講義を見ながら、${escapeHtml(state.device.label)}のジャズステで課題に取り組みます。カメラ・マイクはオフのままでOK、顔は映りません。</p>
     <div class="choices">${items}</div>`;
 }
@@ -510,25 +510,25 @@ function soundRouting(pattern, conn) {
   if (pattern === "pc1") {
     if (appOut === "piano") {
       r.lines.push(["app", "アプリの音", "ピアノのヘッドホン端子に挿したイヤホンから"]);
-      r.lines.push(["meet", "先生の声", "同じイヤホンから（この機種は接続中、パソコンの音がすべてピアノ側から出るため1本でOK）"]);
+      r.lines.push(["meet", "講師の声", "同じイヤホンから（この機種は接続中、パソコンの音がすべてピアノ側から出るため1本でOK）"]);
       r.copy = "音出せない → ピアノのヘッドホン端子にイヤホン1本";
       r.earphones = 1;
-      r.notes.push(`もし先生の声がパソコン側から出てしまう場合は、パソコンの音の出力先を「${kbName}」に切り替えてください。`);
+      r.notes.push(`もし講師の声がパソコン側から出てしまう場合は、パソコンの音の出力先を「${kbName}」に切り替えてください。`);
     } else {
       r.lines.push(["app", "アプリの音", "パソコンに挿したイヤホンから"]);
-      r.lines.push(["meet", "先生の声", "同じイヤホンから（どちらもPCの音なので1本でOK）"]);
-      r.copy = "音出せない → PCにイヤホン1本（アプリも先生の声も両方聞こえる）";
+      r.lines.push(["meet", "講師の声", "同じイヤホンから（どちらもPCの音なので1本でOK）"]);
+      r.copy = "音出せない → PCにイヤホン1本（アプリも講師の声も両方聞こえる）";
       r.earphones = 1;
     }
   } else if (pattern === "mobile1") {
     if (appOut === "piano") {
       r.lines.push(["app", "アプリの音", "ピアノのヘッドホン端子に挿したイヤホンから"]);
-      r.lines.push(["meet", "先生の声", `同じイヤホンから（この機種は接続中、${jazzName}の音がすべてピアノ側から出るため1本でOK）`]);
+      r.lines.push(["meet", "講師の声", `同じイヤホンから（この機種は接続中、${jazzName}の音がすべてピアノ側から出るため1本でOK）`]);
       r.copy = "音出せない → ピアノのヘッドホン端子にイヤホン1本";
       r.earphones = 1;
     } else {
       r.lines.push(["app", "アプリの音", `${jazzName}に挿したイヤホンから`]);
-      r.lines.push(["meet", "先生の声", "同じイヤホンから（同じ端末なので1本でOK）"]);
+      r.lines.push(["meet", "講師の声", "同じイヤホンから（同じ端末なので1本でOK）"]);
       r.copy = `音出せない → ${jazzName}にイヤホン1本`;
       r.earphones = 1;
     }
@@ -536,8 +536,8 @@ function soundRouting(pattern, conn) {
     // 2台構成: 片耳ずつが基本
     const appEar = appOut === "piano" ? "ピアノのヘッドホン端子に挿したイヤホン" : `${jazzName}に挿したイヤホン`;
     r.lines.push(["app", "アプリの音", `${appEar}を片耳に`]);
-    r.lines.push(["meet", "先生の声", `講義用（${lecName}）に挿したイヤホンをもう片耳に`]);
-    r.copy = `音出せない → イヤホン片耳ずつ（アプリ=${appOut === "piano" ? "ピアノ" : jazzName}／先生=講義用）`;
+    r.lines.push(["meet", "講師の声", `講義用（${lecName}）に挿したイヤホンをもう片耳に`]);
+    r.copy = `音出せない → イヤホン片耳ずつ（アプリ=${appOut === "piano" ? "ピアノ" : jazzName}／講師=講義用）`;
     r.earphones = 2;
 
     // iPhone/iPad はMIDIケーブルで唯一の端子がふさがる
