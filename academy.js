@@ -12,6 +12,11 @@
 // （配布はオプチャのノートのリンク経由なので、LIFF無しでも成立する）。
 const ACADEMY_LIFF_ID = "";
 
+// 機材相談部屋（サブトークルーム）の招待リンク。
+// LINEの仕様上URLは短縮できないため、ツール側にボタンとして埋め込んで
+// 「診断 → コピー → 部屋を開く → 貼る」を一本道にする（2026-08-19）
+const KIZAI_ROOM_URL = "https://line.me/ti/g2/o8fIBEC9CfxOMMFGQTVUa1H0WpOtsGtG26mJmQ";
+
 let db = [];
 let state = {
   device: null,     // ジャズステに使う端末（DEVICES の値）
@@ -712,6 +717,7 @@ function resultPanel() {
       <textarea id="consult-note" placeholder="運営や部屋のメンバーに相談したいことを自由に書いてください（任意）"></textarea>
       <button id="copy-btn" class="copy-btn">📋 結果をコピーする</button>
       <p class="copy-note">コピーしたら「機材相談部屋」に貼ってください</p>
+      <a id="room-btn" class="room-btn" href="${KIZAI_ROOM_URL}">💬 機材相談部屋を開く</a>
     </div>
     <button class="link-btn" id="restart-btn">最初からやり直す</button>`);
 
@@ -739,6 +745,7 @@ function buildCopyText(conn, pattern, routing) {
 
 function bindResultPanel() {
   document.getElementById("copy-btn").addEventListener("click", copySetup);
+  document.getElementById("room-btn").addEventListener("click", () => logEvent("room_open"));
   document.getElementById("restart-btn").addEventListener("click", () => location.reload());
 }
 
