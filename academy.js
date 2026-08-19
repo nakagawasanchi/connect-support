@@ -496,22 +496,37 @@ function soundRouting(pattern, conn) {
   }
 
   // 音を出せない場合
+  //
+  // USBオーディオ対応機種（appOut === "piano"）は、接続中その端末の音が
+  // 「アプリの音もMeetの音も含めて全部」ピアノ側から出る（端末のシステム音声の
+  // 出力先がピアノに切り替わるため）。したがって同じ端末で完結する構成
+  // （pc1 / mobile1）では、ピアノのヘッドホン端子にイヤホン1本で足りる。
+  // 片耳ずつが必要なのは、音の出どころが2台に分かれる「two」だけ。
   if (pattern === "pc1") {
-    r.lines.push(["app", "アプリの音", "パソコンに挿したイヤホンから"]);
-    r.lines.push(["meet", "先生の声", "同じイヤホンから（どちらもPCの音なので1本でOK）"]);
-    r.copy = "音出せない → PCにイヤホン1本（アプリも先生の声も両方聞こえる）";
-    r.earphones = 1;
     if (appOut === "piano") {
-      r.lines[0] = ["app", "アプリの音", `ピアノのヘッドホン端子に挿したイヤホンから（この機種は接続中、音の出口がピアノ側になります）`];
-      r.lines[1] = ["meet", "先生の声", "パソコンに挿したイヤホンから"];
-      r.copy = "音出せない → 片耳ずつ（アプリ=ピアノのヘッドホン端子／先生=PC）";
-      r.earphones = 2;
+      r.lines.push(["app", "アプリの音", "ピアノのヘッドホン端子に挿したイヤホンから"]);
+      r.lines.push(["meet", "先生の声", "同じイヤホンから（この機種は接続中、パソコンの音がすべてピアノ側から出るため1本でOK）"]);
+      r.copy = "音出せない → ピアノのヘッドホン端子にイヤホン1本";
+      r.earphones = 1;
+      r.notes.push(`もし先生の声がパソコン側から出てしまう場合は、パソコンの音の出力先を「${kbName}」に切り替えてください。`);
+    } else {
+      r.lines.push(["app", "アプリの音", "パソコンに挿したイヤホンから"]);
+      r.lines.push(["meet", "先生の声", "同じイヤホンから（どちらもPCの音なので1本でOK）"]);
+      r.copy = "音出せない → PCにイヤホン1本（アプリも先生の声も両方聞こえる）";
+      r.earphones = 1;
     }
   } else if (pattern === "mobile1") {
-    r.lines.push(["app", "アプリの音", appOut === "piano" ? "ピアノのヘッドホン端子に挿したイヤホンから" : `${jazzName}に挿したイヤホンから`]);
-    r.lines.push(["meet", "先生の声", appOut === "piano" ? `${jazzName}に挿したイヤホンから` : "同じイヤホンから（同じ端末なので1本でOK）"]);
-    r.copy = appOut === "piano" ? `音出せない → 片耳ずつ（アプリ=ピアノ／先生=${jazzName}）` : `音出せない → ${jazzName}にイヤホン1本`;
-    r.earphones = appOut === "piano" ? 2 : 1;
+    if (appOut === "piano") {
+      r.lines.push(["app", "アプリの音", "ピアノのヘッドホン端子に挿したイヤホンから"]);
+      r.lines.push(["meet", "先生の声", `同じイヤホンから（この機種は接続中、${jazzName}の音がすべてピアノ側から出るため1本でOK）`]);
+      r.copy = "音出せない → ピアノのヘッドホン端子にイヤホン1本";
+      r.earphones = 1;
+    } else {
+      r.lines.push(["app", "アプリの音", `${jazzName}に挿したイヤホンから`]);
+      r.lines.push(["meet", "先生の声", "同じイヤホンから（同じ端末なので1本でOK）"]);
+      r.copy = `音出せない → ${jazzName}にイヤホン1本`;
+      r.earphones = 1;
+    }
   } else {
     // 2台構成: 片耳ずつが基本
     const appEar = appOut === "piano" ? "ピアノのヘッドホン端子に挿したイヤホン" : `${jazzName}に挿したイヤホン`;
