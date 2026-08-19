@@ -2013,6 +2013,36 @@
    "source": "https://jp.yamaha.com/products/musical_instruments/pianos/transacoustic/ta3/index.html",
    "verified": true,
    "usb_audio": true
+  },
+  {
+   "maker": "Roland",
+   "model": "RP701",
+   "series": "RPシリーズ（ホームピアノ）",
+   "keys": 88,
+   "release_year": 2021,
+   "usb_to_host": true,
+   "usb_port_type": "USB-B",
+   "midi_din": false,
+   "bluetooth_midi": true,
+   "notes": "USB Computer端子=USB Type-B、Bluetooth Ver4.2でオーディオ(A2DP)とMIDI(BLE)両対応。公式仕様表で確認（2026-08-20）",
+   "source": "https://www.roland.com/jp/products/rp701/specifications/",
+   "verified": true,
+   "usb_audio": false
+  },
+  {
+   "maker": "CASIO",
+   "model": "AP-750",
+   "series": "CELVIANO（セルヴィアーノ）",
+   "keys": 88,
+   "release_year": 2024,
+   "usb_to_host": true,
+   "usb_port_type": "USB-B",
+   "midi_din": false,
+   "bluetooth_midi": true,
+   "notes": "USB TO HOST=USB Type-B（USB1.1/2.0・取説で確認）。BluetoothのMIDI/オーディオは同梱のワイヤレスMIDI&AUDIOアダプター(WU-BT10)をUSB Type-A端子に挿して使う方式。充電専用ケーブル不可・データ通信対応ケーブル必須。公式取説で確認（2026-08-20）",
+   "source": "https://support.casio.jp/emi/manual/ap-750_ja/",
+   "verified": true,
+   "usb_audio": false
   }
  ]
 }
