@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-19",
+ "updated": "2026-08-20",
  "batch": 2,
  "keyboards": [
   {
@@ -1982,6 +1982,21 @@
    "notes": "アカデミー推奨機種（88鍵で省スペース・折りたたみ）。推奨機種リストと同一の情報を転記",
    "source": "",
    "verified": false,
+   "usb_audio": false
+  },
+  {
+   "maker": "YAMAHA",
+   "model": "NP-11",
+   "series": "piaggero",
+   "keys": 61,
+   "release_year": 2011,
+   "usb_to_host": false,
+   "usb_port_type": null,
+   "midi_din": true,
+   "bluetooth_midi": false,
+   "notes": "生産完了品。USB TO HOST非搭載で、接続は丸型MIDI端子（5ピンDIN IN/OUT）のみ。MIDI-USB変換ケーブルが必要。公式仕様表で確認（2026-08-20）",
+   "source": "https://jp.yamaha.com/products/musical_instruments/keyboards/piaggero/np-11/specs.html",
+   "verified": true,
    "usb_audio": false
   }
  ]
