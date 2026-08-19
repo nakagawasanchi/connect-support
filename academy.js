@@ -612,16 +612,22 @@ function resultPanel() {
   // --- 音の流れ（イヤホン運用のときだけ。スピーカー派には自明なので出さない） ---
   if (routing.lines.length || routing.notes.length) {
     parts.push(`
-      <div class="sound-map">
-        <h4>🎧 音の流れ</h4>
-        ${routing.lines.map(([cls, k, v]) => `
-          <div class="sound-line"><span class="sound-dot ${cls}"></span><span class="k">${k}</span><span>${v}</span></div>`).join("")}
-        ${routing.notes.map((n) => `<p class="item-note">${n}</p>`).join("")}
-      </div>`);
+      <details class="acc-block">
+        <summary>🎧 音の流れ</summary>
+        <div class="sound-map">
+          ${routing.lines.map(([cls, k, v]) => `
+            <div class="sound-line"><span class="sound-dot ${cls}"></span><span class="k">${k}</span><span>${v}</span></div>`).join("")}
+          ${routing.notes.map((n) => `<p class="item-note">${n}</p>`).join("")}
+        </div>
+      </details>`);
   }
 
   // --- 当日の手順 ---
-  parts.push(`<h3 class="txt-head" style="font-size:14.5px">📅 当日の流れ</h3><ol class="day-steps">${daySteps(pattern, conn).map((s) => `<li>${s}</li>`).join("")}</ol>`);
+  parts.push(`
+    <details class="acc-block">
+      <summary>📅 当日の流れ</summary>
+      <ol class="day-steps">${daySteps(pattern, conn).map((s) => `<li>${s}</li>`).join("")}</ol>
+    </details>`);
 
   // --- 買うもの（ケーブル） ---
   if (conn.hasUsb) {
@@ -703,6 +709,7 @@ function resultPanel() {
   parts.push(`
     <div class="consult-area">
       <p class="consult-lead">この結果をコピーしてオープンチャットの「機材相談部屋」に貼れば、そのまま運営に相談できます。うまくいかないとき・不安なときは気軽にどうぞ！</p>
+      <textarea id="consult-note" placeholder="運営や部屋のメンバーに相談したいことを自由に書いてください（任意）"></textarea>
       <button id="copy-btn" class="copy-btn">📋 結果をコピーする</button>
       <p class="copy-note">コピーしたら「機材相談部屋」に貼ってください</p>
     </div>
@@ -726,8 +733,6 @@ function buildCopyText(conn, pattern, routing) {
     `・ケーブル: ${cable}`,
     `・講義用: ${state.lecture.label}（${patternName}）`,
     `・音: ${routing.copy}`,
-    "",
-    "❓困っていること・質問: ",
   ];
   return lines.join("\n");
 }
@@ -739,15 +744,17 @@ function bindResultPanel() {
 
 async function copySetup() {
   const btn = document.getElementById("copy-btn");
-  logEvent("setup_copy", { maker: state.keyboard.maker, model: state.keyboard.model, device: deviceLogLabel(), summary: state.methodSummary });
+  const note = (document.getElementById("consult-note")?.value || "").trim();
+  const text = state.copyText + "\n\n❓相談したいこと: " + (note || "");
+  logEvent("setup_copy", { maker: state.keyboard.maker, model: state.keyboard.model, device: deviceLogLabel(), summary: state.methodSummary, note });
   try {
-    await navigator.clipboard.writeText(state.copyText);
+    await navigator.clipboard.writeText(text);
     btn.textContent = "✅ コピーしました！「機材相談部屋」に貼ってください";
     btn.classList.add("copied");
   } catch (e) {
     // クリップボードAPIが使えない環境（LINE内ブラウザの一部など）へのフォールバック
     const ta = document.createElement("textarea");
-    ta.value = state.copyText;
+    ta.value = text;
     document.body.appendChild(ta);
     ta.select();
     try {
@@ -755,7 +762,7 @@ async function copySetup() {
       btn.textContent = "✅ コピーしました！「機材相談部屋」に貼ってください";
       btn.classList.add("copied");
     } catch (e2) {
-      alert("コピーできませんでした。お手数ですが、この内容を手で選択してコピーしてください：\n\n" + state.copyText);
+      alert("コピーできませんでした。お手数ですが、この内容を手で選択してコピーしてください：\n\n" + text);
     }
     document.body.removeChild(ta);
   }
