@@ -300,7 +300,7 @@ function renderModelResults() {
   if (candidates.length === 0 && q) {
     const li = document.createElement("li");
     li.className = "not-found";
-    li.innerHTML = '<span>見つかりません。機種名の表記をご確認いただくか、オープンチャットの「機材相談部屋」でご相談ください。</span>';
+    li.innerHTML = '<span><b>ここに無い機種でも、多くの場合ご参加いただけます。</b><br>運営中川まで、「診断に自分の機種がなかった」と機種名をメッセージください（オープンチャットの「機材相談部屋」でOKです）。確認してすぐ追加します。</span>';
     list.appendChild(li);
     if (notFoundLogged !== q) {
       notFoundLogged = q;

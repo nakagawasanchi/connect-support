@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-20",
+ "updated": "2026-08-24",
  "batch": 2,
  "keyboards": [
   {
@@ -2042,6 +2042,81 @@
    "notes": "USB TO HOST=USB Type-B（USB1.1/2.0・取説で確認）。BluetoothのMIDI/オーディオは同梱のワイヤレスMIDI&AUDIOアダプター(WU-BT10)をUSB Type-A端子に挿して使う方式。充電専用ケーブル不可・データ通信対応ケーブル必須。公式取説で確認（2026-08-20）",
    "source": "https://support.casio.jp/emi/manual/ap-750_ja/",
    "verified": true,
+   "usb_audio": false
+  },
+  {
+   "maker": "Carina",
+   "model": "LF-0088",
+   "series": "カリーナ（LF0088）",
+   "keys": 88,
+   "release_year": 2023,
+   "usb_to_host": true,
+   "usb_port_type": null,
+   "midi_din": false,
+   "bluetooth_midi": true,
+   "notes": "通販系ブランドの88鍵スリム電子ピアノ。背面にMIDI接続口あり・ワイヤレスMIDI対応と商品ページに記載（2026-08-24確認）。端子の形状は諸元に記載がないため、診断では実機の差込口を見て形を選んでください。Bluetooth接続はiPhone/iPadのみアプリ対応",
+   "source": "https://store.shopping.yahoo.co.jp/hayarishop/carina-lf0088.html",
+   "verified": false,
+   "usb_audio": false
+  },
+  {
+   "maker": "YAMAHA",
+   "model": "MX88",
+   "series": "MXシリーズ（シンセサイザー）",
+   "keys": 88,
+   "release_year": 2017,
+   "usb_to_host": true,
+   "usb_port_type": "USB-B",
+   "midi_din": true,
+   "bluetooth_midi": false,
+   "notes": "音楽制作向けシンセ。USB TO HOST（Type-B）とMIDI IN/OUT端子搭載。一般的な製品情報からの登録のため、念のため実機の端子もご確認ください（2026-08-24）",
+   "source": "",
+   "verified": false,
+   "usb_audio": true
+  },
+  {
+   "maker": "Roland",
+   "model": "DP990RF",
+   "series": "DPシリーズ（DP990系）",
+   "keys": 88,
+   "release_year": 2010,
+   "usb_to_host": true,
+   "usb_port_type": "USB-B",
+   "midi_din": true,
+   "bluetooth_midi": false,
+   "notes": "DP990/DP990F/DP990R/DP990RF共通でUSB COMPUTER端子（Type-B）とMIDI端子を搭載。一般的な製品情報からの登録のため、念のため実機の端子もご確認ください（2026-08-24）",
+   "source": "",
+   "verified": false,
+   "usb_audio": false
+  },
+  {
+   "maker": "KAWAI",
+   "model": "CN340GP",
+   "series": "CNシリーズ（CN34系・島村楽器モデル）",
+   "keys": 88,
+   "release_year": 2013,
+   "usb_to_host": true,
+   "usb_port_type": "USB-B",
+   "midi_din": true,
+   "bluetooth_midi": false,
+   "notes": "CN34の島村楽器仕様。USB TO HOST（Type-B）とMIDI IN/OUT搭載。USBメモリ用のTO DEVICE端子と挿し間違いに注意。一般的な製品情報からの登録のため、念のため実機の端子もご確認ください（2026-08-24）",
+   "source": "",
+   "verified": false,
+   "usb_audio": false
+  },
+  {
+   "maker": "KORG",
+   "model": "KROSS 2-88",
+   "series": "シンセサイザーワークステーション（CROSS表記でも検索可）",
+   "keys": 88,
+   "release_year": 2017,
+   "usb_to_host": true,
+   "usb_port_type": "USB-B",
+   "midi_din": true,
+   "bluetooth_midi": false,
+   "notes": "88鍵シンセワークステーション。USB TO HOST（Type-B）とMIDI IN/OUT搭載。一般的な製品情報からの登録のため、念のため実機の端子もご確認ください（2026-08-24）",
+   "source": "",
+   "verified": false,
    "usb_audio": false
   }
  ]
