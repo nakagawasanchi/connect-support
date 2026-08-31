@@ -149,13 +149,18 @@ function normalize(s) {
 }
 
 // 機種検索の照合。「YAMAHA Piaggero NP-11」のようにメーカー名・シリーズ名ごと
-// 入力してもヒットするよう、空白区切りの各語が maker+series+model のどこかに
-// 含まれれば一致とみなす（従来はmodelのみ照合で、余計な語があると0件になっていた）
+// 入力してもヒットするよう、空白区切りの各語が maker+series+model+aliases のどこかに
+// 含まれれば一致とみなす（従来はmodelのみ照合で、余計な語があると0件になっていた）。
+// さらに「CDP-S105BK」のように色サフィックス付きで入力してもヒットするよう、
+// 逆方向（入力語が型番を丸ごと含む）も一致とみなす（型番4文字以上のときのみ・誤爆防止）
 function keyboardMatches(kb, raw) {
   const tokens = String(raw).trim().split(/\s+/).map(normalize).filter(Boolean);
   if (!tokens.length) return true;
-  const target = normalize((kb.maker || "") + (kb.series || "") + (kb.model || ""));
-  return tokens.every((t) => target.includes(t));
+  const target = normalize((kb.maker || "") + (kb.series || "") + (kb.model || "") + (kb.aliases || []).join(""));
+  const model = normalize(kb.model || "");
+  return tokens.every((t) =>
+    target.includes(t) || (model.length >= 4 && t.includes(model))
+  );
 }
 
 function escapeHtml(s) {
